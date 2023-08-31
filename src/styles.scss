@@ -1,1 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Importing Bootstrap SCSS file. */
+@import "./node_modules/bootstrap/scss/bootstrap";
+
+/* Importing Datepicker SCSS file. */
+@import "node_modules/ngx-bootstrap/datepicker/bs-datepicker";
+
+/* COLORS */
+:root {
+  --black-olive: #3E3E3E;
+  --foam: #D2FEF5;
+  --pastel-pink: #FED2DB;
+  --light-aquamarine: #A1FCEA;
+  --flamingo: #FDA0B3;
+  --rangoon-green: #1D1B1B;
+  --soapstone: #FFFAFA;
+  --watermelon-pink: #FC6E8B;
+  --pearl: #DEE1DF;
+  --purple-heart: #673ab7;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
