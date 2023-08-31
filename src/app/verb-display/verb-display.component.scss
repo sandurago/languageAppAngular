@@ -1,0 +1,14 @@
+.hover {
+  transform: scale(1.05);
+  border-color: var(--rangoon-green);
+}
+
+.btn-hover {
+  padding: 7px 0;
+  background-color: var(--foam);
+}
+
+.text-hover {
+  transform: scale(1.05);
+  font-size: larger;
+}

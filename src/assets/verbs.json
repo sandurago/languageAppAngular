@@ -1,0 +1,194 @@
+{
+  "être": {
+    "conjugation": {
+      "je": "suis",
+      "tu": "es",
+      "il/elle": "est",
+      "nous": "sommes",
+      "vous": "êtes",
+      "ils/elles": "sont"
+    },
+    "translation": "to be",
+    "example": "Je suis sympa."
+  },
+  "avoir": {
+    "conjugation": {
+      "j’": "ai",
+      "tu": "as",
+      "il/elle": "a",
+      "nous": "avons",
+      "vous": "avez",
+      "ils/elles": "ont"
+    },
+    "translation": "to have",
+    "example": "Tu as un beau visage."
+  },
+  "aller": {
+    "conjugation": {
+      "je": "vais",
+      "tu": "vas",
+      "il/elle": "va",
+      "nous": "allons",
+      "vous": "allez",
+      "ils/elles": "vont"
+    },
+    "translation": "to go",
+    "example": "Nous allons au supermarché."
+  },
+  "faire": {
+    "conjugation": {
+      "je": "fais",
+      "tu": "fais",
+      "il/elle": "fait",
+      "nous": "faisons",
+      "vous": "faites",
+      "ils/elles": "font"
+    },
+    "translation": "to do",
+    "example": "Je fais du yoga."
+  },
+  "dire": {
+    "conjugation": {
+      "je": "dis",
+      "tu": "dis",
+      "il/elle": "dit",
+      "nous": "disons",
+      "vous": "dites",
+      "ils/elles": "disent"
+    },
+    "translation": "to say",
+    "example": "Je dis la vérité."
+  },
+  "voir": {
+    "conjugation": {
+      "je": "vois",
+      "tu": "vois",
+      "il/elle": "voit",
+      "nous": "voyons",
+      "vous": "voyez",
+      "ils/elles": "voient"
+    },
+    "translation": "to see",
+    "example": "Vous voyez les goélands."
+  },
+  "savoir": {
+    "conjugation": {
+      "je": "sais",
+      "tu": "sais",
+      "il/elle": "sait",
+      "nous": "savons",
+      "vous": "savez",
+      "ils/elles": "savent"
+    },
+    "translation": "to know",
+    "example": "Je ne sais pas."
+  },
+  "pouvoir": {
+    "conjugation": {
+      "je": "peux",
+      "tu": "peux",
+      "il/elle": "peut",
+      "nous": "pouvons",
+      "vous": "pouvez",
+      "ils/elles": "peuvent"
+    },
+    "translation": "can",
+    "example": "Tu peux le faire."
+  },
+  "vouloir": {
+    "conjugation": {
+      "je": "veux",
+      "tu": "veux",
+      "il/elle": "veut",
+      "nous": "voulons",
+      "vous": "voulez",
+      "ils/elles": "veulent"
+    },
+    "translation": "to want",
+    "example": "Je veux de la glace."
+  },
+  "venir": {
+    "conjugation": {
+      "je": "viens",
+      "tu": "viens",
+      "il/elle": "vient",
+      "nous": "venons",
+      "vous": "venez",
+      "ils/elles": "viennent"
+    },
+    "translation": "to come",
+    "venir": "Nous venons chez vous."
+  },
+  "prendre": {
+    "conjugation": {
+      "je": "prends",
+      "tu": "prends",
+      "il/elle": "prend",
+      "nous": "prenons",
+      "vous": "prenez",
+      "ils/elles": "prennent"
+    },
+    "translation": "to take",
+    "example": "Tu prends un café."
+  },
+  "arriver": {
+    "conjugation": {
+      "j’": "arrive",
+      "tu": "arrives",
+      "il/elle": "arrive",
+      "nous": "arrivons",
+      "vous": "arrivez",
+      "ils/elles": "arrivent"
+    },
+    "translation": "to arrive",
+    "example": "J’arrive dans dix minutes."
+  },
+  "croire": {
+    "conjugation": {
+      "je": "crois",
+      "tu": "crois",
+      "il/elle": "croit",
+      "nous": "croyons",
+      "vous": "croyez",
+      "ils/elles": "croient"
+    },
+    "translation": "to believe/to guess",
+    "example": "Je crois que c’est vrai."
+  },
+  "mettre": {
+    "conjugation": {
+      "je": "mets",
+      "tu": "mets",
+      "il/elle": "met",
+      "nous": "mettons",
+      "vous": "mettez",
+      "ils/elles": "mettent"
+    },
+    "translation": "to put",
+    "example": "Tu mets des glaçons dans ton verre."
+  },
+  "passer": {
+    "conjugation": {
+      "je": "passe",
+      "tu": "passes",
+      "il/elle": "passe",
+      "nous": "passons",
+      "vous": "passez",
+      "ils/elles": "passent"
+    },
+    "translation": "to pass",
+    "example": "Il passe devant la maison."
+  },
+  "devoir": {
+    "conjugation": {
+      "je": "dois",
+      "tu": "dois",
+      "il/elle": "doit",
+      "nous": "devons",
+      "vous": "devez",
+      "ils/elles": "doivent"
+    },
+    "translation": "must",
+    "example": "Je dois partir bientôt."
+  }
+}
