@@ -1,0 +1,46 @@
+<div>
+  <mat-card>
+    <mat-card-header class="mb-2 pb-2 border-b-2 border-b-pearl bg-ghost-white text-black-olive text-lg font-bold rounded-t-lg">
+      <mat-card-title>
+        Verb: <span class="ml-3 text-purple-heart underline italic"> {{ currentVerbName$ | async }}</span>
+      </mat-card-title>
+    </mat-card-header>
+
+    <!-- Card content -->
+    <mat-card-content class="relative" [ngStyle]="{'height': isCheckClicked ? '520px' : null }">
+      <p class="mt-2 mb-4"> <span class="font-bold">Your task:</span> Fill in the fields using correct forms of the verb. You can skip to the next fields without
+        completing the previous ones but in order to complete the task, all fields need to be filled in
+        with correct answers. If you don't know the answer click on 'Help' button. <span class="underline">Good luck!</span>
+      </p>
+      <form [formGroup]="FormGroup">
+        <!-- Stepper -->
+        <mat-stepper #stepper>
+          <mat-step *ngFor="let step of conjugationPersons; let i = index; let first = first; let last = last" [stepControl]="FormGroup">
+            <ng-template matStepLabel>{{ step }}</ng-template>
+            <mat-form-field class="mt-4">
+              <mat-label>{{step}}… ({{verbName}})</mat-label>
+              <input [formControlName]="'input' + (i+1)" matInput :placeholder="…">
+            </mat-form-field>
+            <div>
+              <button *ngIf="!first" mat-button matStepperPrevious type="button">Précédent</button>
+              <button *ngIf="!last" mat-button matStepperNext type="button">Suivant</button>
+              <button *ngIf="last" mat-button matStepperNext (click)="checkAnswers()">Check</button>
+              <button mat-button (click)="openDialog(step)" type="button" class="custom-btn">
+                Aide
+              </button>
+            </div>
+          </mat-step>
+        </mat-stepper>
+      </form>
+      <app-verb-practice-summary
+      *ngIf="isCheckClicked"
+      class="absolute top-40 right-12"
+      [currentVerb]="verbName"
+      [data]="dataWithAnswers"
+      [verbsObj]="verbObject"
+      [message]="summaryMessage"
+      >
+      </app-verb-practice-summary>
+    </mat-card-content>
+  </mat-card>
+</div>
