@@ -91,10 +91,12 @@ export class VerbPracticeTemplateComponent {
     })
   }
 
+  // Dialog with a hint
   openDialog(conjugationPerson:string) {
     const helpPerson = conjugationPerson.toLowerCase();
     const helpConjugation = this.verbObject.conjugation[helpPerson];
 
+    // Opens the dialog and sends data to be displayed
     return this.dialog.open(VerbPracticeDialogComponent, {
       data: { person: helpPerson, conjugation: helpConjugation}
     })
@@ -102,10 +104,10 @@ export class VerbPracticeTemplateComponent {
 
   // Function to check the fields and save answers in the server
   checkAnswers() {
-    this.isCheckClicked = true;
     if (!this.FormGroup.valid) {
       return;
     }
+    this.isCheckClicked = true;
     for (let i = 0; i < 6; i++) {
       const userInput = this.FormGroup.get('input' + (i+1))!.value;
       const person = this.conjugationPersons[i].toLowerCase();
@@ -124,25 +126,5 @@ export class VerbPracticeTemplateComponent {
       this.summaryMessage = "It doesn't hurt to try again :)";
     }
     this.addPoints = 0;
-    //this.postAnswers(this.url, this.dataWithAnswers);
-  }
-
-  // Function to send data to the server (AJAX)
-  async postAnswers(url:string, data:Object) {
-    const response = await fetch(url, {
-      method: "POST",
-      mode: "cors",
-      cache: "no-cache",
-      credentials: "same-origin",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      redirect: "follow",
-      referrerPolicy: "no-referrer",
-      body: JSON.stringify(data)
-    })
-    const json = await response.text();
-    console.log(json);
-    // then check the json status
   }
 }
