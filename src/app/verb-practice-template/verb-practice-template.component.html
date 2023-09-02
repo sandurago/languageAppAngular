@@ -7,7 +7,7 @@
     </mat-card-header>
 
     <!-- Card content -->
-    <mat-card-content class="relative" [ngStyle]="{'height': isCheckClicked ? '520px' : null }">
+    <mat-card-content class="relative" [ngStyle]="{'height': isCheckClicked ? '650px' : null }">
       <p class="mt-2 mb-4"> <span class="font-bold">Your task:</span> Fill in the fields using correct forms of the verb. You can skip to the next fields without
         completing the previous ones but in order to complete the task, all fields need to be filled in
         with correct answers. If you don't know the answer click on 'Help' button. <span class="underline">Good luck!</span>
@@ -24,7 +24,8 @@
             <div>
               <button *ngIf="!first" mat-button matStepperPrevious type="button">Précédent</button>
               <button *ngIf="!last" mat-button matStepperNext type="button">Suivant</button>
-              <button *ngIf="last" mat-button matStepperNext (click)="checkAnswers()">Check</button>
+              <button *ngIf="last" mat-button matStepperNext [disabled]="!FormGroup.valid"
+              (click)="checkAnswers()">Check</button>
               <button mat-button (click)="openDialog(step)" type="button" class="custom-btn">
                 Aide
               </button>

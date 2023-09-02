@@ -20,6 +20,7 @@ import {MatStepperModule} from '@angular/material/stepper';
 import { VerbPracticeDialogComponent } from './verb-practice-dialog/verb-practice-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { VerbPracticeSummaryComponent } from './verb-practice-summary/verb-practice-summary.component';
+import { MatTableModule } from '@angular/material/table';
 
 export function localStorageSyncReducer(rootReducer: any) {
   return localStorageSync({
@@ -54,6 +55,7 @@ export function localStorageSyncReducer(rootReducer: any) {
     FormsModule,
     ReactiveFormsModule,
     MatDialogModule,
+    MatTableModule,
     StoreModule.forRoot(
       { verbsStore: verbsReducer },
       {
