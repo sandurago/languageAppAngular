@@ -108,6 +108,7 @@ export class VerbPracticeTemplateComponent {
       return;
     }
     this.isCheckClicked = true;
+
     for (let i = 0; i < 6; i++) {
       const userInput = this.FormGroup.get('input' + (i+1))!.value;
       const person = this.conjugationPersons[i].toLowerCase();
@@ -126,5 +127,12 @@ export class VerbPracticeTemplateComponent {
       this.summaryMessage = "It doesn't hurt to try again :)";
     }
     this.addPoints = 0;
+
+    setTimeout(() => {
+      const summary = document.getElementById('summary');
+      if (summary) {
+        summary.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 300);
   }
 }
