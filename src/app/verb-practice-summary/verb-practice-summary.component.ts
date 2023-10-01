@@ -49,11 +49,14 @@ export class VerbPracticeSummaryComponent {
       body: JSON.stringify(this.data)
     })
     const json = await response.text();
-    console.log(json);
     // then check the json status
     // if saving to db is successful:
-    this.isProgressSaved = true;
-    this.buttonLabel = "Progress saved!";
+    if (json === '200') {
+      this.isProgressSaved = true;
+      this.buttonLabel = "Progress saved!";
+    } else {
+      this.buttonLabel = "Error. Try again";
+    }
   }
 
   reloadPage() {
