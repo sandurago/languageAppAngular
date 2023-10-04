@@ -14,6 +14,8 @@ export interface Verbs {
   };
   translation: string;
   example: string;
+  name: string;
+  id: number;
 }
 
 export interface VerbsList {

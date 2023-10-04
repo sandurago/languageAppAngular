@@ -24,6 +24,7 @@ export class VerbDisplayComponent {
   constructor(private store: Store<{ verbsStore: VerbState }>) {
     this.verbsList$ = this.store.pipe(
       select('verbsStore'),
+      //verbsList is coming from selectors
       map(state => verbsList(state))
     );
   };

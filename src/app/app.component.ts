@@ -14,7 +14,7 @@ import { VerbsList } from './interface/verbs';
 export class AppComponent {
   /** RETURN DATA */
   title = 'language-app';
-  private URL = 'http://localhost:8080/verbs/allverbs.php';
+  private URL = 'http://localhost:8000/verbs';
 
   /** CONSTRUCTOR */
   constructor(private httpClient: HttpClient, private store: Store<{ verbsStore: VerbState }>) {}
