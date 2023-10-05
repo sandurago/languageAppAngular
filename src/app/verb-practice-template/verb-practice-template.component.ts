@@ -19,8 +19,8 @@ export class VerbPracticeTemplateComponent {
   /** DATA */
   verbsList$:Observable<VerbsList>;
   currentVerbName$:Observable<string>;
-  verbToConjugate$:Observable<Verbs>;
-  verbObject:Verbs;
+  verbToConjugate$:Observable<Verbs | undefined>;
+  verbObject:Verbs | undefined;
   verbName:string;
   conjugationPersons:Array<string>;
   isCheckClicked:boolean = false;
@@ -84,22 +84,25 @@ export class VerbPracticeTemplateComponent {
    */
   getConjugationPersons() {
     this.verbToConjugate$.subscribe((verb) => {
-      const persons:Array<string> = Object.keys(verb.conjugation);
-      this.conjugationPersons = persons.map(person => {
-        return person.charAt(0).toUpperCase() + person.slice(1);
-      });
+      if (verb) {
+        const persons:Array<string> = Object.keys(verb.conjugation);
+        this.conjugationPersons = persons.map(person => {
+          return person.charAt(0).toUpperCase() + person.slice(1);
+        });
+      }
     })
   }
 
   // Dialog with a hint
   openDialog(conjugationPerson:string) {
     const helpPerson = conjugationPerson.toLowerCase();
-    const helpConjugation = this.verbObject.conjugation[helpPerson];
-
-    // Opens the dialog and sends data to be displayed
-    return this.dialog.open(VerbPracticeDialogComponent, {
-      data: { person: helpPerson, conjugation: helpConjugation}
-    })
+    if(this.verbObject) {
+      const helpConjugation = this.verbObject.conjugation[helpPerson];
+      // Opens the dialog and sends data to be displayed
+      this.dialog.open(VerbPracticeDialogComponent, {
+        data: { person: helpPerson, conjugation: helpConjugation}
+      })
+    }
   }
 
   // Function to check the fields and save answers in the server
@@ -112,7 +115,7 @@ export class VerbPracticeTemplateComponent {
     for (let i = 0; i < 6; i++) {
       const userInput = this.FormGroup.get('input' + (i+1))!.value;
       const person = this.conjugationPersons[i].toLowerCase();
-      const answer = this.verbObject.conjugation[person] as unknown as string;
+      const answer = this.verbObject!.conjugation[person] as unknown as string;
 
       this.dataWithAnswers[person] = userInput;
       if (userInput === answer) {

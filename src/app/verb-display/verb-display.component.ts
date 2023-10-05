@@ -18,7 +18,7 @@ export class VerbDisplayComponent {
   allVerbsList:Array<Verbs>;
   isHovered: boolean = false;
   hoveredElement:any = null;
-  verbsList$:Observable<VerbsList>;
+  verbsList$:Observable<Array<Verbs>>;
 
   /** CONSTRUCTOR */
   constructor(private store: Store<{ verbsStore: VerbState }>) {

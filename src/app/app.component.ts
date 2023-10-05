@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { setVerbs } from './store/verbs/verbs.actions';
-import { Store, select } from '@ngrx/store';
-import { Observable, map } from 'rxjs';
+import { Store } from '@ngrx/store';
 import { VerbState } from './store/verbs/verbs.reducer';
 import { HttpClient } from '@angular/common/http';
-import { VerbsList } from './interface/verbs';
+import { Verbs } from './interface/verbs';
 
 @Component({
   selector: 'app-root',
@@ -22,7 +21,7 @@ export class AppComponent {
   /** METHODS */
   ngOnInit() {
     // at the start of an app we do http request to load verbs in the store
-    this.httpClient.get<VerbsList>(this.URL).subscribe((verbs) => {
+    this.httpClient.get<Array<Verbs>>(this.URL).subscribe((verbs) => {
       this.store.dispatch(setVerbs({ allVerbs: verbs}))
     })
   }

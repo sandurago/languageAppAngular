@@ -21,11 +21,11 @@
           {{ con.key }} {{ con.value }}
         </div>
       </div>
-      <a [routerLink]="['/practice', verbsNames[i]]">
+      <a [routerLink]="['/practice', verb.name]">
         <button
           mat-button
           [ngClass]="{'mat-mdc-raised-button': hoveredElement == i}"
-          (click)="practiceThisVerb(verbsNames[i])"
+          (click)="practiceThisVerb(verb.name)"
           color="primary"
           class="w-full"
         >

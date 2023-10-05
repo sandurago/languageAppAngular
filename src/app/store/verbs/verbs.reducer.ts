@@ -1,19 +1,19 @@
 import { createReducer, on } from "@ngrx/store";
 import { congjuateThisVerb, setVerbs } from "./verbs.actions";
-import { VerbsList } from "src/app/interface/verbs";
+import { Verbs } from "src/app/interface/verbs";
 
 //reducers is what handles modifying the state in response to the actions being dispatched
 
 //STATE
 // state is an object with properties and by having an interface we define what are these properties
 export interface VerbState {
-  allVerbs: VerbsList,
+  allVerbs: Array<Verbs>,
   verbName: string
 }
 
 // here we define an initial state (what the interface refers to)
 export const initialState: VerbState = {
-  allVerbs: {},
+  allVerbs: [],
   verbName: ''
 };
 

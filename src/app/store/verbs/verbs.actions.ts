@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { VerbsList } from "src/app/interface/verbs";
+import { Verbs } from "src/app/interface/verbs";
 
 // declaring the actions
 export const congjuateThisVerb = createAction(
@@ -12,5 +12,5 @@ export const congjuateThisVerb = createAction(
  */
 export const setVerbs = createAction(
   '[VerbPracticeTemplateComponent] sets verbs',
-  props<{ allVerbs: VerbsList }>()
+  props<{ allVerbs: Array<Verbs> }>()
 )
