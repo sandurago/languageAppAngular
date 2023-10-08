@@ -1,0 +1,42 @@
+
+  <div>
+    <div class="flex">
+      <mat-card class="mx-auto">
+        <mat-card-header class="mb-3">
+          <div class="mx-auto flex">
+            <mat-card-title>{{ action }}</mat-card-title>
+            <mat-icon matSuffix class="mt-1 ml-1">{{ icon }}</mat-icon>
+          </div>
+        </mat-card-header>
+        <mat-card-content>
+          <form class="flex flex-col items-start" [formGroup]="FormGroup">
+            <mat-form-field>
+              <mat-label>Nickname</mat-label>
+              <input [formControl]="FormGroup.controls.nickname" matInput>
+            </mat-form-field>
+            <mat-form-field *ngIf="!isLogin">
+              <mat-label>Name</mat-label>
+              <input [formControl]="FormGroup.controls.name" matInput>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Password</mat-label>
+              <input formControlName="password" matInput>
+            </mat-form-field>
+            <div class="mx-auto">
+              <button mat-raised-button color="primary" (click)="createUser()">{{ action }}</button>
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div>
+      <p>If you {{ hasAccount }} an account click
+        <button
+          type="button"
+          class="text-flamingo font-semibold"
+          (click)="changeAction()"
+          >
+          here
+        </button> to {{ linkAction }}.</p>
+    </div>
+  </div>

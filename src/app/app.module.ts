@@ -21,8 +21,9 @@ import { VerbPracticeDialogComponent } from './verb-practice-dialog/verb-practic
 import {MatDialogModule} from '@angular/material/dialog';
 import { VerbPracticeSummaryComponent } from './verb-practice-summary/verb-practice-summary.component';
 import { MatTableModule } from '@angular/material/table';
-import { LoginPageComponent } from './login-page/login-page.component';
+import { LoginPageComponent } from './login/login-page.component';
 import { MatIconModule } from '@angular/material/icon';
+import { MainPageComponent } from './main-page/main-page.component';
 
 export function localStorageSyncReducer(rootReducer: any) {
   return localStorageSync({
@@ -44,6 +45,7 @@ export function localStorageSyncReducer(rootReducer: any) {
     VerbPracticeDialogComponent,
     VerbPracticeSummaryComponent,
     LoginPageComponent,
+    MainPageComponent,
   ],
   imports: [
     BrowserModule,
