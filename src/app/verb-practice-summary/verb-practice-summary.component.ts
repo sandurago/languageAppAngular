@@ -36,7 +36,7 @@ export class VerbPracticeSummaryComponent {
 
   // Function to send data to the server (AJAX)
   async postAnswers() {
-    const response = await fetch(this.url, {
+    const response = await fetch(this.url, { // THIS is the Request that I get on the PHP side.
       method: "POST",
       mode: "cors",
       cache: "no-cache",

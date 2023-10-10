@@ -13,6 +13,7 @@ module.exports = {
         'flamingo': '#FDA0B3',
         'rangoon-green': '#1D1B1B',
         'soapstone': '#FFFAFA',
+        'error-red': '#f44336',
         /** PURPLES - PINK for MATERIAL */
         'watermelon-pink': '#FC6E8B',
         'purplish-pink': '#D959AC',

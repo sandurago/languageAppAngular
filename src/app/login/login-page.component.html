@@ -9,6 +9,7 @@
           </div>
         </mat-card-header>
         <mat-card-content>
+          <p *ngIf="message!==''" class="text-error-red">{{ message }}</p>
           <form class="flex flex-col items-start" [formGroup]="FormGroup">
             <mat-form-field>
               <mat-label>Nickname</mat-label>
@@ -23,7 +24,10 @@
               <input formControlName="password" matInput>
             </mat-form-field>
             <div class="mx-auto">
-              <button mat-raised-button color="primary" (click)="createUser()">{{ action }}</button>
+              <button
+                mat-raised-button color="primary"
+                (click)="createUser()">{{ action }}
+              </button>
             </div>
           </form>
         </mat-card-content>

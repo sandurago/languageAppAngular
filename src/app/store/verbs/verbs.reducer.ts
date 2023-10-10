@@ -22,7 +22,6 @@ export const initialState: VerbState = {
 export const verbsReducer = createReducer(
   // Supply the initial state
   initialState,
-  // Add the new hello to hello array
   // on method is to react to specific actions
   on(congjuateThisVerb,
     (state, { verb }) => {

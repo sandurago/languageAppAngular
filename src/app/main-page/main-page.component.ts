@@ -24,12 +24,12 @@ export class MainPageComponent {
   // METHODS
   outputData() {
     if (!this.isLogin) {
-      this.icon = 'how_to_reg';
+      this.icon = 'person';
       this.action = 'register';
       this.linkAction = 'login';
       this.hasAccount = 'have';
     } else {
-      this.icon = 'user';
+      this.icon = 'how_to_reg';
       this.action = 'login';
       this.linkAction = 'register';
       this.hasAccount = 'don\'t have';

@@ -24,6 +24,7 @@ import { MatTableModule } from '@angular/material/table';
 import { LoginPageComponent } from './login/login-page.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MainPageComponent } from './main-page/main-page.component';
+import { userReducer } from './store/user/user.reducer';
 
 export function localStorageSyncReducer(rootReducer: any) {
   return localStorageSync({
@@ -63,7 +64,10 @@ export function localStorageSyncReducer(rootReducer: any) {
     MatTableModule,
     MatIconModule,
     StoreModule.forRoot(
-      { verbsStore: verbsReducer },
+      {
+        verbsStore: verbsReducer,
+        userStore: userReducer
+      },
       {
         metaReducers: [localStorageSyncReducer]
       }
