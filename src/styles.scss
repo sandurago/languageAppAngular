@@ -12,7 +12,6 @@
 /* COLORS */
 :root {
   --black-olive: #3E3E3E;
-  --foam: #D2FEF5;
   --pastel-pink: #FED2DB;
   --light-aquamarine: #A1FCEA;
   --flamingo: #FDA0B3;
@@ -23,5 +22,10 @@
   --purple-heart: #673ab7;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

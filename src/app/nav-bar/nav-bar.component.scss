@@ -1,3 +1,16 @@
 .link {
   color: var(--black-olive);
 }
+
+.custom-container {
+  justify-content: flex-start !important;
+  background: rgb(254,210,219);
+}
+
+.list {
+  margin-bottom: 0 !important;
+}
+
+a {
+  text-decoration: none !important;
+}

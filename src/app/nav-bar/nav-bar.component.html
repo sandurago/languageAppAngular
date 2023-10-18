@@ -1,7 +1,22 @@
 <nav class="navbar h-14 bg-transparent">
-  <div class="mx-2 h-10 rounded-md container-fluid bg-ghost-white leading-3">
-    <a href="#" class="navbar-brand link text-gray-50">
-      Language Discovery
-    </a>
+  <div
+  class="mx-2 h-10 flex rounded-md container-fluid leading-3 custom-container"
+  [ngStyle]="{background: 'linear-gradient(90deg, rgba(254,210,219,1) ' + gradient +'%, rgb(103, 58, 183) 100%)'}"
+  >
+    <ul class="w-full flex list justify-start">
+      <li>
+        <a href="#" class="navbar-brand link text-black-olive">
+          Language Discovery
+        </a>
+      </li>
+      <li class="mx-2">
+        <a class="text-black-olive hover:text-rangoon-green" href="">Exercises</a>
+      </li>
+      <li class="mr-2 ml-auto">
+        <a class="text-ghost-white hover:text-rangoon-green" href="">
+          {{ user || "User" }}
+        </a>
+      </li>
+    </ul>
   </div>
 </nav>

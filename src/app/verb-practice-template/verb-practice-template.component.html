@@ -2,9 +2,9 @@
   <mat-card>
     <mat-card-header class="mb-2 pb-2 border-b-2 border-b-pearl bg-ghost-white text-black-olive text-lg font-bold rounded-t-lg justify-center">
       <mat-card-title class="mx-auto">
-        Verb: <span class="ml-3 text-purple-heart underline italic"> {{ currentVerbName$ | async }}</span>
+        Verb: <span class="ml-1 text-purple-heart uppercase"> {{ currentVerbName$ | async }}</span>
       </mat-card-title>
-      <a [routerLink]="'/display'">
+      <a [routerLink]="'/display'" class="ml-auto">
         <button mat-button color="primary">Verbs list</button>
       </a>
     </mat-card-header>

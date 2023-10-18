@@ -7,7 +7,6 @@ module.exports = {
     extend: {
       colors: {
         'black-olive': '#3E3E3E',
-        'foam': '#D2FEF5',
         'pastel-pink': '#FED2DB',
         'light-aquamarine': '#A1FCEA',
         'flamingo': '#FDA0B3',
