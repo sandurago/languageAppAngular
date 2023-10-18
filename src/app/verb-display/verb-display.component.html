@@ -1,42 +1,52 @@
-<div class="grid grid-cols-5 gap-5 justify-items-center">
-  <table
-    *ngFor="let verb of allVerbsList; let i = index"
-  >
-    <div
-      (mouseenter)="hoveredElement = i"
-      (mouseleave)="hoveredElement = null"
-      [ngClass]="{'hover': hoveredElement == i}"
-      class="w-48 border-2 border-solid border-black-olive rounded-lg transition-transform duration-500">
-      <div class="border-b-gray-200 border-solid rounded-t-md bg-denim-blue text-ghost-white text-center text-lg">
-        {{ verb.name }}
-      </div>
-      <div class="bg-icecold text-center text-black-olive italic text-sm">
-        {{ verb.translation }}
-      </div>
-      <div class="py-3">
-        <div
-          *ngFor="let con of verb.conjugation | keyvalue:onCompare"
-          class="text-center"
-        >
-          {{ con.key }} {{ con.value }}
+<div>
+  <div class="grid grid-cols-5 gap-5 justify-items-center">
+    <table
+      *ngFor="let verb of allVerbsList.slice(start, end); let i = index"
+    >
+      <div
+        (mouseenter)="hoveredElement = i"
+        (mouseleave)="hoveredElement = null"
+        [ngClass]="{'hover': hoveredElement == i}"
+        class="w-48 border-2 border-solid border-black-olive rounded-lg transition-transform duration-500">
+        <div class="border-b-gray-200 border-solid rounded-t-md bg-flamingo text-soapstone text-center text-lg">
+          {{ verb.name }}
         </div>
-      </div>
-      <a [routerLink]="['/practice', verb.name]">
-        <button
-          mat-button
-          [ngClass]="{'mat-mdc-raised-button': hoveredElement == i}"
-          (click)="practiceThisVerb(verb.name)"
-          color="primary"
-          class="w-full"
-        >
-          <span
-            [ngClass]="{'text-hover': hoveredElement == i}"
-            class="transition-all duration-300"
+        <div class="bg-pastel-pink text-center text-black-olive italic text-sm">
+          {{ verb.translation }}
+        </div>
+        <div class="py-3">
+          <div
+            *ngFor="let con of verb.conjugation | keyvalue:onCompare"
+            class="text-center"
           >
-            Practice!
-          </span>
-        </button>
-      </a>
-    </div>
-  </table>
+            {{ con.key }} {{ con.value }}
+          </div>
+        </div>
+        <a [routerLink]="['/practice', verb.name]">
+          <button
+            mat-button
+            [ngClass]="{'mat-mdc-raised-button': hoveredElement == i}"
+            (click)="practiceThisVerb(verb.name)"
+            color="primary"
+            class="w-full"
+          >
+            <span
+              [ngClass]="{'text-hover': hoveredElement == i}"
+              class="transition-all duration-300"
+            >
+              Practice!
+            </span>
+          </button>
+        </a>
+      </div>
+    </table>
+  </div>
+  <mat-paginator
+    [length]="16"
+    [pageSize]="10"
+    [hidePageSize]="true"
+    (page)="handlePageEvent($event)"
+    class="mt-2 text-sm"
+  >
+  </mat-paginator>
 </div>
