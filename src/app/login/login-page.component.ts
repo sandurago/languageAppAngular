@@ -27,7 +27,7 @@ export class LoginPageComponent {
   url:string = 'http://localhost:8000';
   // Here we declare our observables that will keep track of values in the state and change them
   userNickname$:Observable<string>;
-  userName$:Observable<string | undefined>;
+  userName$:Observable<string>;
   userPassword$:Observable<string>;
   message:string = '';
 
@@ -91,7 +91,8 @@ export class LoginPageComponent {
     this.store.dispatch(saveUser({
       nickname: user.nickname as string,
       name: user.nickname as string,
-      password: user.password as string
+      password: user.password as string,
+      login: true
     }));
 
 

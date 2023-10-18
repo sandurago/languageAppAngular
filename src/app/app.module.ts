@@ -31,7 +31,12 @@ export function localStorageSyncReducer(rootReducer: any) {
     keys: [
       'verbsStore',
       'allVerbs',
-      'verbName'
+      'verbName',
+      'userStore',
+      'nickname',
+      'name',
+      'password',
+      'login'
     ],
     rehydrate: true
   })(rootReducer)

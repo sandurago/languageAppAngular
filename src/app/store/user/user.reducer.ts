@@ -6,7 +6,8 @@ import { saveUser } from "./user.actions";
 export const userState: User = {
   nickname: '',
   name: '',
-  password: ''
+  password: '',
+  login: false
 }
 
 export const userReducer = createReducer(
@@ -14,11 +15,12 @@ export const userReducer = createReducer(
   userState,
 
   on(saveUser,
-    (state, {nickname, name, password}) =>({
+    (state, {nickname, name, password, login}) =>({
       ...state,
       nickname: nickname,
       name: name,
-      password: password
+      password: password,
+      login: login
     })
   )
 );

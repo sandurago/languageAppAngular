@@ -5,6 +5,7 @@ export const saveUser = createAction(
   props<{
     nickname:string,
     name:string,
-    password:string
+    password:string,
+    login:boolean
   }>()
 )
