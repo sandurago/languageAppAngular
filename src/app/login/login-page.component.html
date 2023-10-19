@@ -1,46 +1,72 @@
+<div class="flex justify-evenly">
 
-  <div>
-    <div class="flex">
-      <mat-card class="mx-auto">
-        <mat-card-header class="mb-3">
-          <div class="mx-auto flex">
-            <mat-card-title>{{ action }}</mat-card-title>
-            <mat-icon matSuffix class="mt-1 ml-1">{{ icon }}</mat-icon>
-          </div>
-        </mat-card-header>
-        <mat-card-content>
-          <p *ngIf="message!==''" class="text-error-red">{{ message }}</p>
-          <form class="flex flex-col items-start" [formGroup]="FormGroup">
-            <mat-form-field>
-              <mat-label>Nickname</mat-label>
-              <input [formControl]="FormGroup.controls.nickname" matInput>
-            </mat-form-field>
-            <mat-form-field *ngIf="!isLogin">
-              <mat-label>Name</mat-label>
-              <input [formControl]="FormGroup.controls.name" matInput>
-            </mat-form-field>
-            <mat-form-field>
-              <mat-label>Password</mat-label>
-              <input formControlName="password" matInput>
-            </mat-form-field>
-            <div class="mx-auto">
-              <button
-                mat-raised-button color="primary"
-                (click)="createUser()">{{ action }}
-              </button>
-            </div>
-          </form>
-        </mat-card-content>
-      </mat-card>
-    </div>
-    <div>
-      <p>If you {{ hasAccount }} an account click
+  <mat-card class="card-dimension">
+    <mat-card-header class="mb-3">
+      <mat-card-title>{{ action }}</mat-card-title>
+      <mat-icon matSuffix class="mt-1 ml-1">{{ icon }}</mat-icon>
+    </mat-card-header>
+    <mat-card-content>
+      <p *ngIf="message!==''" class="text-error-red">{{ message }}</p>
+      <form
+        class="flex flex-col"
+       [formGroup]="FormGroup"
+      >
+        <div class="card-content flex flex-col justify-center">
+          <mat-form-field class="w-full">
+            <mat-label>Nickname</mat-label>
+            <input [formControl]="FormGroup.controls.nickname" matInput>
+          </mat-form-field>
+          <mat-form-field class="w-full" *ngIf="!isLogin">
+            <mat-label>Name</mat-label>
+            <input [formControl]="FormGroup.controls.name" matInput>
+          </mat-form-field>
+          <mat-form-field class="w-full">
+            <mat-label>Password</mat-label>
+            <input formControlName="password" matInput>
+          </mat-form-field>
+        </div>
         <button
-          type="button"
-          class="text-denim-blue font-semibold"
-          (click)="changeAction()"
-          >
-          here
-        </button> to {{ linkAction }}.</p>
-    </div>
-  </div>
+          mat-raised-button color="primary"
+          (click)="createUser()"
+        >
+          {{ action }}
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card
+    *ngIf="!isLogin"
+    class="card-dimension"
+  >
+    <mat-card-header>
+      <mat-card-title class="mb-3">
+        Why registering
+      </mat-card-title>
+      <mat-icon class="mt-1 ml-1 text-purple-heart">help</mat-icon>
+    </mat-card-header>
+    <mat-card-content class="flex flex-col">
+      <div class="card-content">
+        <div class="my-4">
+          This way you will be able to save and track your progres on this app. When you decide to come back again and continue learning you will be able to see what you've learnt so far and how you performed on each exercise! <br>
+          <mat-icon class="">mood</mat-icon>
+        </div>
+          If you still prefer to use the application without registering click the button below.
+      </div>
+      <button mat-raised-button color="primary">
+        continue
+      </button>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<div>
+  <p>If you {{ hasAccount }} an account click
+    <button
+      type="button"
+      class="text-flamingo font-semibold"
+      (click)="changeAction()"
+      >
+      here
+    </button> to {{ linkAction }}.</p>
+</div>

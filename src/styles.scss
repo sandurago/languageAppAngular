@@ -1,10 +1,12 @@
+/* Importing Bootstrap SCSS file. */
+@import "./node_modules/bootstrap/scss/bootstrap";
+
+
 /* You can add global styles to this file, and also import other style files */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Importing Bootstrap SCSS file. */
-@import "./node_modules/bootstrap/scss/bootstrap";
 
 /* Importing Datepicker SCSS file. */
 @import "node_modules/ngx-bootstrap/datepicker/bs-datepicker";
@@ -24,6 +26,15 @@
   --rangoon-green: #1D1B1B; // hovered elements
   --error-red: #f44336; // errors
   --pearl: #DEE1DF; // borders
+
+  .card-dimension {
+    width: 280px;
+    height: 390px;
+  }
+
+  .card-content {
+    height: 260px;
+  }
 }
 
 html, body {
