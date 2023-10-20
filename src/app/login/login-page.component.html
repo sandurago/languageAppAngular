@@ -54,7 +54,12 @@
           If you still prefer to use the application without registering click the button below.
       </div>
       <button mat-raised-button color="primary">
-        continue
+        <a
+          [routerLink]="['/display']"
+          class="hover:text-white"
+        >
+          continue
+        </a>
       </button>
     </mat-card-content>
   </mat-card>
@@ -64,7 +69,7 @@
   <p>If you {{ hasAccount }} an account click
     <button
       type="button"
-      class="text-flamingo font-semibold"
+      class="text-denim-blue font-semibold"
       (click)="changeAction()"
       >
       here
