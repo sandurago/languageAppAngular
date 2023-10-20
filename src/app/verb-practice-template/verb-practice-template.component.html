@@ -29,8 +29,16 @@
               <button *ngIf="!last" mat-button matStepperNext type="button">Suivant</button>
               <button *ngIf="last" mat-button matStepperNext [disabled]="!FormGroup.valid"
               (click)="checkAnswers()">Check</button>
-              <button mat-button (click)="openDialog(step)" type="button" class="custom-btn">
-                Aide
+              <button
+                mat-button (click)="openDialog(step)"
+                type="button"
+                class="hover:bg-palesky-blue"
+              >
+                <mat-icon
+                  class="ml-1 h-6 w-6 text-2xl leading-none rounded-full bg-darkgreen-blue text-palesky-blue"
+                >
+                  help
+                </mat-icon>
               </button>
             </div>
           </mat-step>
