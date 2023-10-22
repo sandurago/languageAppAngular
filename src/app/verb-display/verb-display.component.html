@@ -8,10 +8,10 @@
         (mouseleave)="hoveredElement = null"
         [ngClass]="{'hover': hoveredElement == i}"
         class="w-48 border-2 border-solid border-black-olive rounded-lg transition-transform duration-500">
-        <div class="border-b-gray-200 border-solid rounded-t-md bg-flamingo text-soapstone text-center text-lg">
+        <div class="border-b-gray-200 border-solid rounded-t-md bg-denim-blue text-ghost-white text-center text-lg">
           {{ verb.name }}
         </div>
-        <div class="bg-pastel-pink text-center text-black-olive italic text-sm">
+        <div class="bg-icecold text-center text-black-olive italic text-sm">
           {{ verb.translation }}
         </div>
         <div class="py-3">
@@ -46,7 +46,8 @@
     [pageSize]="10"
     [hidePageSize]="true"
     (page)="handlePageEvent($event)"
-    class="mt-2 text-sm"
+    class="mt-2 rounded-lg text-sm pagination"
+    [ngStyle]="{background: 'linear-gradient(90deg, rgba(195, 251, 244, 0.5) ' + gradient +'%, rgb(103, 58, 183, 0.5) 100%)'}"
   >
   </mat-paginator>
 </div>

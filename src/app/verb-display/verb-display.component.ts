@@ -7,6 +7,8 @@ import { congjuateThisVerb } from '../store/verbs/verbs.actions';
 import { Observable, map } from 'rxjs';
 import { verbsList } from '../store/verbs/verbs.selectors';
 import { PageEvent } from '@angular/material/paginator';
+import { Color } from '../store/colors/colors.reducer';
+import { gradient } from '../store/colors/colors.selector';
 
 @Component({
   selector: 'app-verb-display',
@@ -22,14 +24,21 @@ export class VerbDisplayComponent {
   verbsList$:Observable<Array<Verbs>>;
   start:number = 0;
   end:number = 10;
+  gradient$:Observable<number>;
+  gradient:number;
 
   /** CONSTRUCTOR */
-  constructor(private store: Store<{ verbsStore: VerbState }>) {
+  constructor(private store: Store<{ verbsStore: VerbState }>, private colorStore: Store<{ colorStore: Color}>) {
     this.verbsList$ = this.store.pipe(
       select('verbsStore'),
       //verbsList is coming from selectors
       map(state => verbsList(state))
     );
+
+    this.gradient$ = this.colorStore.pipe(
+      select('colorStore'),
+      map(state => gradient(state))
+    )
   };
 
   handlePageEvent(e:PageEvent) {
@@ -52,6 +61,10 @@ export class VerbDisplayComponent {
       this.verbsNames = Object.keys(verbs);
       this.allVerbsList = values;
     });
+
+    this.gradient$.subscribe((value) => {
+      this.gradient = value
+    })
   }
   /** Sorts verbs */
   onCompare(_left: KeyValue<string, string>, _right: KeyValue<string, string>): number {

@@ -27,6 +27,7 @@ import { MainPageComponent } from './main-page/main-page.component';
 import { userReducer } from './store/user/user.reducer';
 import { IndexComponent } from './index/index.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { colorReducer } from './store/colors/colors.reducer';
 
 export function localStorageSyncReducer(rootReducer: any) {
   return localStorageSync({
@@ -75,7 +76,8 @@ export function localStorageSyncReducer(rootReducer: any) {
     StoreModule.forRoot(
       {
         verbsStore: verbsReducer,
-        userStore: userReducer
+        userStore: userReducer,
+        colorStore: colorReducer
       },
       {
         metaReducers: [localStorageSyncReducer]
