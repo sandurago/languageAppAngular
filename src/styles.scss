@@ -44,3 +44,6 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+.pagination .mat-mdc-paginator-container {
+  min-height: auto !important;
+}
