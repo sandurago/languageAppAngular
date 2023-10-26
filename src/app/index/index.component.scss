@@ -1,0 +1,39 @@
+.title-bar {
+  animation-duration: 0.8s;
+}
+
+.title {
+  box-shadow: 2px 2px 5px var(--pearl);
+}
+
+.image {
+  animation-duration: 2s;
+  height: 100%;
+  width: 100%;
+  border: 0.5px solid var(--icecold);
+}
+
+.image-container {
+  width: 450px;
+  height: 450px;
+  flex: 0 0 450px;
+  box-shadow: 10px 5px 20px var(--darkgreen-blue);
+}
+
+.position-upper {
+  top: 2px !important;
+  left: 700px !important;
+  border-right: 0.5px solid var(--darkgreen-blue);
+  border-bottom: 0.5px solid var(--darkgreen-blue);
+  box-shadow: 5px 5px 20px var(--darkgreen-blue);
+  animation-duration: 2s;
+}
+
+.position-lower {
+  top: 250px !important;
+  left: 600px !important;
+  border-right: 0.5px solid var(--purple-heart);
+  border-bottom: 0.5px solid var(--purple-heart);
+  box-shadow: 5px 5px 20px var(--purple-heart);
+  animation-duration: 2s;
+}

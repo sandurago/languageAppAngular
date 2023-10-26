@@ -25,6 +25,7 @@ import { LoginPageComponent } from './login/login-page.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MainPageComponent } from './main-page/main-page.component';
 import { userReducer } from './store/user/user.reducer';
+import { IndexComponent } from './index/index.component';
 
 export function localStorageSyncReducer(rootReducer: any) {
   return localStorageSync({
@@ -52,6 +53,7 @@ export function localStorageSyncReducer(rootReducer: any) {
     VerbPracticeSummaryComponent,
     LoginPageComponent,
     MainPageComponent,
+    IndexComponent,
   ],
   imports: [
     BrowserModule,
