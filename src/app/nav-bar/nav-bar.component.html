@@ -13,19 +13,44 @@
         <a class="text-black-olive hover:text-rangoon-green" href="">Exercises</a>
       </li> -->
       <li class="mr-2 ml-auto">
-            <button mat-button [matMenuTriggerFor]="menu"
-            class="text-ghost-white hover:text-rangoon-green"
-            >
-              {{ user || "User" }}
-            </button>
-          <mat-menu #menu="matMenu">
-            <button
-              mat-menu-item
-              (click)="logOut()"
-            >
+        <button mat-button [matMenuTriggerFor]="menu"
+        class="user-btn text-ghost-white on-hover"
+        >
+          {{ user || "User" }}
+        </button>
+        <mat-menu #menu="matMenu">
+          <button *ngIf="isLogin"
+            mat-menu-item
+            class="hover:bg-ghost-white hover:text-black-olive"
+            (click)="logOut()"
+          >
+            <span class="hover:text-black-olive">
               Logout
-            </button>
-          </mat-menu>
+            </span>
+          </button>
+          <button *ngIf="!isLogin"
+            mat-menu-item
+            class="hover:bg-ghost-white"
+          >
+            <a
+              [routerLink]="'/register'"
+              class="hover:text-black-olive"
+            >
+              Register
+            </a>
+          </button>
+          <button *ngIf="!isLogin"
+            mat-menu-item
+            class=" hover:bg-ghost-white"
+          >
+            <a
+              [routerLink]="'/login'"
+              class="hover:text-black-olive"
+            >
+              Login
+            </a>
+          </button>
+        </mat-menu>
       </li>
     </ul>
   </div>

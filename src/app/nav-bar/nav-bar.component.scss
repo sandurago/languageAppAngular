@@ -14,3 +14,11 @@
 a {
   text-decoration: none !important;
 }
+
+.user-btn {
+  margin-top: 3px !important;
+}
+
+.on-hover:hover {
+  box-shadow: 1px 1px 2px var(--black-olive);
+}
