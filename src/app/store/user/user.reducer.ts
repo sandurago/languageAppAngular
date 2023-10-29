@@ -1,6 +1,6 @@
 import { createReducer, on } from "@ngrx/store";
 import { User } from "src/app/interface/user";
-import { saveUser } from "./user.actions";
+import { saveUser, logout } from "./user.actions";
 
 // Declatred and initalized the state for user with type User.
 export const userState: User = {
@@ -22,5 +22,14 @@ export const userReducer = createReducer(
       password: password,
       login: login
     })
-  )
+  ),
+  on(logout,
+    (state) => ({
+      ...state,
+      nickname: '',
+      name: '',
+      password: '',
+      login: false
+    })
+    )
 );

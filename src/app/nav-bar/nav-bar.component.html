@@ -13,9 +13,19 @@
         <a class="text-black-olive hover:text-rangoon-green" href="">Exercises</a>
       </li> -->
       <li class="mr-2 ml-auto">
-        <a class="text-ghost-white hover:text-rangoon-green" href="">
-          {{ user || "User" }}
-        </a>
+            <button mat-button [matMenuTriggerFor]="menu"
+            class="text-ghost-white hover:text-rangoon-green"
+            >
+              {{ user || "User" }}
+            </button>
+          <mat-menu #menu="matMenu">
+            <button
+              mat-menu-item
+              (click)="logOut()"
+            >
+              Logout
+            </button>
+          </mat-menu>
       </li>
     </ul>
   </div>

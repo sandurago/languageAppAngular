@@ -54,6 +54,11 @@ export class NavBarComponent {
     })
    };
 
+   logOut() {
+    this.store.dispatch(logout());
+    this.router.navigate(['/']);
+   }
+
    /** METHODS */
    ngOnInit() {
     this.user$.subscribe((user) => (
@@ -69,4 +74,5 @@ export class NavBarComponent {
       this.gradient = value
     ))
   }
-}
+}import { logout } from '../store/user/user.actions';
+

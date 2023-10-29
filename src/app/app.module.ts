@@ -28,6 +28,7 @@ import { userReducer } from './store/user/user.reducer';
 import { IndexComponent } from './index/index.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { colorReducer } from './store/colors/colors.reducer';
+import {MatMenuModule} from '@angular/material/menu';
 
 export function localStorageSyncReducer(rootReducer: any) {
   return localStorageSync({
@@ -73,6 +74,7 @@ export function localStorageSyncReducer(rootReducer: any) {
     MatTableModule,
     MatIconModule,
     MatPaginatorModule,
+    MatMenuModule,
     StoreModule.forRoot(
       {
         verbsStore: verbsReducer,

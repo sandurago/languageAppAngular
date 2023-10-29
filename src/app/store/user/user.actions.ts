@@ -9,3 +9,7 @@ export const saveUser = createAction(
     login:boolean
   }>()
 )
+
+export const logout = createAction(
+  '[NavbarComponent], Logs user out'
+)
