@@ -1,6 +1,6 @@
 <div class="flex justify-evenly">
 
-  <mat-card class="card-dimension">
+  <mat-card class="card-dimension" [ngStyle]="{'height' : message ? '420px' : ''}">
     <mat-card-header class="mb-3">
       <mat-card-title>{{ action }}</mat-card-title>
       <mat-icon matSuffix class="mt-1 ml-1">{{ icon }}</mat-icon>

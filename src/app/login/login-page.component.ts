@@ -52,7 +52,7 @@ export class LoginPageComponent {
   // METHODS
   FormGroup = this._formBuilder.group({
     nickname: ['', Validators.required],
-    name: [''],
+    name: ['', Validators.required],
     password: ['', Validators.required]
   })
 
@@ -87,15 +87,6 @@ export class LoginPageComponent {
       password: this.FormGroup.get('password')?.value
     }
 
-    // Saves user data into userStore
-    this.store.dispatch(saveUser({
-      nickname: user.nickname as string,
-      name: user.nickname as string,
-      password: user.password as string,
-      login: true
-    }));
-
-
     // If user chose to login delete name from payload and use correct url.
     if (this.isLogin) {
       delete user.name;
@@ -121,6 +112,13 @@ export class LoginPageComponent {
     const jsonMessage = await response.json();
 
     if (jsonStatus == 200 || jsonStatus == 201) {
+      // Saves user data into userStore
+      this.store.dispatch(saveUser({
+        nickname: user.nickname as string,
+        name: user.nickname as string,
+        password: user.password as string,
+        login: true
+      }));
       this.router.navigateByUrl('/display');
     } else {
       this.message = jsonMessage.message;
