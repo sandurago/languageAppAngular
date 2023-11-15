@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 import { User } from '../interface/user';
 import { Observable, map } from 'rxjs';
-import { nickname, name, password } from '../store/user/user.selector';
+import { id, nickname, name, password } from '../store/user/user.selector';
 import { saveUser } from '../store/user/user.actions';
 import { state } from '@angular/animations';
 
@@ -26,6 +26,7 @@ export class LoginPageComponent {
 
   url:string = 'http://localhost:8000';
   // Here we declare our observables that will keep track of values in the state and change them
+  userId$:Observable<number>;
   userNickname$:Observable<string>;
   userName$:Observable<string>;
   userPassword$:Observable<string>;
@@ -35,6 +36,10 @@ export class LoginPageComponent {
   constructor(private _formBuilder: FormBuilder, private store: Store<{ userStore: User }>,
     private route: ActivatedRoute, private router: Router){
       // Here we assign the values from the state to the observables
+      this.userId$ = this.store.pipe(
+        select('userStore'),
+        map(state => id(state))
+      )
       this.userNickname$ = this.store.pipe(
         select('userStore'),
         map(state => nickname(state))
@@ -114,6 +119,7 @@ export class LoginPageComponent {
     if (jsonStatus == 200 || jsonStatus == 201) {
       // Saves user data into userStore
       this.store.dispatch(saveUser({
+        id: jsonMessage.id,
         nickname: user.nickname as string,
         name: user.nickname as string,
         password: user.password as string,

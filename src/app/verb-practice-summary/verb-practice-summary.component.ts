@@ -1,5 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { Verbs } from '../interface/verbs';
+import { Store, select } from '@ngrx/store';
+import { User } from '../interface/user';
+import { Observable, map } from 'rxjs';
+import { id } from '../store/user/user.selector';
 
 @Component({
   selector: 'app-verb-practice-summary',
@@ -21,6 +25,15 @@ export class VerbPracticeSummaryComponent {
   url:string = "http://localhost:8080/verbs/insertDataToTable.php";
   isProgressSaved:boolean = false;
   buttonLabel:string = "Save my progress";
+  userId$:Observable<number>;
+  userId:number;
+
+  constructor(private store: Store<{ userStore: User }>){
+    this.userId$ = this.store.pipe(
+      select('userStore'),
+      map(state => id(state))
+    )
+  };
 
   // METHODS
   getKeys() {
@@ -36,6 +49,11 @@ export class VerbPracticeSummaryComponent {
 
   // Function to send data to the server (AJAX)
   async postAnswers() {
+
+    const dataToSend = {
+      ...this.data,
+      user: this.userId
+    }
     const response = await fetch(this.url, { // THIS is the Request that I get on the PHP side.
       method: "POST",
       mode: "cors",
@@ -74,5 +92,10 @@ export class VerbPracticeSummaryComponent {
       answer: this.data[key],
       correct: this.verbsObj.conjugation[key]
     }))
+
+    //
+    this.userId$.subscribe((user) => {
+      this.userId = user;
+    })
   }
 }
