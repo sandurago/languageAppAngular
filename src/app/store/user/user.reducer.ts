@@ -28,6 +28,7 @@ export const userReducer = createReducer(
   on(logout,
     (state) => ({
       ...state,
+      id: 0,
       nickname: '',
       name: '',
       password: '',
