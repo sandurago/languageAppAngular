@@ -8,6 +8,7 @@ import { filter } from 'rxjs/operators';
 import { Color } from '../store/colors/colors.reducer';
 import { gradient } from '../store/colors/colors.selector';
 import { changeGradient } from '../store/colors/colors.actions';
+import { logout } from '../store/user/user.actions';
 
 @Component({
   selector: 'app-nav-bar',
@@ -57,6 +58,7 @@ export class NavBarComponent {
    logOut() {
     this.store.dispatch(logout());
     this.router.navigate(['/']);
+
    }
 
    /** METHODS */
@@ -74,5 +76,5 @@ export class NavBarComponent {
       this.gradient = value
     ))
   }
-}import { logout } from '../store/user/user.actions';
+}
 
