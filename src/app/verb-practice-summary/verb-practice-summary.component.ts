@@ -22,7 +22,7 @@ export class VerbPracticeSummaryComponent {
   dataKeys:Array<string>;
   dataValues:Array<string>;
   correctAnswers:Array<string>;
-  url:string = "http://localhost:8080/verbs/insertDataToTable.php";
+  url:string = "http://localhost:8000/user/answers";
   isProgressSaved:boolean = false;
   buttonLabel:string = "Save my progress";
   userId$:Observable<number>;
@@ -60,21 +60,16 @@ export class VerbPracticeSummaryComponent {
       cache: "no-cache",
       credentials: "same-origin",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
       },
       redirect: "follow",
       referrerPolicy: "no-referrer",
-      body: JSON.stringify(this.data)
+      body: JSON.stringify(dataToSend)
     })
-    const json = await response.text();
+    const json = await response.json();
     // then check the json status
     // if saving to db is successful:
-    if (json === '200') {
-      this.isProgressSaved = true;
-      this.buttonLabel = "Progress saved!";
-    } else {
-      this.buttonLabel = "Error. Try again";
-    }
+    this.buttonLabel = json.message;
   }
 
   reloadPage() {

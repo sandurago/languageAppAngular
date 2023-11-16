@@ -27,7 +27,6 @@ export class VerbPracticeTemplateComponent {
   dataWithAnswers:any = {};
   addPoints:number = 0;
   summaryMessage:string;
-  url:string = "http://localhost:8080/verbs/insertDataToTable.php";
 
   /** CONSTRUCTOR */
   constructor(private store: Store<{ verbsStore: VerbState }>, private _formBuilder: FormBuilder, public dialog: MatDialog ) {
@@ -111,6 +110,11 @@ export class VerbPracticeTemplateComponent {
       return;
     }
     this.isCheckClicked = true;
+    this.currentVerbName$.subscribe(verb => {
+      this.dataWithAnswers = {
+        verb: verb
+      }
+    })
 
     for (let i = 0; i < 6; i++) {
       const userInput = this.FormGroup.get('input' + (i+1))!.value;
