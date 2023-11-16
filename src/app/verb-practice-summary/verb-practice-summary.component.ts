@@ -82,13 +82,15 @@ export class VerbPracticeSummaryComponent {
     this.getValues();
     this.getCorrectAnswers();
 
+    //Remove 'verb' key from keys answers for the purpose of displaying only answers.
+    this.dataKeys.shift();
+
     this.dataSource = this.dataKeys.map((key) => ({
       subject: key,
       answer: this.data[key],
       correct: this.verbsObj.conjugation[key]
     }))
 
-    //
     this.userId$.subscribe((user) => {
       this.userId = user;
     })

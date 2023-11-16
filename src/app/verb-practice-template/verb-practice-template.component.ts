@@ -110,6 +110,8 @@ export class VerbPracticeTemplateComponent {
       return;
     }
     this.isCheckClicked = true;
+
+    // Save the name of the verb in data with Answers to send to PHP
     this.currentVerbName$.subscribe(verb => {
       this.dataWithAnswers = {
         verb: verb
