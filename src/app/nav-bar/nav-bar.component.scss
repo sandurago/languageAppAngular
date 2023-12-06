@@ -2,6 +2,10 @@
   color: var(--black-olive);
 }
 
+.line-height {
+  line-height: 56px !important;
+}
+
 .custom-container {
   justify-content: flex-start !important;
   background: rgba(195, 251, 244, 1);
@@ -16,7 +20,7 @@ a {
 }
 
 .user-btn {
-  margin-top: 3px !important;
+  margin-top: -8px !important;
 }
 
 .on-hover:hover {

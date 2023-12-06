@@ -1,23 +1,28 @@
 <div>
-  <div class="grid grid-cols-5 gap-5 justify-items-center">
+  <div class="grid grid-cols-3 gap-10 justify-items-center">
     <table
-      *ngFor="let verb of allVerbsList.slice(start, end); let i = index"
+      *ngFor="let verb of allVerbsList; let i = index"
     >
       <div
         (mouseenter)="hoveredElement = i"
+        (click)="practiceThisVerb(verb.name)"
+        [routerLink]="['/practice', verb.name]"
         (mouseleave)="hoveredElement = null"
         [ngClass]="{'hover': hoveredElement == i}"
-        class="w-48 border-2 border-solid border-black-olive rounded-lg transition-transform duration-500">
-        <div class="border-b-gray-200 border-solid rounded-t-md bg-denim-blue text-ghost-white text-center text-lg">
+        id="card"
+        class="w-72 border-2 border-solid border-black-olive rounded-lg transition-transform duration-500"
+        >
+        <div class="border-b-gray-200 h-16 flex justify-center items-center border-solid rounded-t-md bg-dark-green text-ghost-white text-2xl">
           {{ verb.name }}
+          <mat-icon class="ml-2">border_color</mat-icon>
         </div>
-        <div class="bg-icecold text-center text-black-olive italic text-sm">
+        <div class="bg-light-green h-10 flex justify-center items-center text-white text-lg">
           {{ verb.translation }}
         </div>
         <div class="py-3">
           <div
             *ngFor="let con of verb.conjugation | keyvalue:onCompare"
-            class="text-center"
+            class="text-center text-lg"
           >
             {{ con.key }} {{ con.value }}
           </div>

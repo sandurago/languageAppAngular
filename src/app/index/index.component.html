@@ -22,7 +22,6 @@
       class="h-fit p-5 text-xl font-medium leading-10 absolute position-upper text-center animate__animated"
       [ngClass]="{'animate__backInDown': backInDown == true}"
       [ngStyle]="{display: backInDown ? '' : 'none'}"
-
     >
       FrenchUpp is an application with exercises <br> to help you learn and practice your skills <br> in french language.
     </mat-card>
@@ -36,11 +35,11 @@
   </div>
   <div
     [ngClass]="{'animate__fadeInLeft':true}"
-    class="ml-14 rounded-full border-2 border-solid border-darkgreen-blue bg-ghost-white overflow-hidden image-container animate__animated"
+    class="ml-24 rounded-lg border-2 border-solid border-black-olive bg-ghost-white overflow-hidden image-container animate__animated"
   >
     <img
       [src]="bgImage"
-      class="border-solid border-icecold image animate__animated rounded-full"
+      class="border-solid border-black-olive image animate__animated rounded-lg"
       [ngClass]="animateClass"
     >
   </div>

@@ -1,8 +1,8 @@
 <div class="flex justify-evenly">
 
   <mat-card class="card-dimension" [ngStyle]="{'height' : message ? '420px' : ''}">
-    <mat-card-header class="mb-3">
-      <mat-card-title>{{ action }}</mat-card-title>
+    <mat-card-header class="my-3 mx-auto">
+      <mat-card-title class="uppercase">{{ action }}</mat-card-title>
       <mat-icon matSuffix class="mt-1 ml-1">{{ icon }}</mat-icon>
     </mat-card-header>
     <mat-card-content>
@@ -12,20 +12,52 @@
        [formGroup]="FormGroup"
       >
         <div class="card-content flex flex-col justify-center">
+          <ng-template
+            [ngIf]="!isLogin" [ngIfElse]="isLoginWelcome"
+            class="mb-3"
+          >
+            <div>Your nickname will be your username.</div>
+          </ng-template>
+          <ng-template #isLoginWelcome>
+            <div class="mb-5 uppercase text-2xl font-semibold">
+              welcome back
+            </div>
+          </ng-template>
+          <span *ngIf="isLogin">
+            Enter your nickname.
+          </span>
           <mat-form-field class="w-full">
             <mat-label>Nickname</mat-label>
             <input [formControl]="FormGroup.controls.nickname" matInput>
           </mat-form-field>
+          <ng-template
+            [ngIf]="!isLogin"
+          >
+            You can use your real name or not.
+          </ng-template>
           <mat-form-field class="w-full" *ngIf="!isLogin">
             <mat-label>Name</mat-label>
             <input [formControl]="FormGroup.controls.name" matInput>
           </mat-form-field>
+          <ng-template
+            [ngIf]="!isLogin" [ngIfElse]="isLoginPassword"
+          >
+            <div>
+              Set your password for your account.
+            </div>
+          </ng-template>
+          <ng-template #isLoginPassword>
+            <div>
+              Enter your password.
+            </div>
+          </ng-template>
           <mat-form-field class="w-full">
             <mat-label>Password</mat-label>
             <input formControlName="password" type="password" matInput>
           </mat-form-field>
         </div>
         <button
+          class="uppercase py-8"
           mat-raised-button color="primary"
           (click)="createUser()"
         >
@@ -37,28 +69,33 @@
 
   <mat-card
     *ngIf="!isLogin"
-    class="card-dimension"
+    class="dimension-why-register"
   >
-    <mat-card-header>
-      <mat-card-title class="mb-3">
-        Why registering
+    <mat-card-header class="mx-auto">
+      <mat-card-title class="my-3 uppercase">
+        <span class="register text-2xl">Why registering</span>
       </mat-card-title>
-      <mat-icon class="mt-1 ml-1 text-purple-heart">help</mat-icon>
+      <mat-icon class="mt-4 ml-1 text-purple-heart">help</mat-icon>
     </mat-card-header>
     <mat-card-content class="flex flex-col">
       <div class="card-content">
-        <div class="my-4">
+        <div class="my-4 text-xl leading-8">
           This way you will be able to save and track your progres on this app. When you decide to come back again and continue learning you will be able to see what you've learnt so far and how you performed on each exercise! <br>
-          <mat-icon class="">mood</mat-icon>
+          <mat-icon class="">done_outline</mat-icon>
         </div>
-          If you still prefer to use the application without registering click the button below.
+          <p class="text-xl">
+            If you still prefer to use the application without registering click the button below.
+          </p>
       </div>
-      <button mat-raised-button color="primary">
+      <button mat-raised-button
+        color="primary"
+        class="uppercase py-8"
+      >
         <a
           [routerLink]="['/display']"
           class="hover:text-white"
         >
-          continue
+          I understand. Continue.
         </a>
       </button>
     </mat-card-content>
@@ -66,7 +103,7 @@
 </div>
 
 <div class="mt-8">
-  <p>If you {{ hasAccount }} an account click
+  <p class="mb-4 text-lg">If you {{ hasAccount }} an account click
     <button
       type="button"
       class="text-denim-blue font-semibold"

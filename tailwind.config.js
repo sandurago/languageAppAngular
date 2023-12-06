@@ -20,6 +20,12 @@ module.exports = {
         'rangoon-green': '#1D1B1B', // hovered elements
         'error-red': '#f44336', // errors
         'pearl': '#DEE1DF', // borders
+
+        //--- NEW PALETTE
+        'dark-purple': '#845EC2',
+        'light-purple':'#C197FF',
+        'light-green': '#00C9A7',
+        'dark-green': '#005B44'
       },
     },
   },

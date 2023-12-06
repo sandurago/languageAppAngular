@@ -1,57 +1,56 @@
-<nav class="navbar h-14 bg-transparent">
-  <div
-  class="mx-2 h-14 flex rounded-md container-fluid leading-3 custom-container"
-  [ngStyle]="{background: 'linear-gradient(90deg, rgba(195, 251, 244, 1) ' + gradient +'%, rgb(103, 58, 183) 100%)'}"
-  >
-    <ul class="w-full flex list justify-start">
-      <li class="leading-10 font-black text-2xl text-rangoon-green">
-        <a href="#" class="navbar-brand link text-black-olive">
-          FrenchUpp
-        </a>
-      </li>
-     <!--  <li class="mx-2">
-        <a class="text-black-olive hover:text-rangoon-green" href="">Exercises</a>
-      </li> -->
-      <li class="mr-2 ml-auto">
-        <button mat-button [matMenuTriggerFor]="menu"
-        class="user-btn text-ghost-white on-hover"
+<nav class="navbar h-20 bg-ghost-white leading-3">
+  <ul class="w-full flex list justify-start">
+    <li class="font-black text-rangoon-green">
+      <a href="#" class="navbar-brand flex flex-row link text-black-olive text-2xl">
+        <img
+        src="assets/img/logo.jpg"
+        class="mt-3 ml-10 mr-2 w-7 h-7"
         >
-          {{ user || "User" }}
+        <p class="line-height">FrenchUpp</p>
+      </a>
+    </li>
+    <!--  <li class="mx-2">
+      <a class="text-black-olive hover:text-rangoon-green" href="">Exercises</a>
+    </li> -->
+    <li class="mr-6 ml-auto">
+      <button mat-button [matMenuTriggerFor]="menu"
+      class="h-full bg-dark-purple user-btn text-white rounded-none text-lg"
+      >
+        {{ user || "User" }}
+      </button>
+      <mat-menu #menu="matMenu">
+        <button *ngIf="isLogin"
+          mat-menu-item
+          class="hover:bg-ghost-white hover:text-rangoon-green"
+          (click)="logOut()"
+        >
+          <span class="hover:text-black-olive">
+            Logout
+          </span>
         </button>
-        <mat-menu #menu="matMenu">
-          <button *ngIf="isLogin"
-            mat-menu-item
-            class="hover:bg-ghost-white hover:text-black-olive"
-            (click)="logOut()"
+        <button *ngIf="!isLogin"
+          mat-menu-item
+          class="hover:bg-ghost-white"
+        >
+          <a
+            [routerLink]="'/register'"
+            class="hover:text-black-olive"
           >
-            <span class="hover:text-black-olive">
-              Logout
-            </span>
-          </button>
-          <button *ngIf="!isLogin"
-            mat-menu-item
-            class="hover:bg-ghost-white"
+            Register
+          </a>
+        </button>
+        <button *ngIf="!isLogin"
+          mat-menu-item
+          class=" hover:bg-ghost-white"
+        >
+          <a
+            [routerLink]="'/login'"
+            class="hover:text-black-olive"
           >
-            <a
-              [routerLink]="'/register'"
-              class="hover:text-black-olive"
-            >
-              Register
-            </a>
-          </button>
-          <button *ngIf="!isLogin"
-            mat-menu-item
-            class=" hover:bg-ghost-white"
-          >
-            <a
-              [routerLink]="'/login'"
-              class="hover:text-black-olive"
-            >
-              Login
-            </a>
-          </button>
-        </mat-menu>
-      </li>
-    </ul>
-  </div>
+            Login
+          </a>
+        </button>
+      </mat-menu>
+    </li>
+  </ul>
 </nav>

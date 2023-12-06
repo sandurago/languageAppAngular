@@ -21,15 +21,15 @@ export class NavBarComponent {
    user:string;
    isLogin$:Observable<boolean>;
    isLogin:boolean;
-   gradient$:Observable<number>;
-   gradient:number;
+   //gradient$:Observable<number>;
+   //gradient:number;
 
    /** CONSTRUCTOR  */
    constructor(private store: Store <{ userStore: User }>, private router: Router, private colorStore: Store <{ colorStore: Color}>){
-    this.gradient$ = this.colorStore.pipe(
+   /*  this.gradient$ = this.colorStore.pipe(
       select('colorStore'),
       map(state => gradient(state))
-    )
+    ) */
 
     this.user$ = this.store.pipe(
       select('userStore'),
@@ -49,9 +49,6 @@ export class NavBarComponent {
       // We subscribe to it
     ).subscribe((_value: NavigationEnd) => {
       this.store.dispatch(changeGradient());
-      /* this.gradient = Math.floor(Math.random() * 40 + 20);
-      console.log(this.gradient);
-      console.log('linear-gradient(90deg, rgba(254,210,219,1) ' + this.gradient +'%, rgb(103, 58, 183) 100%)'); */
     })
    };
 
@@ -72,9 +69,9 @@ export class NavBarComponent {
       this.isLogin = value
     ));
 
-    this.gradient$.subscribe((value) => (
+    /* this.gradient$.subscribe((value) => (
       this.gradient = value
-    ))
+    )) */
   }
 }
 

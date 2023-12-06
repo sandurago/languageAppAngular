@@ -27,13 +27,19 @@
   --error-red: #f44336; // errors
   --pearl: #DEE1DF; // borders
 
+  //--- NEW PALLETTE
+  --dark-purple: #845EC2;
+  --light-purple: #C197FF;
+  --light-green: #00C9A7;
+  --dark-green: #005B44;
+
   .card-dimension {
-    width: 280px;
-    height: 390px;
+    width: 350px;
+    height: 480px;
   }
 
   .card-content {
-    height: 260px;
+    height: 320px;
   }
 }
 
