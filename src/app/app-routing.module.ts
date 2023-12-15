@@ -9,7 +9,7 @@ const routes: Routes = [
   { path: '', component: IndexComponent},
   { path: 'register', component: MainPageComponent },
   { path: 'login', component: MainPageComponent },
-  //{ path: 'display', loadChildren: () => import('/verb-display/verb-display.module') },
+  { path: 'display', component: VerbDisplayComponent },
   { path: 'practice/:verb', component: VerbPracticeTemplateComponent }
 ];
 
