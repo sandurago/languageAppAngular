@@ -26,16 +26,37 @@
   //--- NEW PALLETTE
   --dark-purple: #845EC2;
   --light-purple: #C197FF;
-  --light-gray: #b0a8b9,
-  --dark-gray: #7c7484,
+  --light-gray: #b0a8b9;
+  --dark-gray: #7c7484;
 
   .card-dimension {
     width: 350px;
     height: 480px;
   }
 
+
   .card-content {
     height: 320px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .card-dimension {
+    width: 20%;
+    height: 580px;
+  }
+
+  .card-content {
+    height: 420px;
+  }
+
+  .reg-log {
+    width: 86% !important;
+    margin: 0 auto;
+  }
+
+  .register-login-page {
+    margin-top: 78px;
   }
 }
 

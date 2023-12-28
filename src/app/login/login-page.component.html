@@ -2,8 +2,8 @@
 
   <mat-card class="card-dimension" [ngStyle]="{'height' : message ? '420px' : ''}">
     <mat-card-header class="my-3 mx-auto">
-      <mat-card-title class="uppercase">{{ action }}</mat-card-title>
-      <mat-icon matSuffix class="mt-1 ml-1">{{ icon }}</mat-icon>
+      <mat-card-title class="uppercase text-dark-gray">{{ action }}</mat-card-title>
+      <mat-icon matSuffix class="mt-1 ml-1 text-dark-gray">{{ icon }}</mat-icon>
     </mat-card-header>
     <mat-card-content>
       <p *ngIf="message!==''" class="text-error-red">{{ message }}</p>
@@ -11,21 +11,16 @@
         class="flex flex-col"
        [formGroup]="FormGroup"
       >
-        <div class="card-content flex flex-col justify-center">
+        <div class="card-content reg-log flex flex-col justify-center">
           <ng-template
-            [ngIf]="!isLogin" [ngIfElse]="isLoginWelcome"
+            [ngIf]="!isLogin" [ngIfElse]="isLoginNickname"
             class="mb-3"
           >
             <div>Your nickname will be your username.</div>
           </ng-template>
-          <ng-template #isLoginWelcome>
-            <div class="mb-5 uppercase text-2xl font-semibold">
-              welcome back
-            </div>
-          </ng-template>
-          <span *ngIf="isLogin">
+          <ng-template #isLoginNickname>
             Enter your nickname.
-          </span>
+          </ng-template>
           <mat-form-field class="w-full">
             <mat-label>Nickname</mat-label>
             <input [formControl]="FormGroup.controls.nickname" matInput>
@@ -73,9 +68,9 @@
   >
     <mat-card-header class="mx-auto">
       <mat-card-title class="my-3 uppercase">
-        <span class="register text-2xl">Why registering</span>
+        <span class="text-2xl text-dark-gray">Why registering</span>
       </mat-card-title>
-      <mat-icon class="mt-4 ml-1 text-purple-heart">help</mat-icon>
+      <mat-icon class="mt-4 ml-1 text-light-gray">help</mat-icon>
     </mat-card-header>
     <mat-card-content class="flex flex-col">
       <div class="card-content">

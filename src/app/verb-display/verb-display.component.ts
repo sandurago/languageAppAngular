@@ -23,9 +23,10 @@ export class VerbDisplayComponent {
   hoveredElement:any = null;
   verbsList$:Observable<Array<Verbs>>;
   start:number = 0;
-  end:number = 10;
+  end:number = 6;
   gradient$:Observable<number>;
   gradient:number;
+  pageIndexBigger:boolean;
 
   /** CONSTRUCTOR */
   constructor(private store: Store<{ verbsStore: VerbState }>, private colorStore: Store<{ colorStore: Color}>) {
@@ -42,14 +43,15 @@ export class VerbDisplayComponent {
   };
 
   handlePageEvent(e:PageEvent) {
-    console.log(e);
     if(e.previousPageIndex !== undefined) {
       if (e.pageIndex > e.previousPageIndex) {
-        this.start+=10;
-        this.end+=10;
+        this.pageIndexBigger = false;
+        this.start+= 6;
+        this.end+= 6;
       } else {
-        this.start-=10;
-        this.end-=10;
+        this.pageIndexBigger = true;
+        this.start-= 6;
+        this.end-= 6;
       }
     }
   }
