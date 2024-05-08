@@ -15,7 +15,7 @@ import { filter } from 'rxjs';
 export class AppComponent {
   /** RETURN DATA */
   title = 'language-app';
-  private URL = 'http://localhost:8000/verbs';
+  private URL = 'http://localhost:5000/verbs/verbslist';
   pageUrl:string = '';
   urlChange: boolean = false;
 
@@ -33,19 +33,18 @@ export class AppComponent {
       setTimeout(() => {
         this.urlChange = false;
       }, 500);
-      console.log(event.url);
     });
   }
 
   /** METHODS */
   ngOnInit() {
-    // at the start of an app we do http request to load verbs in the store
+  //   // at the start of an app we do http request to load verbs in the store
     this.httpClient.get<Array<Verbs>>(this.URL).subscribe((verbs) => {
       this.store.dispatch(setVerbs({ allVerbs: verbs}))
     })
   }
 
-  ngOnChanges(changes: SimpleChange) {
-    console.log(changes);
-  }
+  // ngOnChanges(changes: SimpleChange) {
+  //   console.log(changes);
+  // }
 }

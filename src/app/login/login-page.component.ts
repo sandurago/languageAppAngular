@@ -24,7 +24,7 @@ export class LoginPageComponent {
 
   @Output() actionEvent = new EventEmitter();
 
-  url:string = 'http://localhost:8000';
+  url:string = 'http://localhost:5000/user';
   // Here we declare our observables that will keep track of values in the state and change them
   userId$:Observable<number>;
   userNickname$:Observable<string>;
@@ -97,7 +97,7 @@ export class LoginPageComponent {
       delete user.name;
       userURL = this.url + '/login';
     } else {
-      userURL = this.url + '/create';
+      userURL = this.url + '/register';
     }
 
     const response = await fetch(userURL, {
@@ -112,6 +112,7 @@ export class LoginPageComponent {
       referrerPolicy: "no-referrer",
       body: JSON.stringify(user)
     })
+    console.log(JSON.stringify(user));
 
     const jsonStatus = await response.status;
     const jsonMessage = await response.json();
