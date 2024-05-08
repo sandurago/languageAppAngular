@@ -1,5 +1,5 @@
 <div>
-  <div
+  <!-- <div
     class="flex items-center mb-5 bg-ghost-white rounded-lg title animate__animated animate__fadeInLeft"
   >
     <h1 class="py-1 ml-52 mb-0 flex-1 font-black text-4xl text-rangoon-green">
@@ -16,31 +16,21 @@
         Continue to app
       </a>
     </button>
-  </div>
-  <div class="mt-14 relative">
+  </div> -->
+  <div class="-mt-14 w-1/2 flex flex-col gap-6 justify-center bg-[url('/assets/img/cover.png')]" style="height: calc(100vh - 80px)">
     <mat-card
-      class="h-fit p-5 text-xl font-medium leading-10 absolute position-upper text-center animate__animated"
+      class="mx-10 h-fit p-5 text-xl font-medium leading-10 text-center animate__animated"
       [ngClass]="{'animate__backInDown': backInDown == true}"
       [ngStyle]="{display: backInDown ? '' : 'none'}"
     >
       FrenchUpp is an application with exercises <br> to help you learn and practice your skills <br> in french language.
     </mat-card>
     <mat-card
-      class="h-fit p-5 text-xl font-medium leading-10 absolute position-lower text-center animate__animated"
+      class="mx-10 h-fit p-5 text-xl font-medium leading-10 text-center animate__animated"
       [ngClass]="{'animate__backInUp': backInUp == true}"
       [ngStyle]="{display: backInUp ? '' : 'none'}"
     >
       You can create your own account <br> where you can save the exercises <br> and your answers.
     </mat-card>
-  </div>
-  <div
-    [ngClass]="{'animate__fadeInLeft':true}"
-    class="ml-24 rounded-lg border-2 border-solid border-black-olive bg-ghost-white overflow-hidden image-container animate__animated"
-  >
-    <img
-      [src]="bgImage"
-      class="border-solid border-light-gray image animate__animated rounded-lg"
-      [ngClass]="animateClass"
-    >
   </div>
 </div>
