@@ -1,3 +1,15 @@
+@import "src/my-theme.scss";
+
+.upper {
+  background-color: mat-color($app-theme-primary, 200);
+  color: mat-color($app-theme-primary, 800);
+}
+
+.lower {
+  background-color: mat-color($app-theme-primary, 600);
+  color: mat-color($app-theme-primary, 100);
+}
+
 .title {
   box-shadow: 2px 2px 5px var(--pearl);
   animation-duration: 0.8s;

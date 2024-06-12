@@ -1,14 +1,14 @@
 import { KeyValue } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { Verbs } from '../interface/verbs';
+import { Verbs } from '../../Interface/verbs';
 import { Store, select } from '@ngrx/store';
-import { VerbState } from '../store/verbs/verbs.reducer';
-import { congjuateThisVerb } from '../store/verbs/verbs.actions';
+import { VerbState } from '../../store/verbs/verbs.reducer';
+import { congjuateThisVerb } from '../../store/verbs/verbs.actions';
 import { Observable, map } from 'rxjs';
-import { verbsList } from '../store/verbs/verbs.selectors';
+import { verbsList } from '../../store/verbs/verbs.selectors';
 import { PageEvent } from '@angular/material/paginator';
-import { Color } from '../store/colors/colors.reducer';
-import { gradient } from '../store/colors/colors.selector';
+import { Color } from '../../store/colors/colors.reducer';
+import { gradient } from '../../store/colors/colors.selector';
 
 @Component({
   selector: 'app-verb-display',

@@ -1,15 +1,11 @@
-/* Importing Bootstrap SCSS file. */
-@import "./node_modules/bootstrap/scss/bootstrap";
-
-
 /* You can add global styles to this file, and also import other style files */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-
-/* Importing Datepicker SCSS file. */
-@import "node_modules/ngx-bootstrap/datepicker/bs-datepicker";
+* {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
 
 /* COLORS */
 :root {
@@ -20,7 +16,7 @@
   --darkgreen-blue: #25676e; // third primary color (used for better visibility against white bg)
 
   --rangoon-green: #1D1B1B; // hovered elements
-  --error-red: #f44336; // errors
+  --error-red: #c24848; // errors
   --pearl: #DEE1DF; // borders
 
   //--- NEW PALLETTE
@@ -30,13 +26,13 @@
   --dark-gray: #7c7484;
 
   .card-dimension {
-    width: 350px;
-    height: 480px;
+    width: 500px;
+    height: 650px;
   }
 
 
   .card-content {
-    height: 320px;
+    height: 200px;
   }
 }
 

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { Verbs, VerbsList, VerbsCong } from '../interface/verbs';
+import { Verbs, VerbsList, VerbsCong } from '../../Interface/verbs';
 import { Store, select } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
-import { VerbState } from '../store/verbs/verbs.reducer';
-import { currentVerb, findVerbToConjugate } from '../store/verbs/verbs.selectors';
+import { VerbState } from '../../store/verbs/verbs.reducer';
+import { currentVerb, findVerbToConjugate } from '../../store/verbs/verbs.selectors';
 import { KeyValue } from '@angular/common';
 import { FormBuilder, Validators } from '@angular/forms';
 import { VerbPracticeDialogComponent } from '../verb-practice-dialog/verb-practice-dialog.component';

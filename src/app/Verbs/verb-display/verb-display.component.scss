@@ -1,3 +1,5 @@
+@import "src/my-theme.scss";
+
 .hover {
   transform: scale(1.05);
   border-color: var(--rangoon-green);
@@ -11,4 +13,12 @@
 .text-hover {
   transform: scale(1.05);
   font-size: larger;
+}
+
+.verb-name {
+  background-color: mat-color($app-theme-primary, 800);
+}
+
+.verb-translation {
+  background-color: mat-color($app-theme-primary, 300);
 }

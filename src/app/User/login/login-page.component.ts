@@ -1,28 +1,44 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
-import { User } from '../interface/user';
+import { User } from '../../Interface/user';
 import { Observable, map } from 'rxjs';
-import { id, nickname, name, password } from '../store/user/user.selector';
-import { saveUser } from '../store/user/user.actions';
-import { state } from '@angular/animations';
+import { id, nickname, name, password } from '../../store/user/user.selector';
+import { saveUser } from '../../store/user/user.actions';
 
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.scss']
 })
-export class LoginPageComponent {
-  // DATA
-  @Input() icon:string = '';
-  @Input() action:string = '';
-  @Input() linkAction:string = '';
-  @Input() hasAccount:string = '';
-  @Input() isLogin:boolean;
 
-  @Output() actionEvent = new EventEmitter();
+export class LoginPageComponent {
+
+  @ViewChild('input', { read: ElementRef, static:false }) input: ElementRef;
+  constructor(
+    private _formBuilder: FormBuilder,
+    private store: Store<{ userStore: User }>,
+    private router: Router
+  ){
+    // Here we assign the values from the state to the observables
+    this.userId$ = this.store.pipe(
+      select('userStore'),
+      map(state => id(state))
+    )
+    this.userNickname$ = this.store.pipe(
+      select('userStore'),
+      map(state => nickname(state))
+    )
+    this.userName$ = this.store.pipe(
+      select('userStore'),
+      map(state => name(state))
+    )
+    this.userPassword$ = this.store.pipe(
+      select('userStore'),
+      map(state => password(state))
+    )
+  }
 
   url:string = 'http://localhost:5000/user';
   // Here we declare our observables that will keep track of values in the state and change them
@@ -30,31 +46,17 @@ export class LoginPageComponent {
   userNickname$:Observable<string>;
   userName$:Observable<string>;
   userPassword$:Observable<string>;
+
   message:string = '';
+  animateClass:string;
+  backInDown:boolean;
+  backInUp:boolean;
+  isLogin:boolean = true;
+  linkAction:string = 'register';
+  hasAccount:string = 'don\'t have';
+  action:string = 'login';
 
-  // CONSTRUCTOR
-  constructor(private _formBuilder: FormBuilder, private store: Store<{ userStore: User }>,
-    private route: ActivatedRoute, private router: Router){
-      // Here we assign the values from the state to the observables
-      this.userId$ = this.store.pipe(
-        select('userStore'),
-        map(state => id(state))
-      )
-      this.userNickname$ = this.store.pipe(
-        select('userStore'),
-        map(state => nickname(state))
-      )
-      this.userName$ = this.store.pipe(
-        select('userStore'),
-        map(state => name(state))
-      )
-      this.userPassword$ = this.store.pipe(
-        select('userStore'),
-        map(state => password(state))
-      )
-    }
-
-  // METHODS
+  // Values from form
   FormGroup = this._formBuilder.group({
     nickname: ['', Validators.required],
     name: ['', Validators.required],
@@ -65,18 +67,14 @@ export class LoginPageComponent {
    * Changes the action from register to login and other way around.
    */
   changeAction() {
-    // emits this action to the main-page component
-    this.actionEvent.emit();
+    !this.isLogin ? this.router.navigateByUrl('/login') : this.router.navigateByUrl('/register');
+  };
 
-    if (!this.isLogin) {
-      //window.history.replaceState({}, 'login', '/login');
-      this.router.navigateByUrl('/login');
-      this.isLogin = true;
-    } else {
-      //window.history.replaceState({}, 'register', '/register');
-      this.router.navigateByUrl('/register');
-      this.isLogin = false;
-    };
+  hideError() {
+    this.message = '';
+    const parent = this.input.nativeElement;
+    parent.children[0].classList.remove("mdc-text-field--invalid");
+    console.log(parent.children[0].classList);
   }
 
   /**
@@ -91,6 +89,7 @@ export class LoginPageComponent {
       name: this.FormGroup.get('name')?.value,
       password: this.FormGroup.get('password')?.value
     }
+    console.log(nickname + ' ' + name);
 
     // If user chose to login delete name from payload and use correct url.
     if (this.isLogin) {
@@ -113,6 +112,7 @@ export class LoginPageComponent {
       body: JSON.stringify(user)
     })
     console.log(JSON.stringify(user));
+    console.log(userURL);
 
     const jsonStatus = await response.status;
     const jsonMessage = await response.json();
@@ -122,13 +122,29 @@ export class LoginPageComponent {
       this.store.dispatch(saveUser({
         id: jsonMessage.id,
         nickname: user.nickname as string,
-        name: user.nickname as string,
+        name: user.name as string,
         password: user.password as string,
+        created_at: jsonMessage.created_at,
+        last_login: jsonMessage.last_login,
         login: true
       }));
-      this.router.navigateByUrl('/display');
+      this.router.navigateByUrl('/dashboard');
     } else {
       this.message = jsonMessage.message;
+    }
+  }
+
+  ngOnInit() {
+    if (this.router.url === '/login') {
+      this.isLogin = true;
+      this.linkAction = 'register';
+      this.hasAccount = 'don\t have';
+      this.action = 'login';
+    } else {
+      this.isLogin = false;
+      this.linkAction = 'login';
+      this.hasAccount = 'have';
+      this.action = 'register';
     }
   }
 }

@@ -1,20 +1,20 @@
 <nav class="navbar h-20 bg-ghost-white leading-3">
-  <ul class="w-full flex list justify-start">
+  <ul class="w-full flex list justify-start flex flex-row items-center">
     <li class="font-black text-rangoon-green">
       <a href="#" class="navbar-brand flex flex-row link text-black-olive text-2xl">
         <img
         src="assets/img/logo.jpg"
-        class="mt-3 ml-10 mr-2 w-7 h-7"
+        class="ml-10 mr-2 w-7 h-7"
         >
-        <p class="line-height">FrenchUpp</p>
+        <p>FrenchUpp</p>
       </a>
     </li>
-    <!--  <li class="mx-2">
-      <a class="text-black-olive hover:text-rangoon-green" href="">Exercises</a>
-    </li> -->
+     <li class="mx-2">
+      <a class="text-xl text-black-olive hover:text-rangoon-green" href="display">Verbs</a>
+    </li>
     <li class="mr-6 ml-auto">
       <button mat-button [matMenuTriggerFor]="menu"
-      class="h-full bg-dark-purple user-btn text-white rounded-none text-lg"
+      class="pt-[30px] pb-[30px] h-full user-btn text-white rounded-none text-lg user-button"
       >
         {{ user || "User" }}
       </button>

@@ -15,7 +15,7 @@ module.exports = {
         'darkgreen-blue': '#25676e', // third primary color (used for better visibility against white bg)
 
         'rangoon-green': '#1D1B1B', // hovered elements
-        'error-red': '#f44336', // errors
+        'error-red': '#c24848', // errors
         'pearl': '#DEE1DF', // borders
 
         //--- NEW PALETTE

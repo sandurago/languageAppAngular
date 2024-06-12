@@ -1,4 +1,4 @@
-<div>
+<div class="flex flex-row justify-between">
   <!-- <div
     class="flex items-center mb-5 bg-ghost-white rounded-lg title animate__animated animate__fadeInLeft"
   >
@@ -17,20 +17,29 @@
       </a>
     </button>
   </div> -->
-  <div class="-mt-14 w-1/2 flex flex-col gap-6 justify-center bg-[url('/assets/img/cover.png')]" style="height: calc(100vh - 80px)">
+
+
+  <div
+    class="-mt-14 w-1/2 -ml-5 flex flex-col gap-6 justify-center bg-[url('/assets/img/sprinke.png')]"
+    style="height: calc(100vh - 80px)"
+  >
     <mat-card
-      class="mx-10 h-fit p-5 text-xl font-medium leading-10 text-center animate__animated"
+      class="w-1/2 mx-10 text-xl font-medium leading-10 text-center animate__animated upper"
       [ngClass]="{'animate__backInDown': backInDown == true}"
       [ngStyle]="{display: backInDown ? '' : 'none'}"
     >
-      FrenchUpp is an application with exercises <br> to help you learn and practice your skills <br> in french language.
+      <span>FrenchUpp is an application with exercises <br> to help you learn and practice your skills <br> in french language.</span>
     </mat-card>
     <mat-card
-      class="mx-10 h-fit p-5 text-xl font-medium leading-10 text-center animate__animated"
+      class="w-1/2 ml-auto mr-10 text-xl font-medium leading-10 text-center animate__animated lower"
       [ngClass]="{'animate__backInUp': backInUp == true}"
       [ngStyle]="{display: backInUp ? '' : 'none'}"
+
     >
       You can create your own account <br> where you can save the exercises <br> and your answers.
     </mat-card>
   </div>
+  <app-login-page
+    class="mx-auto"
+  />
 </div>

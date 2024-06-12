@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { User } from '../interface/user';
+import { User } from '../Interface/user';
 import { Store, select } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
 import { nickname, login } from '../store/user/user.selector';

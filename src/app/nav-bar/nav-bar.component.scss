@@ -1,9 +1,7 @@
+@import "src/my-theme.scss";
+
 .link {
   color: var(--black-olive);
-}
-
-.line-height {
-  line-height: 56px !important;
 }
 
 .custom-container {
@@ -25,4 +23,8 @@ a {
 
 .on-hover:hover {
   box-shadow: 1px 1px 2px var(--black-olive);
+}
+
+.user-button {
+  background-color: mat-color($app-theme-primary, 900);
 }
