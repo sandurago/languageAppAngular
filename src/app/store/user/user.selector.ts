@@ -1,4 +1,4 @@
-import { User } from "src/app/interface/user";
+import { User } from "src/app/Interface/user";
 
 export const id = (state: User) => state.id;
 export const nickname = (state: User) => state.nickname;

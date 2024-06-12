@@ -7,7 +7,9 @@ export const saveUser = createAction(
     nickname:string,
     name:string,
     password:string,
-    login:boolean
+    created_at: string;
+    last_login: string;
+    login:boolean,
   }>()
 )
 
