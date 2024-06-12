@@ -1,5 +1,5 @@
 import { createSelector } from "@ngrx/store";
-import { Verbs } from "src/app/interface/verbs";
+import { Verbs } from "src/app/Interface/verbs";
 import { VerbState } from "./verbs.reducer";
 
 //GETTERS

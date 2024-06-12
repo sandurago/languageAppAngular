@@ -5,9 +5,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { VerbDisplayComponent } from './verb-display/verb-display.component';
+import { VerbDisplayComponent } from './Verbs/verb-display/verb-display.component';
 import { HttpClientModule } from '@angular/common/http';
-import { VerbPracticeTemplateComponent } from './verb-practice-template/verb-practice-template.component';
+import { VerbPracticeTemplateComponent } from './Verbs/verb-practice-template/verb-practice-template.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -17,18 +17,21 @@ import { localStorageSync } from 'ngrx-store-localstorage';
 import { verbsReducer } from './store/verbs/verbs.reducer';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatStepperModule} from '@angular/material/stepper';
-import { VerbPracticeDialogComponent } from './verb-practice-dialog/verb-practice-dialog.component';
+import { VerbPracticeDialogComponent } from './Verbs/verb-practice-dialog/verb-practice-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
-import { VerbPracticeSummaryComponent } from './verb-practice-summary/verb-practice-summary.component';
+import { VerbPracticeSummaryComponent } from './Verbs/verb-practice-summary/verb-practice-summary.component';
 import { MatTableModule } from '@angular/material/table';
-import { LoginPageComponent } from './login/login-page.component';
+import { LoginPageComponent } from './User/login/login-page.component';
 import { MatIconModule } from '@angular/material/icon';
-import { MainPageComponent } from './main-page/main-page.component';
 import { userReducer } from './store/user/user.reducer';
 import { IndexComponent } from './index/index.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { colorReducer } from './store/colors/colors.reducer';
 import {MatMenuModule} from '@angular/material/menu';
+import { CoverSvgComponentComponent } from './cover-svg-component/cover-svg.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { AngularSvgIconModule } from 'angular-svg-icon';
+import { ChartComponent } from './Components/chart/chart.component';
 
 export function localStorageSyncReducer(rootReducer: any) {
   return localStorageSync({
@@ -55,8 +58,10 @@ export function localStorageSyncReducer(rootReducer: any) {
     VerbPracticeDialogComponent,
     VerbPracticeSummaryComponent,
     LoginPageComponent,
-    MainPageComponent,
     IndexComponent,
+    CoverSvgComponentComponent,
+    DashboardComponent,
+    ChartComponent,
   ],
   imports: [
     BrowserModule,
@@ -75,6 +80,7 @@ export function localStorageSyncReducer(rootReducer: any) {
     MatIconModule,
     MatPaginatorModule,
     MatMenuModule,
+    AngularSvgIconModule.forRoot(),
     StoreModule.forRoot(
       {
         verbsStore: verbsReducer,

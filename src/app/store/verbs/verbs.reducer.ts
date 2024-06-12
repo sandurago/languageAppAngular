@@ -1,6 +1,6 @@
 import { createReducer, on } from "@ngrx/store";
 import { congjuateThisVerb, setVerbs } from "./verbs.actions";
-import { Verbs } from "src/app/interface/verbs";
+import { Verbs } from "src/app/Interface/verbs";
 
 //reducers is what handles modifying the state in response to the actions being dispatched
 

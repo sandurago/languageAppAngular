@@ -3,7 +3,7 @@ import { setVerbs } from './store/verbs/verbs.actions';
 import { Store } from '@ngrx/store';
 import { VerbState } from './store/verbs/verbs.reducer';
 import { HttpClient } from '@angular/common/http';
-import { Verbs } from './interface/verbs';
+import { Verbs } from './Interface/verbs';
 import { NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { filter } from 'rxjs';
 

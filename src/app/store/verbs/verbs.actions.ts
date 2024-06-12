@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { Verbs } from "src/app/interface/verbs";
+import { Verbs } from "src/app/Interface/verbs";
 
 // declaring the actions
 export const congjuateThisVerb = createAction(
