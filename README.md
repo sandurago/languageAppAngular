@@ -1,7 +1,8 @@
 # LanguageAppAngular
 
 This project is a platform to learn and practice French language, where user can create his own account to save and track his progress while practicing the language. <br />
-It was built with Angular CLI version 15.1.6.
+The backend side of this application is here: [https://github.com/sandurago/languageAppExpress](https://github.com/sandurago/languageAppExpress). <br />
+The application was built with Angular CLI version 15.1.6.
 
 ## Get started with the project
 
