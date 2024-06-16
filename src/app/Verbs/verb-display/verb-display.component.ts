@@ -7,8 +7,6 @@ import { congjuateThisVerb } from '../../Store/verbs/verbs.actions';
 import { Observable, map } from 'rxjs';
 import { verbsList } from '../../Store/verbs/verbs.selectors';
 import { PageEvent } from '@angular/material/paginator';
-import { Color } from '../../Store/colors/colors.reducer';
-import { gradient } from '../../Store/colors/colors.selector';
 
 @Component({
   selector: 'app-verb-display',
@@ -29,17 +27,12 @@ export class VerbDisplayComponent {
   pageIndexBigger:boolean;
 
   /** CONSTRUCTOR */
-  constructor(private store: Store<{ verbsStore: VerbState }>, private colorStore: Store<{ colorStore: Color}>) {
+  constructor(private store: Store<{ verbsStore: VerbState }>) {
     this.verbsList$ = this.store.pipe(
       select('verbsStore'),
       //verbsList is coming from selectors
       map(state => verbsList(state))
     );
-
-    this.gradient$ = this.colorStore.pipe(
-      select('colorStore'),
-      map(state => gradient(state))
-    )
   };
 
   handlePageEvent(e:PageEvent) {
