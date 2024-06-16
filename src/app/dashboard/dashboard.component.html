@@ -1,19 +1,32 @@
-<div>
-    <mat-card class="mx-48 p-12">
+<div class="grid grid-cols-1 gap-10">
+    <mat-card class="p-12">
         <mat-card-content class="flex flex-row justify-center items-center gap-12">
             <div class="flex flex-col">
                 <h1 class="text-[80px]">Hello, {{ user }}</h1>
-                <p class="text-[50px]">What do you want to do next?</p>
+                <p class="text-[50px]">Ready for your next challenge?</p>
             </div>
             <svg-icon src="../../assets/icons/green-alien-hello.svg"></svg-icon>
         </mat-card-content>
     </mat-card>
-    <div class="grid grid-cols-2 gap-4">
-        <mat-card>
-            HELLO
+    <div class="grid grid-cols-2 gap-10">
+        <mat-card #chart>
+            <mat-card-title>
+                <p class="p-4 font-bold text-2xl">Time you spent learning during last 7 days</p>
+            </mat-card-title>
+            <app-chart
+                [chartParentWidth]="chartParentWidth"
+                [chartParentHeight]="chartParentHeight"
+            />
         </mat-card>
         <mat-card>
-            HELLO
+            <mat-card-title>
+                <p class="p-4 font-bold text-2xl">Your last activity</p>
+            </mat-card-title>
+            <mat-card-content>
+                <p>The last task you did was on Tuesday 22/05/2024.</p>
+                <p>You completed: Verbs: avoir.</p>
+                <p>Your result:</p>
+            </mat-card-content>
         </mat-card>
     </div>
 </div>

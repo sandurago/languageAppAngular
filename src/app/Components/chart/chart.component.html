@@ -1,1 +1,18 @@
-<p>chart works!</p>
+<ngx-charts-bar-vertical
+  [view]="view"
+  [results]="data"
+  [gradient]="gradient"
+  [xAxis]="showXAxis"
+  [yAxis]="showYAxis"
+  [legend]="showLegend"
+  [showGridLines]="showGridLines"
+  [showXAxisLabel]="showXAxisLabel"
+  [showYAxisLabel]="showYAxisLabel"
+  [xAxisLabel]="xAxisLabel"
+  [yAxisLabel]="yAxisLabel"
+  [barPadding]="barPadding"
+  >
+  <ng-template #tooltipTemplate let-model = "model">
+      {{model.value}} min
+  </ng-template>
+</ngx-charts-bar-vertical>
