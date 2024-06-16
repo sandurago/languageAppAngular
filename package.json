@@ -1,6 +1,7 @@
 {
   "name": "language-app",
   "version": "0.0.0",
+  "author": "Sandra Liu",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
