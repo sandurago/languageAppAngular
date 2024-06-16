@@ -5,7 +5,7 @@ import { saveUser, logout } from "./user.actions";
 // Declatred and initalized the state for user with type User.
 export const userState: User = {
   id: 0,
-  nickname: '',
+  username: '',
   name: '',
   password: '',
   created_at: '',
@@ -18,10 +18,10 @@ export const userReducer = createReducer(
   userState,
 
   on(saveUser,
-    (state, {id, nickname, name, password, created_at, last_login, login}) =>({
+    (state, {id, username, name, password, created_at, last_login, login}) =>({
       ...state,
       id: id,
-      nickname: nickname,
+      username: username,
       name: name,
       password: password,
       create_at: created_at,
@@ -33,7 +33,7 @@ export const userReducer = createReducer(
     (state) => ({
       ...state,
       id: 0,
-      nickname: '',
+      username: '',
       name: '',
       password: '',
       login: false

@@ -16,13 +16,13 @@
       <button mat-button [matMenuTriggerFor]="menu"
       class="pt-[30px] pb-[30px] h-full user-btn text-white rounded-none text-lg user-button"
       >
-        {{ user || "User" }}
+        {{ username || "User" }}
       </button>
       <mat-menu #menu="matMenu">
         <button *ngIf="isLogin"
           mat-menu-item
           class="hover:bg-ghost-white hover:text-rangoon-green"
-          (click)="logOut()"
+          (click)="logout()"
         >
           <span class="hover:text-black-olive">
             Logout

@@ -1,14 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, HostListener, SimpleChange } from '@angular/core';
 import { User } from '../Interface/user';
 import { Store, select } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
-import { nickname, login } from '../store/user/user.selector';
+import { id, name, login, username } from '../Store/user/user.selector';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
-import { Color } from '../store/colors/colors.reducer';
-import { gradient } from '../store/colors/colors.selector';
-import { changeGradient } from '../store/colors/colors.actions';
-import { logout } from '../store/user/user.actions';
+import { logout } from '../Store/user/user.actions';
 
 @Component({
   selector: 'app-nav-bar',
@@ -16,62 +13,84 @@ import { logout } from '../store/user/user.actions';
   styleUrls: ['./nav-bar.component.scss']
 })
 export class NavBarComponent {
-  /** DATA */
-   user$:Observable<string>;
-   user:string;
+  @HostListener('window:beforeunload', [ '$event'])
+  unloadHandler(event:void) {
+    this.logout();
+  }
+   name$:Observable<string>;
+   name:string;
+   username$:Observable<string>;
+   username:string;
    isLogin$:Observable<boolean>;
    isLogin:boolean;
-   //gradient$:Observable<number>;
-   //gradient:number;
+   userId$:Observable<number>;
+   userId:number;
 
-   /** CONSTRUCTOR  */
-   constructor(private store: Store <{ userStore: User }>, private router: Router, private colorStore: Store <{ colorStore: Color}>){
-   /*  this.gradient$ = this.colorStore.pipe(
-      select('colorStore'),
-      map(state => gradient(state))
-    ) */
-
-    this.user$ = this.store.pipe(
+   constructor(private store: Store <{ userStore: User }>, private router: Router){
+    this.username$ = this.store.pipe(
       select('userStore'),
-      map(state => nickname(state))
-    )
+      map(state => username(state))
+    );
+
+    this.name$ = this.store.pipe(
+      select('userStore'),
+      map(state => name(state))
+    );
 
     this.isLogin$ = this.store.pipe(
       select('userStore'),
       map(state => login(state))
-    )
-
-    // Detects changes in url
-    // We use .pipe() to transform data
-    this.router.events.pipe(
-      // We filter the navigation event that interests us
-      filter((event: any) => event instanceof NavigationEnd)
-      // We subscribe to it
-    ).subscribe((_value: NavigationEnd) => {
-      this.store.dispatch(changeGradient());
-    })
-   };
-
-   logOut() {
-    this.store.dispatch(logout());
-    this.router.navigate(['/']);
-
-   }
-
-   /** METHODS */
-   ngOnInit() {
-    this.user$.subscribe((user) => (
-      this.user = user
-    )
     );
 
-    this.isLogin$.subscribe((value) => (
-      this.isLogin = value
+    this.userId$ = this.store.pipe(
+      select('userStore'),
+      map(state => id(state))
+    )
+   };
+
+   async logout() {
+    const response = await fetch('http://localhost:5000/user/logout', {
+      method: 'POST',
+      mode: 'cors',
+      cache: 'no-cache',
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'Application/json',
+      },
+      redirect: 'follow',
+      referrerPolicy: 'no-referrer',
+      body: JSON.stringify({
+        'id': this.userId,
+        'name': this.name,
+        'username': this.username,
+      }),
+    });
+
+    const status = await response.status;
+    const json = await response.json();
+
+    if (status === 200 || status === 201) {
+      this.store.dispatch(logout());
+      this.router.navigate(['/']);
+    }
+   }
+
+   ngOnInit() {
+    this.name$.subscribe((name) => (
+      this.name = name
     ));
 
-    /* this.gradient$.subscribe((value) => (
-      this.gradient = value
-    )) */
+    this.username$.subscribe((username) => (
+      this.username = username
+    ))
+
+    this.isLogin$.subscribe((login) => (
+      this.isLogin = login
+    ));
+
+    this.userId$.subscribe((id) => (
+      this.userId = id
+    ));
   }
 }
 

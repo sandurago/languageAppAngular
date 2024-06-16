@@ -4,8 +4,10 @@ import { Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 import { User } from '../../Interface/user';
 import { Observable, map } from 'rxjs';
-import { id, nickname, name, password } from '../../store/user/user.selector';
-import { saveUser } from '../../store/user/user.actions';
+import { id, username, name, password } from '../../Store/user/user.selector';
+import { saveUser } from '../../Store/user/user.actions';
+import { json } from 'd3';
+//import POST_USER  from '../../Query/';
 
 @Component({
   selector: 'app-login-page',
@@ -14,38 +16,9 @@ import { saveUser } from '../../store/user/user.actions';
 })
 
 export class LoginPageComponent {
-
+  
   @ViewChild('input', { read: ElementRef, static:false }) input: ElementRef;
-  constructor(
-    private _formBuilder: FormBuilder,
-    private store: Store<{ userStore: User }>,
-    private router: Router
-  ){
-    // Here we assign the values from the state to the observables
-    this.userId$ = this.store.pipe(
-      select('userStore'),
-      map(state => id(state))
-    )
-    this.userNickname$ = this.store.pipe(
-      select('userStore'),
-      map(state => nickname(state))
-    )
-    this.userName$ = this.store.pipe(
-      select('userStore'),
-      map(state => name(state))
-    )
-    this.userPassword$ = this.store.pipe(
-      select('userStore'),
-      map(state => password(state))
-    )
-  }
-
   url:string = 'http://localhost:5000/user';
-  // Here we declare our observables that will keep track of values in the state and change them
-  userId$:Observable<number>;
-  userNickname$:Observable<string>;
-  userName$:Observable<string>;
-  userPassword$:Observable<string>;
 
   message:string = '';
   animateClass:string;
@@ -56,24 +29,39 @@ export class LoginPageComponent {
   hasAccount:string = 'don\'t have';
   action:string = 'login';
 
+  name$:Observable<string>;
+  name:any;
+
   // Values from form
   FormGroup = this._formBuilder.group({
-    nickname: ['', Validators.required],
+    username: ['', Validators.required],
     name: ['', Validators.required],
     password: ['', Validators.required]
   })
+
+  constructor(
+    private _formBuilder: FormBuilder,
+    private store: Store<{userStore: User}>,
+    private router: Router
+  ){
+    this.name$ = this.store.pipe(
+      select('userStore'),
+      map(state => username(state))
+    );
+  }
 
   /**
    * Changes the action from register to login and other way around.
    */
   changeAction() {
     !this.isLogin ? this.router.navigateByUrl('/login') : this.router.navigateByUrl('/register');
+    console.log(this.isLogin);
   };
 
   hideError() {
     this.message = '';
     const parent = this.input.nativeElement;
-    parent.children[0].classList.remove("mdc-text-field--invalid");
+    parent.children[0].classList.remove('mdc-text-field--invalid');
     console.log(parent.children[0].classList);
   }
 
@@ -85,34 +73,24 @@ export class LoginPageComponent {
     let userURL:string;
     // Form an object to be sent
     const user = {
-      nickname: this.FormGroup.get('nickname')?.value,
+      username: this.FormGroup.get('username')?.value,
       name: this.FormGroup.get('name')?.value,
       password: this.FormGroup.get('password')?.value
     }
-    console.log(nickname + ' ' + name);
-
-    // If user chose to login delete name from payload and use correct url.
-    if (this.isLogin) {
-      delete user.name;
-      userURL = this.url + '/login';
-    } else {
       userURL = this.url + '/register';
-    }
 
     const response = await fetch(userURL, {
-      method: "POST",
-      mode: "cors",
-      cache: "no-cache",
-      credentials: "same-origin",
+      method: 'POST',
+      mode: 'cors',
+      cache: 'no-cache',
+      credentials: 'same-origin',
       headers: {
-        "Content-Type": "application/json"
+        'Content-Type': 'application/json'
       },
-      redirect: "follow",
-      referrerPolicy: "no-referrer",
+      redirect: 'follow',
+      referrerPolicy: 'no-referrer',
       body: JSON.stringify(user)
     })
-    console.log(JSON.stringify(user));
-    console.log(userURL);
 
     const jsonStatus = await response.status;
     const jsonMessage = await response.json();
@@ -121,8 +99,54 @@ export class LoginPageComponent {
       // Saves user data into userStore
       this.store.dispatch(saveUser({
         id: jsonMessage.id,
-        nickname: user.nickname as string,
+        username: user.username as string,
         name: user.name as string,
+        password: user.password as string,
+        created_at: jsonMessage.created_at,
+        last_login: jsonMessage.last_login,
+        login: true
+      }));
+      console.log(this.name);
+      this.router.navigateByUrl('/dashboard');
+    } else {
+      this.message = jsonMessage.message;
+    }
+  }
+
+  async loginUser() {
+    // Variable for url
+    let userURL:string;
+    // Form an object to be sent
+    const user = {
+      username: this.FormGroup.get('username')?.value,
+      password: this.FormGroup.get('password')?.value,
+    }
+
+    userURL = this.url + '/login';
+
+    const response = await fetch(userURL, {
+      method: 'POST',
+      mode: 'cors',
+      cache: 'no-cache',
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      redirect: 'follow',
+      referrerPolicy: 'no-referrer',
+      body: JSON.stringify(user)
+    })
+
+    const jsonStatus = await response.status;
+    const jsonMessage = await response.json();
+    console.log(jsonMessage);
+
+    if (jsonStatus == 200 || jsonStatus == 201) {
+      // Saves user data into userStore
+      this.store.dispatch(saveUser({
+        id: jsonMessage.id,
+        username: user.username as string,
+        name: jsonMessage.name,
         password: user.password as string,
         created_at: jsonMessage.created_at,
         last_login: jsonMessage.last_login,
@@ -134,7 +158,7 @@ export class LoginPageComponent {
     }
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     if (this.router.url === '/login') {
       this.isLogin = true;
       this.linkAction = 'register';
@@ -146,5 +170,9 @@ export class LoginPageComponent {
       this.hasAccount = 'have';
       this.action = 'register';
     }
+
+    this.name$.subscribe((name) => (
+      this.name = name
+    ))
   }
 }

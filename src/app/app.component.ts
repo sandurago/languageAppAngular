@@ -1,7 +1,7 @@
 import { Component, SimpleChange } from '@angular/core';
-import { setVerbs } from './store/verbs/verbs.actions';
+import { setVerbs } from './Store/verbs/verbs.actions';
 import { Store } from '@ngrx/store';
-import { VerbState } from './store/verbs/verbs.reducer';
+import { VerbState } from './Store/verbs/verbs.reducer';
 import { HttpClient } from '@angular/common/http';
 import { Verbs } from './Interface/verbs';
 import { NavigationEnd, NavigationStart, Router } from '@angular/router';

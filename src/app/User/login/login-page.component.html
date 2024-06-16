@@ -29,14 +29,14 @@
       >
         <ng-template
           [ngIf]="!isLogin"
-          [ngIfElse]="isLoginNickname"
+          [ngIfElse]="isLoginUsername"
           class="mb-3"
         >
           <span class="font-bold">
             Enter your username, eg. barry78
           </span>
         </ng-template>
-        <ng-template #isLoginNickname>
+        <ng-template #isLoginUsername>
           <span class="font-bold">
             Enter your username
           </span>
@@ -47,7 +47,7 @@
           class="w-full"
         >
           <input
-            [formControl]="FormGroup.controls.nickname"
+            [formControl]="FormGroup.controls.username"
             matInput
             type="username"
             (focus)="hideError()"
@@ -98,20 +98,30 @@
             class="p-3"
           >
         </mat-form-field>
-        <button
-          class="uppercase py-8"
-          mat-raised-button color="primary"
-          (click)="createUser()"
-        >
-          {{ action }}
-        </button>
+        <ng-template [ngIf]="isLogin" [ngIfElse]="Register">
+          <button
+              class="uppercase py-8"
+              mat-raised-button color="primary"
+              (click)="loginUser()"
+            >
+              Login
+            </button>
+        </ng-template>
+        <ng-template #Register>
+          <button
+              class="uppercase py-8"
+              mat-raised-button color="primary"
+              (click)="createUser()"
+            >
+              Register
+            </button>
+        </ng-template>
       </form>
     </mat-card-content>
     <mat-card-footer class="mt-auto mx-auto pb-4">
       If you {{ hasAccount }} an account click
       <button
         type="button"
-
         (click)="changeAction()"
         >
         here

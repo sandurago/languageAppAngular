@@ -14,7 +14,7 @@ import { MatInputModule } from '@angular/material/input';
 import {MatCardModule} from '@angular/material/card';
 import { StoreModule } from '@ngrx/store';
 import { localStorageSync } from 'ngrx-store-localstorage';
-import { verbsReducer } from './store/verbs/verbs.reducer';
+import { verbsReducer } from './Store/verbs/verbs.reducer';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatStepperModule} from '@angular/material/stepper';
 import { VerbPracticeDialogComponent } from './Verbs/verb-practice-dialog/verb-practice-dialog.component';
@@ -23,15 +23,15 @@ import { VerbPracticeSummaryComponent } from './Verbs/verb-practice-summary/verb
 import { MatTableModule } from '@angular/material/table';
 import { LoginPageComponent } from './User/login/login-page.component';
 import { MatIconModule } from '@angular/material/icon';
-import { userReducer } from './store/user/user.reducer';
+import { userReducer } from './Store/user/user.reducer';
 import { IndexComponent } from './index/index.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
-import { colorReducer } from './store/colors/colors.reducer';
 import {MatMenuModule} from '@angular/material/menu';
 import { CoverSvgComponentComponent } from './cover-svg-component/cover-svg.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { ChartComponent } from './Components/chart/chart.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 export function localStorageSyncReducer(rootReducer: any) {
   return localStorageSync({
@@ -80,12 +80,12 @@ export function localStorageSyncReducer(rootReducer: any) {
     MatIconModule,
     MatPaginatorModule,
     MatMenuModule,
+    NgxChartsModule,
     AngularSvgIconModule.forRoot(),
     StoreModule.forRoot(
       {
         verbsStore: verbsReducer,
         userStore: userReducer,
-        colorStore: colorReducer
       },
       {
         metaReducers: [localStorageSyncReducer]

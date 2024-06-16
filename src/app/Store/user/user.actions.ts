@@ -4,7 +4,7 @@ export const saveUser = createAction(
   '[LoginPageComponent], Adds user info to the store',
   props<{
     id:number,
-    nickname:string,
+    username:string,
     name:string,
     password:string,
     created_at: string;

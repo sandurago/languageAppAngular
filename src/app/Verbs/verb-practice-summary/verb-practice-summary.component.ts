@@ -3,7 +3,7 @@ import { Verbs } from '../../Interface/verbs';
 import { Store, select } from '@ngrx/store';
 import { User } from '../../Interface/user';
 import { Observable, map } from 'rxjs';
-import { id } from '../../store/user/user.selector';
+import { id } from '../../Store/user/user.selector';
 
 @Component({
   selector: 'app-verb-practice-summary',
