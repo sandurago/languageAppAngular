@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, ElementRef } from '@angular/core';
 import { User } from '../Interface/user';
 import { Store, select } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
-import { name } from '../Store/user/user.selector';
+import { name, lastLogin } from '../Store/user/user.selector';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,12 +15,18 @@ export class DashboardComponent {
   user: string;
   chartParentWidth:number;
   chartParentHeight:number;
-
+  lastLogin$: Observable<string>;
+  lastLogin: string;
 
   constructor(private store: Store<{userStore: User}>, private chart: ElementRef, private cdref: ChangeDetectorRef){
     this.user$ = this.store.pipe(
       select('userStore'),
       map(state => name(state))
+    )
+
+    this.lastLogin$ = this.store.pipe(
+      select('userStore'),
+      map(state => lastLogin(state))
     )
   };
 
@@ -38,5 +44,11 @@ export class DashboardComponent {
     this.user$.subscribe((user) => {
       this.user = user;
     })
+
+    this.lastLogin$.subscribe((lastLogin) => {
+      this.lastLogin = lastLogin;
+    })
+
+    console.log(this.lastLogin);
   };
 }

@@ -1,5 +1,5 @@
 import { KeyValue } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { Verbs } from '../../Interface/verbs';
 import { Store, select } from '@ngrx/store';
 import { VerbState } from '../../Store/verbs/verbs.reducer';

@@ -6,8 +6,6 @@ import { User } from '../../Interface/user';
 import { Observable, map } from 'rxjs';
 import { id, username, name, password } from '../../Store/user/user.selector';
 import { saveUser } from '../../Store/user/user.actions';
-import { json } from 'd3';
-//import POST_USER  from '../../Query/';
 
 @Component({
   selector: 'app-login-page',
@@ -102,8 +100,8 @@ export class LoginPageComponent {
         username: user.username as string,
         name: user.name as string,
         password: user.password as string,
-        created_at: jsonMessage.created_at,
-        last_login: jsonMessage.last_login,
+        createdAt: jsonMessage.createdAt,
+        lastLogin: jsonMessage.lastLogin,
         login: true
       }));
       console.log(this.name);
@@ -135,11 +133,10 @@ export class LoginPageComponent {
       redirect: 'follow',
       referrerPolicy: 'no-referrer',
       body: JSON.stringify(user)
-    })
+    });
 
     const jsonStatus = await response.status;
     const jsonMessage = await response.json();
-    console.log(jsonMessage);
 
     if (jsonStatus == 200 || jsonStatus == 201) {
       // Saves user data into userStore
@@ -148,15 +145,15 @@ export class LoginPageComponent {
         username: user.username as string,
         name: jsonMessage.name,
         password: user.password as string,
-        created_at: jsonMessage.created_at,
-        last_login: jsonMessage.last_login,
-        login: true
+        createdAt: jsonMessage.created_at,
+        lastLogin: jsonMessage.login_time,
+        login: true,
       }));
       this.router.navigateByUrl('/dashboard');
     } else {
       this.message = jsonMessage.message;
     }
-  }
+  };
 
   ngOnInit(): void {
     if (this.router.url === '/login') {

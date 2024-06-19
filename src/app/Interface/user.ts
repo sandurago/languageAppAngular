@@ -3,7 +3,7 @@ export interface User {
   username: string;
   name: string;
   password: string;
-  created_at: string;
-  last_login: string;
+  createdAt: string;
+  lastLogin: string;
   login: boolean;
 }

@@ -24,6 +24,7 @@
     "@ngrx/store": "^15.4.0",
     "@swimlane/ngx-charts": "^20.5.0",
     "angular-svg-icon": "^15.0.0",
+    "moment": "^2.30.1",
     "ngrx-store-localstorage": "^15.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
