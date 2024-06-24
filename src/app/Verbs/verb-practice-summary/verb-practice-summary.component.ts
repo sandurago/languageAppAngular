@@ -22,7 +22,7 @@ export class VerbPracticeSummaryComponent {
   dataKeys:Array<string>;
   dataValues:Array<string>;
   correctAnswers:Array<string>;
-  url:string = "http://localhost:8000/user/answers";
+  url:string = "http://localhost:5000/user/answers";
   isProgressSaved:boolean = false;
   buttonLabel:string = "Save my progress";
   userId$:Observable<number>;
@@ -54,7 +54,7 @@ export class VerbPracticeSummaryComponent {
       ...this.data,
       user: this.userId
     }
-    const response = await fetch(this.url, { // THIS is the Request that I get on the PHP side.
+    const response = await fetch(this.url, {
       method: "POST",
       mode: "cors",
       cache: "no-cache",

@@ -1,16 +1,9 @@
 import { createAction, props } from "@ngrx/store";
+import { User } from "src/app/Interface/user";
 
 export const saveUser = createAction(
   '[LoginPageComponent], Adds user info to the store',
-  props<{
-    id:number,
-    username:string,
-    name:string,
-    password:string,
-    createdAt: string;
-    lastLogin: string;
-    login:boolean,
-  }>()
+  props<User>()
 )
 
 export const logout = createAction(

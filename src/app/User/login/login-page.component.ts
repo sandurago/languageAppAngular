@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 import { User } from '../../Interface/user';
 import { Observable, map } from 'rxjs';
-import { id, username, name, password } from '../../Store/user/user.selector';
+import { username } from '../../Store/user/user.selector';
 import { saveUser } from '../../Store/user/user.actions';
 
 @Component({
@@ -102,7 +102,8 @@ export class LoginPageComponent {
         password: user.password as string,
         createdAt: jsonMessage.createdAt,
         lastLogin: jsonMessage.lastLogin,
-        login: true
+        login: true,
+        loginDays: [],
       }));
       console.log(this.name);
       this.router.navigateByUrl('/dashboard');
@@ -148,6 +149,7 @@ export class LoginPageComponent {
         createdAt: jsonMessage.created_at,
         lastLogin: jsonMessage.login_time,
         login: true,
+        loginDays: jsonMessage.login_days,
       }));
       this.router.navigateByUrl('/dashboard');
     } else {

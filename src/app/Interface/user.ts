@@ -1,3 +1,5 @@
+import { Day } from "./days";
+
 export interface User {
   id: number;
   username: string;
@@ -6,4 +8,5 @@ export interface User {
   createdAt: string;
   lastLogin: string;
   login: boolean;
+  loginDays: Array<Day>;
 }
