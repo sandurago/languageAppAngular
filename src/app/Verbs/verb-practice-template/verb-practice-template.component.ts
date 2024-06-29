@@ -3,11 +3,14 @@ import { Verbs, VerbsList, VerbsCong } from '../../Interface/verbs';
 import { Store, select } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
 import { VerbState } from '../../Store/verbs/verbs.reducer';
-import { currentVerb, findVerbToConjugate } from '../../Store/verbs/verbs.selectors';
+import { currentVerb, selectVerb } from '../../Store/verbs/verbs.selectors';
 import { KeyValue } from '@angular/common';
-import { FormBuilder, Validators } from '@angular/forms';
-import { VerbPracticeDialogComponent } from '../verb-practice-dialog/verb-practice-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
+import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
+import { User } from 'src/app/Interface/user';
+import { id } from 'src/app/Store/user/user.selector';
+import moment, { Moment } from 'moment';
+import { VerbPracticeSummaryComponent } from '../verb-summary-dialog/verb-practice-summary.component';
 
 @Component({
   selector: 'app-verb-practice-template',
@@ -18,60 +21,54 @@ import {MatDialog} from '@angular/material/dialog';
 export class VerbPracticeTemplateComponent {
   /** DATA */
   verbsList$:Observable<VerbsList>;
-  currentVerbName$:Observable<string>;
+  verbName$:Observable<string>;
+  verbName:string;
   verbToConjugate$:Observable<Verbs | undefined>;
   verbObject:Verbs | undefined;
-  verbName:string;
-  conjugationPersons:Array<string>;
+  conjugationSubject:Array<string>;
+  conjugationVerbs:Array<string>;
+  currentSubject:string;
   isCheckClicked:boolean = false;
-  dataWithAnswers:any = {};
-  addPoints:number = 0;
+  userScoreSummary:any = {};
+  userAnswers:any = {};
+  score:number = 0;
+  index:number = 0;
+  isBtnClicked:boolean = false;
+  startTime:Moment;
+  endTime:Moment;
+  userId$:Observable<number>;
+  userId:number;
+
   summaryMessage:string;
+  spinnerValue:number = 0;
+  color:string = 'black';
+  mode: ProgressSpinnerMode = 'determinate';
 
   /** CONSTRUCTOR */
-  constructor(private store: Store<{ verbsStore: VerbState }>, private _formBuilder: FormBuilder, public dialog: MatDialog ) {
+  constructor(private store: Store<{ verbsStore: VerbState, userStore: User }>, public dialog: MatDialog ) {
     // asigns whats in the state (a verb) to 'currentVerb'
-    this.currentVerbName$ = this.store.pipe(
+    this.verbName$ = this.store.pipe(
       select('verbsStore'),
       map(state => currentVerb(state))
     )
     this.verbToConjugate$ = this.store.pipe(
       select('verbsStore'),
-      map(state => findVerbToConjugate(state))
+      map(state => selectVerb(state))
+    )
+    this.userId$ = this.store.pipe(
+      select('userStore'),
+      map(state => id(state))
     )
   };
 
-  FormGroup = this._formBuilder.group({
-    input1: ['', Validators.required],
-    input2: ['', Validators.required],
-    input3: ['', Validators.required],
-    input4: ['', Validators.required],
-    input5: ['', Validators.required],
-    input6: ['', Validators.required]
-  })
-
-  /** METHODS */
-  ngOnInit () {
-    // currentVerb is an observable so we need to subscribe to it to use its value
-    this.verbToConjugate$.subscribe((value) => {
-      this.verbObject = value;
-    })
-
-    this.currentVerbName$.subscribe((name) => {
-      this.verbName = name;
-    })
-
-    //At the start of the page it gets all the persons of practiced verb
-    this.getConjugationPersons();
-  };
-
   // VerbsList is the interface of all json object. keyof means it has to be the key that exists in VerbsList. Here we take name of the verb and use it to find the verb in json file.
-  findConjugationByVerb (verbName: keyof VerbsList) {
-    this.verbsList$.subscribe((list) => {
-      console.log(list, verbName)
-      this.verbObject = list[verbName];
-    })
-  }
+  // findConjugationByVerb (verbName: keyof VerbsList) {
+  //   this.verbsList$.subscribe((list) => {
+  //     console.log(list);
+  //     this.verbObject = list[verbName];
+  //   })
+  // }
+
   /** Sorts verbs */
   onCompare(_left: KeyValue<string, VerbsCong>, _right: KeyValue<string, VerbsCong>): number {
     return 1;
@@ -81,67 +78,125 @@ export class VerbPracticeTemplateComponent {
    * Returns the subject to conjugate
    * @param index of person (je, tu, ...)
    */
-  getConjugationPersons() {
-    this.verbToConjugate$.subscribe((verb) => {
-      if (verb) {
-        const persons:Array<string> = Object.keys(verb.conjugation);
-        this.conjugationPersons = persons.map(person => {
-          return person.charAt(0).toUpperCase() + person.slice(1);
-        });
-      }
-    })
-  }
-
-  // Dialog with a hint
-  openDialog(conjugationPerson:string) {
-    const helpPerson = conjugationPerson.toLowerCase();
+  getConjugationSubject() {
     if(this.verbObject) {
-      const helpConjugation = this.verbObject.conjugation[helpPerson];
-      // Opens the dialog and sends data to be displayed
-      this.dialog.open(VerbPracticeDialogComponent, {
-        data: { person: helpPerson, conjugation: helpConjugation}
+      const subjects:Array<string> = Object.keys(this.verbObject.conjugation);
+      this.conjugationSubject = subjects.map((subject) => {
+        if (subject === 'ilelle') {
+          return 'Il/elle';
+        } else if (subject === 'ilselles') {
+          return 'Ils/elles';
+        } else {
+          return subject.charAt(0).toUpperCase() + subject.slice(1);
+        }
       })
     }
   }
 
+  getConjugationVerbs() {
+    if (this.verbObject) {
+      const verbs = Object.values(this.verbObject.conjugation);
+      const verbsLength = verbs.length;
+      const listOfIndexes:Array<number> = [];
+
+      while (listOfIndexes.length < 6) {
+        const randomVerbIndex = Math.floor(Math.random() * verbsLength);
+        if (!listOfIndexes.includes(randomVerbIndex)) {
+          listOfIndexes.push(randomVerbIndex)
+        }
+      }
+      this.conjugationVerbs = listOfIndexes.map((index) => verbs[index]);
+    }
+  }
+
+  // Dialog with a hint
+  // openDialog(conjugationPerson:string) {
+  //   const helpPerson = conjugationPerson.toLowerCase();
+  //   if(this.verbObject) {
+  //     const helpConjugation = this.verbObject.conjugation[helpPerson];
+  //     // Opens the dialog and sends data to be displayed
+  //     this.dialog.open(VerbPracticeDialogComponent, {
+  //       data: { person: helpPerson, conjugation: helpConjugation}
+  //     })
+  //   }
+  // }
+
+  addUserAnswer(subject:string, verb:string) {
+    let subjectToLowerCase;
+
+    switch(subject) {
+      case 'Il/elle':
+        subjectToLowerCase = 'ilelle';
+        break;
+      case 'Ils/elles':
+        subjectToLowerCase = 'ilselles';
+        break;
+      default:
+        subjectToLowerCase = subject.toLowerCase();
+        break;
+    }
+    this.userAnswers[subject] = verb;
+
+    if (this.verbObject && verb === this.verbObject.conjugation[subjectToLowerCase]) {
+      this.score++;
+    }
+
+    this.isBtnClicked = true;
+    setTimeout(() => {
+      this.isBtnClicked = false;
+      if (this.index < 5) {
+        this.index++;
+        this.spinnerValue = (this.index/6) * 100;
+      } else {
+        this.spinnerValue = 100;
+        this.index = 6;
+        this.checkAnswers();
+      }
+    }, 400);
+  }
+
   // Function to check the fields and save answers in the server
   checkAnswers() {
-    if (!this.FormGroup.valid) {
-      return;
-    }
-    this.isCheckClicked = true;
+    this.endTime = moment();
 
-    // Save the name of the verb in data with Answers to send to PHP
-    this.currentVerbName$.subscribe(verb => {
-      this.dataWithAnswers = {
-        verb: verb
+    const solvedIn = this.endTime.diff(this.startTime, 'seconds');
+
+    this.dialog.open(VerbPracticeSummaryComponent, {
+      data: {
+        answers: this.userAnswers,
+        userScoreSummary: {
+          ...this.userScoreSummary,
+          score: this.score,
+          createdAt: this.startTime,
+          solvedIn: solvedIn,
+        },
+        verbObject: this.verbObject,
       }
+    });
+
+    this.score = 0;
+  }
+
+  ngOnInit () {
+    // currentVerb is an observable so we need to subscribe to it to use its value
+    this.verbToConjugate$.subscribe((value) => {
+      this.verbObject = value;
     })
 
-    for (let i = 0; i < 6; i++) {
-      const userInput = this.FormGroup.get('input' + (i+1))!.value;
-      const person = this.conjugationPersons[i].toLowerCase();
-      const answer = this.verbObject!.conjugation[person] as unknown as string;
+    this.verbName$.subscribe((name) => {
+      this.verbName = name;
+    })
 
-      this.dataWithAnswers[person] = userInput;
-      if (userInput === answer) {
-        this.addPoints++;
-      }
-    }
-    if(this.addPoints == 6) {
-      this.summaryMessage = "Perfect!";
-    } else if (this.addPoints > 3 && this.addPoints < 6) {
-      this.summaryMessage = "Not bad… not bad!";
-    } else if (this.addPoints <= 3) {
-      this.summaryMessage = "It doesn't hurt to try again :)";
-    }
-    this.addPoints = 0;
+    this.userId$.subscribe((id) => {
+      this.userId = id;
+    })
 
-    setTimeout(() => {
-      const summary = document.getElementById('summary');
-      if (summary) {
-        summary.scrollIntoView({ behavior: 'smooth' });
-      }
-    }, 300);
-  }
+    this.getConjugationSubject();
+    this.getConjugationVerbs();
+
+    this.userScoreSummary['userId'] = this.userId;
+
+    this.startTime = moment();
+    console.log(this.startTime);
+  };
 }

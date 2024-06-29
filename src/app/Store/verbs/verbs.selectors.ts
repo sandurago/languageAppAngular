@@ -6,11 +6,10 @@ import { VerbState } from "./verbs.reducer";
 export const currentVerb = (state: VerbState) => state.verbName;
 export const verbsList = (state: VerbState) => state.allVerbs;
 
-export const findVerbToConjugate = createSelector(
+export const selectVerb = createSelector(
   currentVerb,
   verbsList,
   (verbName: string, allVerbs: Array<Verbs>) => {
-    //return allVerbs.find((verb: string) => verb === verbName);
     return allVerbs.find((verb) => verb.name === verbName);
   }
 )

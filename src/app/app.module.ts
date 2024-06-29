@@ -19,7 +19,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatStepperModule} from '@angular/material/stepper';
 import { VerbPracticeDialogComponent } from './Verbs/verb-practice-dialog/verb-practice-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
-import { VerbPracticeSummaryComponent } from './Verbs/verb-practice-summary/verb-practice-summary.component';
+import { VerbPracticeSummaryComponent } from './Verbs/verb-summary-dialog/verb-practice-summary.component';
 import { MatTableModule } from '@angular/material/table';
 import { LoginPageComponent } from './User/login/login-page.component';
 import { MatIconModule } from '@angular/material/icon';
@@ -32,6 +32,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { ChartComponent } from './Components/chart/chart.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import {ProgressSpinnerMode, MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 export function localStorageSyncReducer(rootReducer: any) {
   return localStorageSync({
@@ -81,6 +82,7 @@ export function localStorageSyncReducer(rootReducer: any) {
     MatPaginatorModule,
     MatMenuModule,
     NgxChartsModule,
+    MatProgressSpinnerModule,
     AngularSvgIconModule.forRoot(),
     StoreModule.forRoot(
       {

@@ -1,8 +1,8 @@
 <div class="mx-14">
-  <mat-card>
-    <mat-card-header class="mb-2 pb-2 border-b-2 border-b-pearl bg-ghost-white text-black-olive text-lg font-bold rounded-t-lg justify-center">
+  <mat-card class="pb-10">
+    <mat-card-header class="px-10  mb-2 pb-2 border-b-2 border-b-pearl bg-ghost-white text-black-olive text-lg font-bold rounded-t-lg justify-center">
       <mat-card-title class="mx-auto">
-        Verb: <span class="ml-1 text-purple-heart uppercase"> {{ currentVerbName$ | async }}</span>
+        <span class="font-semibold text-xl">Verb: <span class="ml-1 text-purple-heart uppercase"> {{ verbName$ | async }}</span></span>
       </mat-card-title>
       <a [routerLink]="'/display'" class="ml-auto">
         <button mat-button color="primary">Verbs list</button>
@@ -10,48 +10,75 @@
     </mat-card-header>
 
     <!-- Card content -->
-    <mat-card-content class="relative" [ngStyle]="{'height': isCheckClicked ? '650px' : null }">
-      <p class="mt-6 mb-28 mx-6 text-xl"> <span class="font-bold">Your task:</span> Fill in the fields using correct forms of the verb. You can skip to the next fields without
-        completing the previous ones but in order to complete the task, all fields need to be filled in
-        with correct answers. If you don't know the answer click on 'Help' button. <span class="underline">Good luck!</span>
+    <mat-card-content class="px-10 relative" [ngStyle]="{'height': isCheckClicked ? '650px' : null }">
+      <p class="mb-12 mt-6 text-xl"> <span class="font-bold">Your task:</span> Choose the correct answer. <span class="underline">Good luck!</span>
       </p>
-      <form [formGroup]="FormGroup">
-        <!-- Stepper -->
-        <mat-stepper #stepper>
-          <mat-step *ngFor="let step of conjugationPersons; let i = index; let first = first; let last = last" [stepControl]="FormGroup">
-            <ng-template matStepLabel>{{ step }}</ng-template>
-            <mat-form-field class="mt-24">
-              <mat-label>{{step}}… ({{verbName}})</mat-label>
-              <input [formControlName]="'input' + (i+1)" matInput :placeholder="…">
-            </mat-form-field>
-            <div>
-              <button *ngIf="!first" mat-button matStepperPrevious type="button">Previous</button>
-              <button *ngIf="!last" mat-button matStepperNext type="button">Next</button>
-              <button *ngIf="last" mat-button matStepperNext [disabled]="!FormGroup.valid"
-              (click)="checkAnswers()">Check</button>
+      <div class="flex flex-row">
+        <div class="flex flex-col basis-1/2 gap-8 animate__animated" [ngClass]="{animate__fadeOut: isBtnClicked, animate__fadeIn: !isBtnClicked}">
+          <form class="flex flex-col gap-8">
+            <mat-card class="p-6 card-style-primary">
+              <span class="font-bold text-2xl text-center">
+                {{ conjugationSubject[index] }} ...
+              </span>
+            </mat-card>
+            <div class="grid grid-cols-3 gap-6">
               <button
-                mat-button (click)="openDialog(step)"
-                type="button"
+                *ngFor="let verb of conjugationVerbs"
+                (click)="addUserAnswer(conjugationSubject[index], verb)" class="btn-hover"
               >
-                <mat-icon
-                  class="ml-1 h-6 w-6 text-2xl leading-none rounded-full bg-ghost-white text-dark-purple"
-                >
-                  help
-                </mat-icon>
+                <mat-card class="py-8 px-4 card-style-accent hover:duration-200">
+                  <span class="font-semibold text-xl">{{ verb }}</span>
+                </mat-card>
               </button>
             </div>
-          </mat-step>
-        </mat-stepper>
-      </form>
+            <!-- Stepper -->
+            <!-- <mat-stepper #stepper>
+              <mat-step *ngFor="let step of conjugationPersons; let i = index; let first = first; let last = last" [stepControl]="FormGroup">
+                <ng-template matStepLabel>{{ step }}</ng-template>
+                <mat-form-field class="mt-24">
+                  <mat-label>{{step}}… ({{verbName}})</mat-label>
+                  <input [formControlName]="'input' + (i+1)" matInput :placeholder="…">
+                </mat-form-field>
+                <div>
+                  <button *ngIf="!first" mat-button matStepperPrevious type="button">Previous</button>
+                  <button *ngIf="!last" mat-button matStepperNext type="button">Next</button>
+                  <button *ngIf="last" mat-button matStepperNext [disabled]="!FormGroup.valid"
+                  (click)="checkAnswers()">Check</button>
+                  <button
+                    mat-button (click)="openDialog(step)"
+                    type="button"
+                  >
+                    <mat-icon
+                      class="ml-1 h-6 w-6 text-2xl leading-none rounded-full bg-ghost-white text-dark-purple"
+                    >
+                      help
+                    </mat-icon>
+                  </button>
+                </div>
+              </mat-step>
+            </mat-stepper> -->
+          </form>
+        </div>
+        <div class="flex flex-col items-center mx-auto">
+          <span class="text-xl font-semibold">Progress: {{ index }} / 6</span>
+          <mat-progress-spinner
+            [color]="color"
+            [mode]="mode"
+            [diameter]="300"
+            [value]="spinnerValue"
+          >
+          </mat-progress-spinner>
+        </div>
+      </div>
+
       <app-verb-practice-summary
-      *ngIf="isCheckClicked"
-      class="absolute top-40 right-12"
-      [currentVerb]="verbName"
-      [data]="dataWithAnswers"
-      [verbsObj]="verbObject!"
-      [message]="summaryMessage"
-      >
-      </app-verb-practice-summary>
+        *ngIf="index === 6"
+        [currentVerb]="verbName"
+        [verbsObj]="verbObject!"
+        [message]="summaryMessage"
+        [userAnswers]="userAnswers"
+        [userScoreSummary]="userScoreSummary"
+      />
     </mat-card-content>
   </mat-card>
 </div>
