@@ -1,4 +1,20 @@
+@import 'src/my-theme.scss';
+
 .center-header {
   display: block !important;
   text-align: center;
+}
+
+.try-again {
+  color: mat-color($app-theme-accent, A700);
+}
+
+.correct {
+  color: var(--green-700);
+  font-weight: 600;
+}
+
+.wrong {
+  color: var(--deep-orange-700);
+  font-weight: 600;
 }

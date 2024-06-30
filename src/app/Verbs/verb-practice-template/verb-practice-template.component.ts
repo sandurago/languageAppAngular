@@ -162,6 +162,7 @@ export class VerbPracticeTemplateComponent {
     const solvedIn = this.endTime.diff(this.startTime, 'seconds');
 
     this.dialog.open(VerbPracticeSummaryComponent, {
+      minWidth: '40vw',
       data: {
         answers: this.userAnswers,
         userScoreSummary: {

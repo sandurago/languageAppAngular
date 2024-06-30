@@ -1,11 +1,10 @@
-import { Component, Input, inject } from '@angular/core';
-import { Verbs } from '../../Interface/verbs';
+import { Component, inject } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { User } from '../../Interface/user';
 import { Observable, map } from 'rxjs';
 import { id } from '../../Store/user/user.selector';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { SummaryDialogData, UserAnswers } from 'src/app/Interface/dialog';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { SummaryDialogData } from 'src/app/Interface/dialog';
 
 @Component({
   selector: 'app-verb-practice-summary',
@@ -14,50 +13,22 @@ import { SummaryDialogData, UserAnswers } from 'src/app/Interface/dialog';
 })
 
 export class VerbPracticeSummaryComponent {
-  // DATA
-  @Input() currentVerb:string = '';
   readonly data = inject<SummaryDialogData>(MAT_DIALOG_DATA);
-  @Input() verbsObj:Verbs;
-  @Input() message:string;
-  @Input() userAnswers:any;
-  @Input() userScoreSummary:any;
-
-
   dataSource:Array<any>;
-  columnsToDisplay:Array<string> = ['subject', 'answer'];
-  dataKeys:Array<string>;
-  dataValues:Array<string>;
-  correctAnswers:Array<string>;
+  columnsToDisplay:Array<string> = ['subject', 'answer', 'icon'];
   url:string = "http://localhost:5000/verbs/presentanswers";
   isProgressSaved:boolean = false;
-  buttonLabel:string = "Save my progress";
   userId$:Observable<number>;
   userId:number;
 
-  constructor(
-    private store: Store<{ userStore: User }>,
-    private dialogRef: MatDialogRef<VerbPracticeSummaryComponent>,
-    //private dataDialog: UserAnswers
-  ){
+  constructor(private store: Store<{ userStore: User }>,){
     this.userId$ = this.store.pipe(
       select('userStore'),
       map(state => id(state))
     )
   };
 
-  // METHODS
-  getKeys() {
-    this.dataKeys = Object.keys(this.data);
-  }
-  getValues() {
-    this.dataValues = Object.values(this.data);
-  }
-  // Gets correct values for the verb
-  getCorrectAnswers() {
-    this.correctAnswers = Object.values(this.verbsObj.conjugation);
-  }
-
-  // Function to send data to the server (AJAX)
+  // Function to send data to the server
   async postAnswers() {
 
     const dataToSend = {
@@ -77,26 +48,16 @@ export class VerbPracticeSummaryComponent {
       body: JSON.stringify(dataToSend)
     })
     const json = await response.json();
-    // then check the json status
-    // if saving to db is successful:
-    this.buttonLabel = json.message;
   }
 
   reloadPage() {
     window.location.reload();
   }
 
-
   ngOnInit() {
-    // this.getKeys();
-    // this.getValues();
-    // this.getCorrectAnswers();
-
-    // //Remove 'verb' key from keys answers for the purpose of displaying only answers.
-    // this.dataKeys.shift();
-
     this.dataSource = [];
 
+    // Construct the object with values for the table
     for (const subject in this.data.answers) {
       const conjugationSubject = subject.toLowerCase().replace('/', '');
       this.dataSource.push({
