@@ -32,7 +32,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { ChartComponent } from './Components/chart/chart.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-import {ProgressSpinnerMode, MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {ToastModule} from "primeng/toast";
+import { MessageService } from 'primeng/api';
 
 export function localStorageSyncReducer(rootReducer: any) {
   return localStorageSync({
@@ -83,6 +85,7 @@ export function localStorageSyncReducer(rootReducer: any) {
     MatMenuModule,
     NgxChartsModule,
     MatProgressSpinnerModule,
+    ToastModule,
     AngularSvgIconModule.forRoot(),
     StoreModule.forRoot(
       {
@@ -92,9 +95,9 @@ export function localStorageSyncReducer(rootReducer: any) {
       {
         metaReducers: [localStorageSyncReducer]
       }
-    )
+    ),
   ],
-  providers: [],
+  providers: [MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

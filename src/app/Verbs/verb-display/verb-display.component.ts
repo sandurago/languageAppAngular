@@ -22,15 +22,12 @@ export class VerbDisplayComponent {
   verbsList$:Observable<Array<Verbs>>;
   start:number = 0;
   end:number = 6;
-  gradient$:Observable<number>;
-  gradient:number;
   pageIndexBigger:boolean;
 
   /** CONSTRUCTOR */
   constructor(private store: Store<{ verbsStore: VerbState }>) {
     this.verbsList$ = this.store.pipe(
       select('verbsStore'),
-      //verbsList is coming from selectors
       map(state => verbsList(state))
     );
   };
@@ -56,10 +53,6 @@ export class VerbDisplayComponent {
       this.verbsNames = Object.keys(verbs);
       this.allVerbsList = values;
     });
-
-    this.gradient$.subscribe((value) => {
-      this.gradient = value
-    })
   }
   /** Sorts verbs */
   onCompare(_left: KeyValue<string, string>, _right: KeyValue<string, string>): number {

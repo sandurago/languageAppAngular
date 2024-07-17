@@ -61,14 +61,6 @@ export class VerbPracticeTemplateComponent {
     )
   };
 
-  // VerbsList is the interface of all json object. keyof means it has to be the key that exists in VerbsList. Here we take name of the verb and use it to find the verb in json file.
-  // findConjugationByVerb (verbName: keyof VerbsList) {
-  //   this.verbsList$.subscribe((list) => {
-  //     console.log(list);
-  //     this.verbObject = list[verbName];
-  //   })
-  // }
-
   /** Sorts verbs */
   onCompare(_left: KeyValue<string, VerbsCong>, _right: KeyValue<string, VerbsCong>): number {
     return 1;
@@ -108,18 +100,6 @@ export class VerbPracticeTemplateComponent {
       this.conjugationVerbs = listOfIndexes.map((index) => verbs[index]);
     }
   }
-
-  // Dialog with a hint
-  // openDialog(conjugationPerson:string) {
-  //   const helpPerson = conjugationPerson.toLowerCase();
-  //   if(this.verbObject) {
-  //     const helpConjugation = this.verbObject.conjugation[helpPerson];
-  //     // Opens the dialog and sends data to be displayed
-  //     this.dialog.open(VerbPracticeDialogComponent, {
-  //       data: { person: helpPerson, conjugation: helpConjugation}
-  //     })
-  //   }
-  // }
 
   addUserAnswer(subject:string, verb:string) {
     let subjectToLowerCase;
@@ -168,7 +148,7 @@ export class VerbPracticeTemplateComponent {
         userScoreSummary: {
           ...this.userScoreSummary,
           score: this.score,
-          createdAt: this.startTime,
+          createdAt: this.endTime,
           solvedIn: solvedIn,
         },
         verbObject: this.verbObject,
@@ -198,6 +178,5 @@ export class VerbPracticeTemplateComponent {
     this.userScoreSummary['userId'] = this.userId;
 
     this.startTime = moment();
-    console.log(this.startTime);
   };
 }

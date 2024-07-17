@@ -3,13 +3,17 @@ import { Store, select } from '@ngrx/store';
 import { User } from '../../Interface/user';
 import { Observable, map } from 'rxjs';
 import { id } from '../../Store/user/user.selector';
+import { id as verbId } from '../../Store/verbs/verbs.selectors';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { SummaryDialogData } from 'src/app/Interface/dialog';
-
+import { VerbState } from 'src/app/Store/verbs/verbs.reducer';
+import { NotificationService } from 'src/app/Services/notification.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-verb-practice-summary',
   templateUrl: './verb-practice-summary.component.html',
-  styleUrls: ['./verb-practice-summary.component.scss']
+  styleUrls: ['./verb-practice-summary.component.scss'],
+  providers: [],
 })
 
 export class VerbPracticeSummaryComponent {
@@ -20,11 +24,21 @@ export class VerbPracticeSummaryComponent {
   isProgressSaved:boolean = false;
   userId$:Observable<number>;
   userId:number;
+  verbId$:Observable<number | undefined>;
+  verbId:number | undefined;
 
-  constructor(private store: Store<{ userStore: User }>,){
+  constructor(
+    private store: Store<{ userStore: User, verbsStore: VerbState, notificationStore: Notification }>,
+    private notificationService: NotificationService,
+    private router: Router,
+  ) {
     this.userId$ = this.store.pipe(
       select('userStore'),
       map(state => id(state))
+    )
+    this.verbId$ = this.store.pipe(
+      select('verbsStore'),
+      map(state => verbId(state))
     )
   };
 
@@ -32,9 +46,13 @@ export class VerbPracticeSummaryComponent {
   async postAnswers() {
 
     const dataToSend = {
-      ...this.data,
-      user: this.userId
+      verbId: this.verbId,
+      userId: this.data.userScoreSummary.userId,
+      score: this.data.userScoreSummary.score,
+      createdAt: this.data.userScoreSummary.createdAt,
+      solvedIn: this.data.userScoreSummary.solvedIn,
     }
+
     const response = await fetch(this.url, {
       method: "POST",
       mode: "cors",
@@ -45,9 +63,12 @@ export class VerbPracticeSummaryComponent {
       },
       redirect: "follow",
       referrerPolicy: "no-referrer",
-      body: JSON.stringify(dataToSend)
+      body: JSON.stringify(dataToSend),
     })
-    const json = await response.json();
+    const json = await response.text();
+
+    this.notificationService.showNotification('success', 'Progress sucessfully saved!');
+    this.router.navigateByUrl('/display');
   }
 
   reloadPage() {
@@ -55,6 +76,10 @@ export class VerbPracticeSummaryComponent {
   }
 
   ngOnInit() {
+    this.verbId$.subscribe((id) => {
+      this.verbId = id;
+    })
+
     this.dataSource = [];
 
     // Construct the object with values for the table

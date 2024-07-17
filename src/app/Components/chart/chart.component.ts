@@ -37,7 +37,7 @@ export class ChartComponent {
   showXAxisLabel = true;
   xAxisLabel = 'Days';
   showYAxisLabel = true;
-  yAxisLabel = 'Time';
+  yAxisLabel = 'Time (in minutes)';
   showGridLines = false;
   barPadding = 20;
 
@@ -50,6 +50,6 @@ export class ChartComponent {
         name: day.date,
         value: day.minutes,
       }))
-    }) 
+    })
   }
 }

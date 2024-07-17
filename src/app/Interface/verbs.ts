@@ -9,13 +9,13 @@ export interface VerbsCong {
 }
 
 export interface Verbs {
+  id: number;
+  name: string;
+  translation: string;
   conjugation: {
     [string: string]: string;
   };
-  translation: string;
   example: string;
-  name: string;
-  id: number;
 }
 
 export interface VerbsList {

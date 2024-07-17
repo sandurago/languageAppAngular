@@ -5,6 +5,7 @@ import { VerbState } from "./verbs.reducer";
 //GETTERS
 export const currentVerb = (state: VerbState) => state.verbName;
 export const verbsList = (state: VerbState) => state.allVerbs;
+export const id = (state: VerbState) => state.id;
 
 export const selectVerb = createSelector(
   currentVerb,

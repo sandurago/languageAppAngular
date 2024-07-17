@@ -3,12 +3,14 @@ import { congjuateThisVerb, setVerbs } from "./verbs.actions";
 import { Verbs } from "src/app/Interface/verbs";
 export interface VerbState {
   allVerbs: Array<Verbs>,
-  verbName: string
+  verbName: string,
+  id: number | undefined,
 }
 
 export const initialState: VerbState = {
   allVerbs: [],
-  verbName: ''
+  verbName: '',
+  id: undefined,
 };
 
 export const verbsReducer = createReducer(
@@ -17,9 +19,13 @@ export const verbsReducer = createReducer(
   // on method is to react to specific actions
   on(congjuateThisVerb,
     (state, { verb }) => {
+      const currVerb = state.allVerbs.find((verbObj) => verbObj.name === verb);
+      const id = currVerb?.id;
+      console.log(id);
         return {
         ...state,
-        verbName: verb
+        verbName: verb,
+        id: id,
       }
     }
   ),
