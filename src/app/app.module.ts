@@ -35,6 +35,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {ToastModule} from "primeng/toast";
 import { MessageService } from 'primeng/api';
+import { ProfileComponent } from './User/profile/profile.component';
 
 export function localStorageSyncReducer(rootReducer: any) {
   return localStorageSync({
@@ -65,6 +66,7 @@ export function localStorageSyncReducer(rootReducer: any) {
     CoverSvgComponentComponent,
     DashboardComponent,
     ChartComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

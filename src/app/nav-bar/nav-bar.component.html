@@ -1,7 +1,7 @@
 <nav class="navbar h-20 bg-ghost-white leading-3">
-  <ul class="w-full flex list justify-start flex flex-row items-center">
+  <ul class="w-full list flex justify-start flex-row items-center">
     <li class="font-black text-rangoon-green">
-      <a href="#" class="navbar-brand flex flex-row link text-black-olive text-2xl">
+      <a [routerLink]="'/dashboard'" class="navbar-brand flex flex-row link text-black-olive text-2xl">
         <img
         src="assets/img/logo.jpg"
         class="ml-10 mr-2 w-7 h-7"
@@ -19,6 +19,14 @@
         {{ username || "User" }}
       </button>
       <mat-menu #menu="matMenu">
+        <a *ngIf="isLogin" [routerLink]="'/profile'">
+          <button
+            mat-menu-item
+            class="hover:bg-ghost-white hover:text-rangoon-green"
+          >
+            Profile
+          </button>
+        </a>
         <button *ngIf="isLogin"
           mat-menu-item
           class="hover:bg-ghost-white hover:text-rangoon-green"
