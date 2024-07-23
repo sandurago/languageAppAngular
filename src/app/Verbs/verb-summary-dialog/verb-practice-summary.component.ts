@@ -7,7 +7,7 @@ import { id as verbId } from '../../Store/verbs/verbs.selectors';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { SummaryDialogData } from 'src/app/Interface/dialog';
 import { VerbState } from 'src/app/Store/verbs/verbs.reducer';
-import { NotificationService } from 'src/app/Services/notification.service';
+import { NotificationService } from 'src/app/Services/Notification/notification.service';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-verb-practice-summary',

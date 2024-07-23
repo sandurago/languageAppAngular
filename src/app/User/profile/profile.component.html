@@ -1,1 +1,33 @@
-<p>profile works!</p>
+<mat-card class="flex gap-8 p-8">
+  <div class="flex flex-row items-center gap-8">
+    <mat-card class="w-fit">
+      <svg-icon src="../../../assets/icons/red-alien.svg"></svg-icon>
+    </mat-card>
+    <h1 class="font-bold text-8xl">{{ name }}</h1>
+  </div>
+  <div class="flex flex-row gap-8">
+    <mat-card class="basis-1/2">
+      <mat-card-header>
+        <p class="font-bold text-3xl">Basic info</p>
+      </mat-card-header>
+      <mat-card-content class="text-xl">
+        <p class="py-2">Name: <span class="font-bold">{{ name }}</span></p>
+        <p class="py-2">Username: <span class="font-bold">{{ username }}</span></p>
+        <p class="py-2">E-mail: <span class="font-bold">{{ email }}</span></p>
+        <p class="py-2">Account creation: <span class="font-bold">{{ createdAt }}</span></p>
+        <p class="py-2">Last login: <span class="font-bold">{{ lastLogin }}</span></p>
+      </mat-card-content>
+    </mat-card>
+    <mat-card class="basis-1/2">
+      <mat-card-header>
+        <p class="font-bold text-3xl">Verbs you practiced the most</p>
+      </mat-card-header>
+      <app-chart
+        [chartParentWidth]="chartParentWidth"
+        [chartParentHeight]="chartParentHeight"
+        [data]="data"
+        chartType="pie"
+      />
+    </mat-card>
+  </div>
+</mat-card>

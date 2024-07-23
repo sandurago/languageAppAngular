@@ -1,18 +1,36 @@
-<ngx-charts-bar-vertical
+<ng-template [ngIf]="chartType === 'bar'">
+  <ngx-charts-bar-vertical
+    [view]="view"
+    [results]="data"
+    [gradient]="gradient"
+    [xAxis]="showXAxis"
+    [yAxis]="showYAxis"
+    [legend]="showLegend"
+    [showGridLines]="showGridLines"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    [xAxisLabel]="xAxisLabel"
+    [yAxisLabel]="yAxisLabel"
+    [barPadding]="barPadding"
+    [scheme]="scheme"
+    >
+    <ng-template #tooltipTemplate let-model = "model">
+        {{model.value}} min
+    </ng-template>
+  </ngx-charts-bar-vertical>
+</ng-template>
+
+<ng-template [ngIf]="chartType === 'pie'">
+  <ngx-charts-pie-chart
   [view]="view"
+  [scheme]="scheme"
   [results]="data"
   [gradient]="gradient"
-  [xAxis]="showXAxis"
-  [yAxis]="showYAxis"
-  [legend]="showLegend"
-  [showGridLines]="showGridLines"
-  [showXAxisLabel]="showXAxisLabel"
-  [showYAxisLabel]="showYAxisLabel"
-  [xAxisLabel]="xAxisLabel"
-  [yAxisLabel]="yAxisLabel"
-  [barPadding]="barPadding"
-  >
-  <ng-template #tooltipTemplate let-model = "model">
-      {{model.value}} min
-  </ng-template>
-</ngx-charts-bar-vertical>
+  [legend]="showLegendPie"
+  [legendPosition]="legendPosition"
+  [labels]="showLabels"
+  [doughnut]="isDoughnut"
+    >
+  </ngx-charts-pie-chart>
+</ng-template>
+

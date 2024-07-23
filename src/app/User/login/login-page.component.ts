@@ -14,7 +14,7 @@ import { saveUser } from '../../Store/user/user.actions';
 })
 
 export class LoginPageComponent {
-  
+
   @ViewChild('input', { read: ElementRef, static:false }) input: ElementRef;
   url:string = 'http://localhost:5000/user';
 
@@ -34,7 +34,8 @@ export class LoginPageComponent {
   FormGroup = this._formBuilder.group({
     username: ['', Validators.required],
     name: ['', Validators.required],
-    password: ['', Validators.required]
+    email: [''],
+    password: ['', Validators.required],
   })
 
   constructor(
@@ -73,6 +74,7 @@ export class LoginPageComponent {
     const user = {
       username: this.FormGroup.get('username')?.value,
       name: this.FormGroup.get('name')?.value,
+      email: this.FormGroup.get('email')?.value,
       password: this.FormGroup.get('password')?.value
     }
       userURL = this.url + '/register';
@@ -99,6 +101,7 @@ export class LoginPageComponent {
         id: jsonMessage.id,
         username: user.username as string,
         name: user.name as string,
+        email: user.email as unknown as string,
         password: user.password as string,
         createdAt: jsonMessage.createdAt,
         lastLogin: jsonMessage.lastLogin,
@@ -145,6 +148,7 @@ export class LoginPageComponent {
         id: jsonMessage.id,
         username: user.username as string,
         name: jsonMessage.name,
+        email: jsonMessage.email,
         password: user.password as string,
         createdAt: jsonMessage.created_at,
         lastLogin: jsonMessage.login_time,

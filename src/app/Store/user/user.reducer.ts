@@ -6,6 +6,7 @@ export const userState: User = {
   id: 0,
   username: '',
   name: '',
+  email: '',
   password: '',
   createdAt: '',
   lastLogin: '',
@@ -18,11 +19,12 @@ export const userReducer = createReducer(
   userState,
 
   on(saveUser,
-    (state, {id, username, name, password, createdAt, lastLogin, login, loginDays}) =>({
+    (state, {id, username, name, email, password, createdAt, lastLogin, login, loginDays}) =>({
       ...state,
       id: id,
       username: username,
       name: name,
+      email: email,
       password: password,
       createdAt: createdAt,
       lastLogin: lastLogin,
@@ -36,6 +38,7 @@ export const userReducer = createReducer(
       id: 0,
       username: '',
       name: '',
+      email: '',
       password: '',
       login: false,
       createdAt: '',

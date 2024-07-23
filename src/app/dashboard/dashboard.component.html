@@ -1,33 +1,57 @@
 <div class="grid grid-cols-1 gap-10">
-    <mat-card class="p-12">
-        <mat-card-content class="flex flex-row justify-center items-center gap-12">
-            <div class="flex flex-col">
-                <h1 class="text-[80px]">Hello, {{ user }}</h1>
-                <p class="text-[50px]">Ready for your next challenge?</p>
-            </div>
-            <svg-icon src="../../assets/icons/green-alien-hello.svg"></svg-icon>
-        </mat-card-content>
+  <mat-card class="p-12">
+      <mat-card-content class="flex flex-row justify-center items-center gap-12">
+        <div class="flex flex-col">
+          <h1 class="text-[80px]">Hello, {{ user || 'User' }}</h1>
+          <p class="text-[50px]">Ready for your next challenge?</p>
+        </div>
+        <svg-icon src="../../assets/icons/green-alien-hello.svg"/>
+      </mat-card-content>
+  </mat-card>
+  <div class="grid grid-cols-2 gap-10">
+    <mat-card #chart>
+      <mat-card-title class="flex flex-row items-center">
+        <p class="p-4 font-bold text-2xl">Time you spent learning during last 7n days</p>
+        <svg-icon src="../../assets/icons/space-observatory-bw.svg"/>
+      </mat-card-title>
+      <ng-template [ngIf]="isLogin" [ngIfElse]="emptyReport">
+        <app-chart
+          [chartParentWidth]="chartParentWidth"
+          [chartParentHeight]="chartParentHeight"
+          [data]="data"
+          [xAxis]="'Days'"
+          [yAxis]="'Time (in minutes)'"
+          chartType="bar"
+        />
+      </ng-template>
+      <ng-template #emptyReport>
+        <div class="py-10 flex flex-col justify-center items-center">
+          <p class="text-2xl font-bold">No data available.</p>
+          <svg-icon src="../../assets/icons/space-capsule.svg" class="py-6"/>
+          <p>Register or login to see the report from your learning time.</p>
+        </div>
+      </ng-template>
     </mat-card>
-    <div class="grid grid-cols-2 gap-10">
-        <mat-card #chart>
-            <mat-card-title>
-                <p class="p-4 font-bold text-2xl">Time you spent learning during last 7 days</p>
-            </mat-card-title>
-            <app-chart
-                [chartParentWidth]="chartParentWidth"
-                [chartParentHeight]="chartParentHeight"
-            />
-        </mat-card>
-        <mat-card>
-            <mat-card-title>
-                <p class="p-4 font-bold text-2xl">Your last activity</p>
-            </mat-card-title>
-            <mat-card-content>
-                <p>Your last activity was on: {{ lastLogin }}</p>
-                <p>The last task you did was on Tuesday 22/05/2024.</p>
-                <p>You completed: Verbs: avoir.</p>
-                <p>Your result:</p>
-            </mat-card-content>
-        </mat-card>
-    </div>
+    <mat-card>
+      <mat-card-title class="flex flex-row items-center">
+        <p class="p-4 font-bold text-2xl">Your last activity</p>
+        <svg-icon src="../../assets/icons/alien-obduction-bw.svg"/>
+      </mat-card-title>
+      <ng-template [ngIf]="isLogin" [ngIfElse]="emptyActivity">
+        <mat-card-content>
+          <p>Your last activity was on: {{ lastLogin }}</p>
+          <p>The last task you did was on Tuesday 22/05/2024.</p>
+          <p>You completed: Verbs: avoir.</p>
+          <p>Your result:</p>
+        </mat-card-content>
+      </ng-template>
+      <ng-template #emptyActivity>
+        <div class="py-10 flex flex-col justify-center items-center">
+          <p class="text-2xl font-bold">No data available.</p>
+          <svg-icon src="../../assets/icons/purple-alien.svg" class="py-6"/>
+          <p>Register or login to see information about your last activity.</p>
+        </div>
+      </ng-template>
+    </mat-card>
+  </div>
 </div>

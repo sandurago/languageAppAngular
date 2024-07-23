@@ -38,6 +38,8 @@ export class VerbPracticeTemplateComponent {
   endTime:Moment;
   userId$:Observable<number>;
   userId:number;
+  minutes:number = 0;
+  seconds:number = 0;
 
   summaryMessage:string;
   spinnerValue:number = 0;
@@ -135,6 +137,15 @@ export class VerbPracticeTemplateComponent {
     }, 400);
   }
 
+  // countSeconds() {
+  //   if (this.seconds < 60) {
+  //     this.seconds++;
+  //   } else {
+  //     this.minutes++;
+  //     this.seconds = 0;
+  //   }
+  // }
+
   // Function to check the fields and save answers in the server
   checkAnswers() {
     this.endTime = moment();
@@ -178,5 +189,7 @@ export class VerbPracticeTemplateComponent {
     this.userScoreSummary['userId'] = this.userId;
 
     this.startTime = moment();
+
+    // setInterval(this.countSeconds, 1000);
   };
 }

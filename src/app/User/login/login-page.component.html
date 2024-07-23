@@ -74,6 +74,23 @@
             class="p-3"
           >
         </mat-form-field>
+        <ng-template [ngIf]="!isLogin">
+          <span class="font-bold">
+            Enter your e-mail
+          </span>
+          <mat-form-field
+            appearance="outline"
+            class="w-full"
+          >
+            <input
+              type="email"
+              formControlName="email"
+              matInput
+              (focus)="hideError()"
+              class="p-3"
+            >
+          </mat-form-field>
+        </ng-template>
         <ng-template
           [ngIf]="!isLogin" [ngIfElse]="isLoginPassword"
         >
