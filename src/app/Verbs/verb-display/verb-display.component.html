@@ -1,8 +1,8 @@
 <div>
-  <div class="grid grid-cols-3 gap-10 justify-items-center">
+  <div class="mb-20 grid lg:grid-cols-3 lg:gap-10 md:grid-cols-2 md:gap-8 sm:grid-cols-1 justify-items-center">
     <table
       *ngFor="let verb of allVerbsList.slice(start, end); let i = index"
-      class="animate__animated animate__fadeIn"
+      class="animate__animated animate__fadeIn lg:mb-0 md:mb-0 mb-6"
       [ngClass]="{'animate__fadeInLeft': pageIndexBigger == true, 'animate__fadeInRight': pageIndexBigger == false}"
     >
       <div
@@ -12,7 +12,7 @@
         (mouseleave)="hoveredElement = null"
         [ngClass]="{'hover': hoveredElement == i}"
         id="card"
-        class="w-72 border-2 border-solid border-black-olive rounded-lg transition-transform duration-500"
+        class="w-80 border-2 border-solid border-black-olive rounded-lg transition-transform duration-500"
         >
         <div class="border-b-gray-200 h-16 flex justify-center items-center border-solid rounded-t-md text-ghost-white text-2xl verb-name">
           {{ verb.name }}
@@ -21,13 +21,31 @@
         <div class="h-10 flex justify-center items-center text-white text-lg verb-translation">
           {{ verb.translation }}
         </div>
-        <div class="py-3">
-          <div
+        <div class="">
+          <table mat-table [dataSource]="verb.conjugation |keyvalue:onCompare" class="conjugation-table">
+            <ng-container matColumnDef="subject">
+              <th mat-header-cell *matHeaderCellDef> Subject </th>
+              <td mat-cell *matCellDef="let element"> {{element.key}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="conjugation">
+              <th mat-header-cell *matHeaderCellDef> Conjugation </th>
+              <td mat-cell *matCellDef="let element"> {{element.value}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+
+
+
+
+          <!-- <div
             *ngFor="let con of verb.conjugation | keyvalue:onCompare"
-            class="text-center text-lg"
+            class="grid grid-cols-2 text-lg"
           >
-            {{ con.key }} {{ con.value }}
-          </div>
+            <span>{{ con.key }}</span> <span>{{ con.value }}</span>
+          </div> -->
         </div>
         <a [routerLink]="['/practice', verb.name]">
           <button
@@ -54,6 +72,5 @@
     [hidePageSize]="true"
     (page)="handlePageEvent($event)"
     class="mt-5 rounded-lg text-sm pagination bg-ghost-white fixed bottom-0 left-0 w-full"
-  >
-  </mat-paginator>
+  />
 </div>

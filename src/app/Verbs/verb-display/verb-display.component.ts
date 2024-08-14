@@ -1,6 +1,6 @@
 import { KeyValue } from '@angular/common';
 import { Component } from '@angular/core';
-import { Verbs } from '../../Interface/verbs';
+import { Verbs, VerbsCong } from '../../Interface/verbs';
 import { Store, select } from '@ngrx/store';
 import { VerbState } from '../../Store/verbs/verbs.reducer';
 import { congjuateThisVerb } from '../../Store/verbs/verbs.actions';
@@ -23,6 +23,8 @@ export class VerbDisplayComponent {
   start:number = 0;
   end:number = 6;
   pageIndexBigger:boolean;
+  // conjugationAsArray: Array<any>;
+  displayedColumns: Array<string> = ['subject', 'conjugation'];
 
   /** CONSTRUCTOR */
   constructor(private store: Store<{ verbsStore: VerbState }>) {
@@ -52,11 +54,20 @@ export class VerbDisplayComponent {
       let values = Object.values(verbs);
       this.verbsNames = Object.keys(verbs);
       this.allVerbsList = values;
+      console.log(this.allVerbsList);
     });
+
+    // if (this.allVerbsList) {
+    //   this.conjugationAsArray = this.allVerbsList.map((conjugation) => {
+    //     return conjugation.conjugation;
+    //   })
+    // }
+
+    // console.log(this.conjugationAsArray);
   }
   /** Sorts verbs */
   onCompare(_left: KeyValue<string, string>, _right: KeyValue<string, string>): number {
-    return 1;
+    return 0;
   }
   /** Dispatches and action to add this verb to the store */
   practiceThisVerb(verb: string) {

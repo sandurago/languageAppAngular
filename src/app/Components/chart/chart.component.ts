@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, ElementRef, Input } from '@angular/core';
 import { LegendPosition } from '@swimlane/ngx-charts';
 
 @Component({
@@ -15,9 +15,8 @@ export class ChartComponent {
   @Input() yAxis:string;
   @Input() data: Array<{ name: string, value: number }>;
 
+  //chart
   view: any = [];
-
-
   // options
   showXAxis = true;
   showYAxis = true;
@@ -35,11 +34,53 @@ export class ChartComponent {
   legendPosition: LegendPosition = LegendPosition.Right;
   scheme = 'natural';
 
+  initialWindowWidth: number = window.innerWidth;
+  windowWidth: number = window.innerWidth;;
+  windowWidthAfterResize: number;
+  isResponsive: boolean = false;
+
+  // In `hostElement` there will be the actual HTML container of our component.
+  // constructor(private hostElement: ElementRef) {
+  // }
+
+  onResize(event:any) {
+    this.windowWidthAfterResize = event.target.innerWidth;
+    let difference;
+
+    if (this.windowWidthAfterResize > 1024) {
+      if (this.windowWidth > this.windowWidthAfterResize) {
+        difference = (this.windowWidth - this.windowWidthAfterResize) / 2;
+        this.chartParentWidth = this.chartParentWidth - difference;
+        this.windowWidth = this.windowWidthAfterResize;
+      } else {
+        if (this.isResponsive) {
+          this.chartParentWidth = (this.chartParentWidth - 100) / 2;
+          difference = (this.windowWidthAfterResize - this.windowWidth) / 2;
+          this.chartParentWidth = this.chartParentWidth + difference;
+          this.windowWidth = this.windowWidthAfterResize;
+          this.isResponsive = false;
+
+        } else {
+          difference = (this.windowWidthAfterResize - this.windowWidth) / 2;
+          this.chartParentWidth = this.chartParentWidth + difference;
+          this.windowWidth = this.windowWidthAfterResize;
+        }
+      }
+    } else {
+      this.chartParentWidth = this.windowWidthAfterResize - 100;
+      this.windowWidth = this.windowWidthAfterResize;
+      this.isResponsive = true;
+    }
+    this.view = [this.chartParentWidth, this.chartParentHeight];
+
+    // const { offsetHeight, offsetWidth } = this.hostElement.nativeElement.parentNode
+    // this.view = [offsetWidth, offsetHeight - 100];
+  }
+
   ngOnInit() {
-    this.chartParentWidth = (this.chartParentWidth-100) / 2;
+    this.chartParentWidth = this.chartParentWidth > 1024 ? ((this.chartParentWidth-100) / 2) : (this.chartParentWidth-100);
     this.view = [this.chartParentWidth, this.chartParentHeight+100];
     this.xAxisLabel = this.xAxis;
     this.yAxisLabel = this.yAxis;
-
   }
 }

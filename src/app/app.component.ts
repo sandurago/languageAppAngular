@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { VerbState } from './Store/verbs/verbs.reducer';
 import { HttpClient } from '@angular/common/http';
 import { Verbs } from './Interface/verbs';
-import { NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { filter } from 'rxjs';
 
 @Component({
@@ -17,6 +17,8 @@ export class AppComponent {
   private URL = 'http://localhost:5000/verbs/verbslist';
   pageUrl:string = '';
   urlChange: boolean = false;
+  isURLRegisterLogin: boolean = false;
+  isFooterVisible: boolean = true;
 
   /** CONSTRUCTOR */
   constructor(private httpClient: HttpClient, private router: Router, private store: Store<{ verbsStore: VerbState }>) {
@@ -40,6 +42,21 @@ export class AppComponent {
   // at the start of an app we do http request to load verbs in the store
     this.httpClient.get<Array<Verbs>>(this.URL).subscribe((verbs) => {
       this.store.dispatch(setVerbs({ allVerbs: verbs}))
+    })
+
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationStart) {
+        if (event.url === '/register' || event.url === '/login') {
+          this.isURLRegisterLogin = true;
+        } else {
+          this.isURLRegisterLogin = false;
+        }
+        if (event.url === '/display') {
+          this.isFooterVisible= false;
+        } else {
+          this.isFooterVisible = true;
+        }
+      }
     })
   }
 }

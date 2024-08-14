@@ -14,25 +14,10 @@
   --green-700: #2E7D32;
   --deep-orange-700: #DD2C00;
 
-  // --black-olive: #3E3E3E; // text dark
-  // --ghost-white: #F9F9F9; // text light
-
-  // --purple-heart: #673ab7; // navbar darkest color & primary color
-  // --darkgreen-blue: #25676e; // third primary color (used for better visibility against white bg)
-
-  // --rangoon-green: #1D1B1B; // hovered elements
-  // --error-red: #c24848; // errors
-  // --pearl: #DEE1DF; // borders
-
-  // //--- NEW PALLETTE
-  // --dark-purple: #845EC2;
-  // --light-purple: #C197FF;
-  // --light-gray: #b0a8b9;
-  // --dark-gray: #7c7484;
-
   .card-dimension {
     width: 500px;
     height: 650px;
+    overflow: scroll;
   }
 
   .card-content {
@@ -52,27 +37,45 @@
     border-right: 4px solid mat-color($app-theme-accent, 200);
     border-radius: 8px;
   }
+
+  .footer {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: #263238;
+    color: white;
+    font-size: medium;
+    font-weight: bold;
+  }
+
+  @media (max-width: 1024px) {
+    .card-dimension {
+      width: 400px;
+      height: 550px;
+    }
+
+    .card-content {
+      height: 50px;
+    }
+
+    .reg-log {
+      width: 86% !important;
+      margin: 0 auto;
+    }
+
+    .register-login-page {
+      margin-top: 78px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .card-dimension {
+      width: 300px;
+      height: 550px;
+    }
+  }
 }
 
-@media (min-width: 1280px) {
-  .card-dimension {
-    width: 20%;
-    height: 580px;
-  }
 
-  .card-content {
-    height: 420px;
-  }
-
-  .reg-log {
-    width: 86% !important;
-    margin: 0 auto;
-  }
-
-  .register-login-page {
-    margin-top: 78px;
-  }
-}
 
 html, body {
   height: 100%;

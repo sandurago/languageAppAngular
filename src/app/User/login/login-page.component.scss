@@ -5,26 +5,26 @@ mat-card {
   border-top: 8px solid mat-color($app-theme-primary, 800);
 }
 
-mat-card-header {
-  margin-top: 12px;
-  margin-bottom: 50px;
-  margin-left: auto;
-  margin-right: auto;
-}
+// mat-card-header {
+//   margin-top: 12px;
+//   margin-bottom: 50px;
+//   margin-left: auto;
+//   margin-right: auto;
+// }
 
-mat-card-title {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  align-items: center;
-  padding-bottom: 20px;
-  color: mat-color($app-theme-primary, 800);
-}
+// mat-card-title {
+//   display: flex;
+//   flex-direction: column;
+//   gap: 16px;
+//   align-items: center;
+//   padding-bottom: 20px;
+//   color: mat-color($app-theme-primary, 800);
+// }
 
-mat-card-content {
-  display: flex;
-  flex-direction: column;
-}
+// mat-card-content {
+//   display: flex;
+//   flex-direction: column;
+// }
 
 button {
   color: mat-color($app-theme-accent, A200);
@@ -33,10 +33,6 @@ button {
 
 .margin {
   margin-top: 3px;
-}
-
-.dimension-why-register {
-  width: 570px;
 }
 
 .register {
@@ -60,4 +56,13 @@ button {
 
 :ng-deep .mat-mdc-form-field-infix {
   border: none;
+}
+
+@media (max-width: 640px) {
+  // mat-card-header {
+  //   margin-top: 10px;
+  //   margin-bottom: 150px;
+  //   margin-left: auto;
+  //   margin-right: auto;
+  // }
 }

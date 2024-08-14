@@ -21,7 +21,6 @@ export const verbsReducer = createReducer(
     (state, { verb }) => {
       const currVerb = state.allVerbs.find((verbObj) => verbObj.name === verb);
       const id = currVerb?.id;
-      console.log(id);
         return {
         ...state,
         verbName: verb,

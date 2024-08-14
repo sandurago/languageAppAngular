@@ -9,3 +9,4 @@ export const login = (state: User) => state.login;
 export const createdAt = (state: User) => state.createdAt;
 export const lastLogin = (state: User) => state.lastLogin;
 export const loginDays = (state: User) => state.loginDays;
+export const previousTasks = (state: User) => state.previousTasks;

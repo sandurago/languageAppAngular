@@ -23,6 +23,7 @@ import { VerbPracticeSummaryComponent } from './Verbs/verb-summary-dialog/verb-p
 import { MatTableModule } from '@angular/material/table';
 import { LoginPageComponent } from './User/login/login-page.component';
 import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { userReducer } from './Store/user/user.reducer';
 import { IndexComponent } from './index/index.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
@@ -82,6 +83,7 @@ export function localStorageSyncReducer(rootReducer: any) {
     ReactiveFormsModule,
     MatDialogModule,
     MatTableModule,
+    MatTooltipModule,
     MatIconModule,
     MatPaginatorModule,
     MatMenuModule,

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -23,23 +23,8 @@ export class IndexComponent {
 
   // CONSTRUCTOR
   //activatedRoute checks the route thats currently in the outlet
-  constructor(public route: ActivatedRoute, private router: Router){};
+  constructor(public route: ActivatedRoute, private router: Router, private element: ElementRef){};
 
-
-  /** METHODS */
-  // outputData() {
-  //   if (!this.isLogin) {
-  //     this.icon = 'person';
-  //     this.action = 'register';
-  //     this.linkAction = 'login';
-  //     this.hasAccount = 'have';
-  //   } else {
-  //     this.icon = 'how_to_reg';
-  //     this.action = 'login';
-  //     this.linkAction = 'register';
-  //     this.hasAccount = 'don\'t have';
-  //   }
-  // }
   animateImages(i:number) {
     this.bgImage = this.images[i];
     this.animateClass = 'animate__fadeInLeft';
@@ -58,6 +43,8 @@ export class IndexComponent {
     }, 5500);
   }
 
+  // do responsive heres
+
   ngOnInit() {
     this.animateImages(0);
 
@@ -67,15 +54,5 @@ export class IndexComponent {
     setTimeout(() => {
       this.backInUp = true;
     }, 250);
-
-    // this fires everytime I change the route. Possible solution? Create a user store.
-  //  this.route.url.subscribe((params) => {
-  //   if (params[0].path == 'login') {
-  //     this.isLogin = true;
-  //   } else {
-  //     this.isLogin = false;
-  //   }
-  //   this.outputData();
-  // })
   }
 }

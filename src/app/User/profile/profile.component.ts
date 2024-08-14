@@ -72,7 +72,6 @@ export class ProfileComponent {
     })
 
     const jsonResponse = await response.json();
-    console.log(jsonResponse);
 
     this.data = jsonResponse.map((data: {name: string, practice_time: number}) => {
       return { name: data.name, value: data.practice_time };

@@ -16,19 +16,18 @@ import { saveUser } from '../../Store/user/user.actions';
 export class LoginPageComponent {
 
   @ViewChild('input', { read: ElementRef, static:false }) input: ElementRef;
-  url:string = 'http://localhost:5000/user';
+  url: string = 'http://localhost:5000/user';
 
-  message:string = '';
-  animateClass:string;
-  backInDown:boolean;
-  backInUp:boolean;
-  isLogin:boolean = true;
-  linkAction:string = 'register';
-  hasAccount:string = 'don\'t have';
-  action:string = 'login';
-
-  name$:Observable<string>;
-  name:any;
+  message: string = '';
+  animateClass: string;
+  backInDown: boolean;
+  backInUp: boolean;
+  isLogin: boolean = true;
+  linkAction: string = 'register';
+  hasAccount: string = 'don\'t have';
+  action: string = 'login';
+  name$: Observable<string>;
+  name: any;
 
   // Values from form
   FormGroup = this._formBuilder.group({
@@ -54,14 +53,12 @@ export class LoginPageComponent {
    */
   changeAction() {
     !this.isLogin ? this.router.navigateByUrl('/login') : this.router.navigateByUrl('/register');
-    console.log(this.isLogin);
   };
 
   hideError() {
     this.message = '';
     const parent = this.input.nativeElement;
     parent.children[0].classList.remove('mdc-text-field--invalid');
-    console.log(parent.children[0].classList);
   }
 
   /**
@@ -107,8 +104,8 @@ export class LoginPageComponent {
         lastLogin: jsonMessage.lastLogin,
         login: true,
         loginDays: [],
+        previousTasks: [],
       }));
-      console.log(this.name);
       this.router.navigateByUrl('/dashboard');
     } else {
       this.message = jsonMessage.message;
@@ -154,6 +151,7 @@ export class LoginPageComponent {
         lastLogin: jsonMessage.login_time,
         login: true,
         loginDays: jsonMessage.login_days,
+        previousTasks: jsonMessage.tasksWithFormattedDate,
       }));
       this.router.navigateByUrl('/dashboard');
     } else {

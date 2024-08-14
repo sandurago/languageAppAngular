@@ -49,11 +49,6 @@ export class NavBarComponent {
    };
 
    async logout() {
-    console.log(JSON.stringify({
-      'id': this.userId,
-      'name': this.name,
-      'username': this.username,
-    }))
     const response = await fetch('http://localhost:5000/user/logout', {
       method: 'POST',
       mode: 'cors',
@@ -70,8 +65,6 @@ export class NavBarComponent {
         'username': this.username,
       }),
     });
-
-    console.log(response.body);
 
     const status = await response.status;
     const json = await response.json();

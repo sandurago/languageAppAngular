@@ -1,7 +1,8 @@
-<div class="flex flex-row justify-between">
+<div #element
+  class="sm:py-20 lg:p-20 flex flex-row justify-between background-svg">
   <div
-    class="-mt-14 w-1/2 -ml-5 flex flex-col gap-6 justify-center bg-[url('/assets/img/sprinke.png')]"
-    style="height: calc(100vh - 80px)"
+    *ngIf=""
+    class="w-1/2 flex flex-col gap-6 justify-center"
   >
     <mat-card
       class="w-1/2 mx-10 text-xl font-medium leading-10 text-center animate__animated upper"

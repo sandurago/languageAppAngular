@@ -1,5 +1,6 @@
 <ng-template [ngIf]="chartType === 'bar'">
   <ngx-charts-bar-vertical
+    (window:resize)="onResize($event)"
     [view]="view"
     [results]="data"
     [gradient]="gradient"

@@ -1,10 +1,19 @@
-<div class="animate__animated animate__fadeIn">
+<div class="flex min-h-screen flex-col justify-between animate__animated animate__fadeIn">
   <app-nav-bar></app-nav-bar>
-  <div class="mx-10 mt-8 mb-2 lg:my-14 animate__animated"
-    [ngClass]="{animate__fadeIn: urlChange == true}"
+  <div
+    class="animate__animated"
+    [ngClass]="{
+      animate__fadeIn: urlChange,
+      'mx-0 mt-0 mb-0 lg:my-0': isURLRegisterLogin,
+      'mx-10 mt-8 mb-2 lg:my-14': !isURLRegisterLogin
+    }"
   >
     <router-outlet></router-outlet>
     <p-toast position="top-center"></p-toast>
+  </div>
+  <div *ngIf="isFooterVisible" class="footer flex flex-row gap-4 justify-center">
+    <span>Author: Sandra Liu.</span>
+    <span>Github: <a href="https://github.com/sandurago" target="_blank" class="hover:text-dark-gray">https://github.com/sandurago</a></span>
   </div>
 
 </div>

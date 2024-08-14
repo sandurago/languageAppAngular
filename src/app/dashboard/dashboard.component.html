@@ -1,17 +1,22 @@
 <div class="grid grid-cols-1 gap-10">
   <mat-card class="p-12">
-      <mat-card-content class="flex flex-row justify-center items-center gap-12">
+      <mat-card-content class="flex lg:flex-row text-center lg:text-left justify-center items-center gap-12">
         <div class="flex flex-col">
-          <h1 class="text-[80px]">Hello, {{ user || 'User' }}</h1>
-          <p class="text-[50px]">Ready for your next challenge?</p>
+          <div class="flex flex-row gap-3">
+            <h1 class="lg:text-[80px] text-5xl">Hello, {{ user || 'User' }}</h1>
+            <ng-template [ngIf]="!isLogin">
+              <svg-icon src="../../assets/icons/info-icon.svg" matTooltip="Feel free to explore the app as User. However if you want to see all the features, login or register in the top right corner." matTooltipPosition="above" matTooltipClass="text-sm"/>
+            </ng-template>
+          </div>
+          <p class="lg:text-[50px] hidden lg:block">Ready for your next challenge?</p>
         </div>
-        <svg-icon src="../../assets/icons/green-alien-hello.svg"/>
+        <svg-icon src="../../assets/icons/green-alien-hello.svg" class="hidden lg:block"/>
       </mat-card-content>
   </mat-card>
-  <div class="grid grid-cols-2 gap-10">
+  <div class="grid grid-rows-2 lg:grid-cols-2 lg:grid-rows-none gap-10">
     <mat-card #chart>
       <mat-card-title class="flex flex-row items-center">
-        <p class="p-4 font-bold text-2xl">Time you spent learning during last 7n days</p>
+        <p class="p-4 font-bold text-2xl">Time you spent learning during last days</p>
         <svg-icon src="../../assets/icons/space-observatory-bw.svg"/>
       </mat-card-title>
       <ng-template [ngIf]="isLogin" [ngIfElse]="emptyReport">
@@ -39,10 +44,29 @@
       </mat-card-title>
       <ng-template [ngIf]="isLogin" [ngIfElse]="emptyActivity">
         <mat-card-content>
-          <p>Your last activity was on: {{ lastLogin }}</p>
-          <p>The last task you did was on Tuesday 22/05/2024.</p>
-          <p>You completed: Verbs: avoir.</p>
-          <p>Your result:</p>
+          <p>Your last activity was on: <span class="font-bold">{{ lastLogin }}</span></p>
+          <p class="pt-2 text-lg font-bold text-center">Verbs you practiced recently</p>
+
+          <table mat-table [dataSource]="dataSource">
+            <ng-container matColumnDef="date">
+              <th mat-header-cell *matHeaderCellDef> Date </th>
+              <td mat-cell *matCellDef="let element"> {{element.created_at}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef> Name </th>
+              <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="score">
+              <th mat-header-cell *matHeaderCellDef> Score </th>
+              <td mat-cell *matCellDef="let element"> {{element.score}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+
         </mat-card-content>
       </ng-template>
       <ng-template #emptyActivity>

@@ -1,8 +1,8 @@
-import { ChangeDetectorRef, Component, ElementRef } from '@angular/core';
-import { User } from '../Interface/user';
+import { ChangeDetectorRef, Component, ElementRef, HostListener, ViewChild } from '@angular/core';
+import { LastTasks, User } from '../Interface/user';
 import { Store, select } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
-import { name, lastLogin, loginDays, login } from '../Store/user/user.selector';
+import { name, lastLogin, loginDays, login, previousTasks } from '../Store/user/user.selector';
 import { Day } from '../Interface/days';
 
 @Component({
@@ -14,14 +14,17 @@ import { Day } from '../Interface/days';
 export class DashboardComponent {
   user$: Observable<string>;
   user: string;
-  isLogin$:Observable<boolean>;
-  isLogin:boolean;
-  chartParentWidth:number;
-  chartParentHeight:number;
+  isLogin$: Observable<boolean>;
+  isLogin: boolean;
+  chartParentWidth: number;
+  chartParentHeight: number;
   lastLogin$: Observable<string>;
   lastLogin: string;
-  loginDays$:Observable<Array<Day>>;
+  loginDays$: Observable<Array<Day>>;
   data: Array<{ name: string, value: number }> = [];
+  dataSource$: Observable<Array<LastTasks>>;
+  dataSource: Array<LastTasks>;
+  displayedColumns: Array<string> = ['date', 'name', 'score'];
 
   constructor(
     private store: Store<{userStore: User}>,
@@ -44,7 +47,12 @@ export class DashboardComponent {
       select('userStore'),
       map(state => loginDays(state))
     )
+    this.dataSource$ = this.store.pipe(
+      select('userStore'),
+      map(state => previousTasks(state))
+    )
   };
+
 
   ngAfterContentInit() {
     this.chartParentWidth = this.chart.nativeElement.offsetWidth;
@@ -73,6 +81,10 @@ export class DashboardComponent {
         name: day.date,
         value: day.minutes,
       }))
+    })
+
+    this.dataSource$.subscribe((data) => {
+      this.dataSource = data;
     })
   };
 }

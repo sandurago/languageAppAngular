@@ -10,9 +10,16 @@ export interface User {
   lastLogin: string;
   login: boolean;
   loginDays: Array<Day>;
+  previousTasks: Array<LastTasks>;
 }
 
 export interface MostPracticedVerbs {
   name: string;
   value: number;
+}
+
+export interface LastTasks {
+  createdAt: string;
+  name: string;
+  score: number;
 }

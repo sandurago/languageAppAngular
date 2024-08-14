@@ -22,3 +22,7 @@
 .verb-translation {
   background-color: mat-color($app-theme-primary, 300);
 }
+
+.conjugation-table .mdc-data-table__row {
+  height: 40px;
+}
