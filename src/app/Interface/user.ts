@@ -13,6 +13,16 @@ export interface User {
   previousTasks: Array<LastTasks>;
 }
 
+export interface UserLoginPayload {
+  username:string;
+  password:string;
+}
+
+export interface UserPayload extends UserLoginPayload {
+  name:string;
+  email:string;
+}
+
 export interface MostPracticedVerbs {
   name: string;
   value: number;

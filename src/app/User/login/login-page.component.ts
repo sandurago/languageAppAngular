@@ -2,10 +2,11 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
-import { User } from '../../Interface/user';
+import { User, UserLoginPayload } from '../../Interface/user';
 import { Observable, map } from 'rxjs';
 import { username } from '../../Store/user/user.selector';
 import { saveUser } from '../../Store/user/user.actions';
+import { UserService } from './create-user.service';
 
 @Component({
   selector: 'app-login-page',
@@ -40,7 +41,8 @@ export class LoginPageComponent {
   constructor(
     private _formBuilder: FormBuilder,
     private store: Store<{userStore: User}>,
-    private router: Router
+    private router: Router,
+    private userService: UserService,
   ){
     this.name$ = this.store.pipe(
       select('userStore'),
@@ -65,8 +67,6 @@ export class LoginPageComponent {
    * Prepares an object to send and to create/login the user
    */
   async createUser() {
-    // Variable for url
-    let userURL:string;
     // Form an object to be sent
     const user = {
       username: this.FormGroup.get('username')?.value,
@@ -74,88 +74,31 @@ export class LoginPageComponent {
       email: this.FormGroup.get('email')?.value,
       password: this.FormGroup.get('password')?.value
     }
-      userURL = this.url + '/register';
 
-    const response = await fetch(userURL, {
-      method: 'POST',
-      mode: 'cors',
-      cache: 'no-cache',
-      credentials: 'same-origin',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      redirect: 'follow',
-      referrerPolicy: 'no-referrer',
-      body: JSON.stringify(user)
-    })
+    const result = await this.userService.createUser(user as User)
 
-    const jsonStatus = await response.status;
-    const jsonMessage = await response.json();
-
-    if (jsonStatus == 200 || jsonStatus == 201) {
-      // Saves user data into userStore
-      this.store.dispatch(saveUser({
-        id: jsonMessage.id,
-        username: user.username as string,
-        name: user.name as string,
-        email: user.email as unknown as string,
-        password: user.password as string,
-        createdAt: jsonMessage.createdAt,
-        lastLogin: jsonMessage.lastLogin,
-        login: true,
-        loginDays: [],
-        previousTasks: [],
-      }));
+    if (result.user !== null) {
+      this.store.dispatch(saveUser(result.user));
       this.router.navigateByUrl('/dashboard');
     } else {
-      this.message = jsonMessage.message;
+      this.message = result.message;
     }
   }
 
   async loginUser() {
-    // Variable for url
-    let userURL:string;
     // Form an object to be sent
     const user = {
       username: this.FormGroup.get('username')?.value,
       password: this.FormGroup.get('password')?.value,
     }
 
-    userURL = this.url + '/login';
+    const result = await this.userService.loginUser(user as UserLoginPayload)
 
-    const response = await fetch(userURL, {
-      method: 'POST',
-      mode: 'cors',
-      cache: 'no-cache',
-      credentials: 'same-origin',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      redirect: 'follow',
-      referrerPolicy: 'no-referrer',
-      body: JSON.stringify(user)
-    });
-
-    const jsonStatus = await response.status;
-    const jsonMessage = await response.json();
-
-    if (jsonStatus == 200 || jsonStatus == 201) {
-      // Saves user data into userStore
-      this.store.dispatch(saveUser({
-        id: jsonMessage.id,
-        username: user.username as string,
-        name: jsonMessage.name,
-        email: jsonMessage.email,
-        password: user.password as string,
-        createdAt: jsonMessage.created_at,
-        lastLogin: jsonMessage.login_time,
-        login: true,
-        loginDays: jsonMessage.login_days,
-        previousTasks: jsonMessage.tasksWithFormattedDate,
-      }));
+    if (result.user !== null) {
+      this.store.dispatch(saveUser(result.user));
       this.router.navigateByUrl('/dashboard');
     } else {
-      this.message = jsonMessage.message;
+      this.message = result.message;
     }
   };
 

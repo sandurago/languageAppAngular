@@ -1,5 +1,5 @@
 <div>
-  <mat-card class="card-dimension">
+  <mat-card class="card-dimension login-card">
     <mat-card-header class="" [ngClass]="{'mb-10 lg:mb-16' : action === 'register', 'mb-16 sm:mb-20 lg:mb-32' : action === 'login'}">
       <mat-card-title>
         <span class="flex flex-row items-end link text-black-olive text-2xl">
@@ -30,7 +30,7 @@
           [ngIfElse]="isLoginUsername"
         >
           <span class="font-bold">
-            Enter your username, eg. barry78
+            Enter your username
           </span>
         </ng-template>
         <ng-template #isLoginUsername>
@@ -41,7 +41,6 @@
         <mat-form-field
           #input
           appearance="outline"
-          class=""
         >
           <input
             [formControl]="FormGroup.controls.username"
@@ -49,13 +48,15 @@
             type="username"
             (focus)="hideError()"
             class=""
+            placeholder="eg. barry78"
+            class="h-10"
           />
         </mat-form-field>
         <ng-template
           [ngIf]="!isLogin"
         >
           <span class="font-bold">
-            Enter your name, eg. Amanda
+            Enter your name
           </span>
         </ng-template>
         <mat-form-field
@@ -68,7 +69,8 @@
             matInput
             type="name"
             (focus)="hideError()"
-            class=""
+            placeholder="eg. Amanda"
+            class="h-10"
           >
         </mat-form-field>
         <ng-template [ngIf]="!isLogin">
@@ -77,14 +79,14 @@
           </span>
           <mat-form-field
             appearance="outline"
-            class=""
           >
             <input
               type="email"
               formControlName="email"
               matInput
               (focus)="hideError()"
-              class=""
+              placeholder="eg. amanda@email.com"
+              class="h-10"
             >
           </mat-form-field>
         </ng-template>
@@ -109,7 +111,7 @@
             type="password"
             matInput
             (focus)="hideError()"
-            class=""
+            class="h-10"
           >
         </mat-form-field>
         <ng-template [ngIf]="isLogin" [ngIfElse]="Register">
