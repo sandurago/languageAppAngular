@@ -25,7 +25,7 @@ export class LoginPageComponent {
   backInUp: boolean;
   isLogin: boolean = true;
   linkAction: string = 'register';
-  hasAccount: string = 'don\'t have';
+  hasAccount: string = "don't have";
   action: string = 'login';
   name$: Observable<string>;
   name: any;
@@ -53,11 +53,11 @@ export class LoginPageComponent {
   /**
    * Changes the action from register to login and other way around.
    */
-  changeAction() {
+  changeAction():void {
     !this.isLogin ? this.router.navigateByUrl('/login') : this.router.navigateByUrl('/register');
   };
 
-  hideError() {
+  hideError():void {
     this.message = '';
     const parent = this.input.nativeElement;
     parent.children[0].classList.remove('mdc-text-field--invalid');
@@ -66,7 +66,7 @@ export class LoginPageComponent {
   /**
    * Prepares an object to send and to create/login the user
    */
-  async createUser() {
+  async createUser():Promise<void> {
     // Form an object to be sent
     const user = {
       username: this.FormGroup.get('username')?.value,
@@ -85,7 +85,7 @@ export class LoginPageComponent {
     }
   }
 
-  async loginUser() {
+  async loginUser():Promise<void> {
     // Form an object to be sent
     const user = {
       username: this.FormGroup.get('username')?.value,
@@ -106,7 +106,7 @@ export class LoginPageComponent {
     if (this.router.url === '/login') {
       this.isLogin = true;
       this.linkAction = 'register';
-      this.hasAccount = 'don\t have';
+      this.hasAccount = "don't have";
       this.action = 'login';
     } else {
       this.isLogin = false;

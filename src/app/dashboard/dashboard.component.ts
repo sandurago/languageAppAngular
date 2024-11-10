@@ -54,16 +54,16 @@ export class DashboardComponent {
   };
 
 
-  ngAfterContentInit() {
+  ngAfterContentInit():void {
     this.chartParentWidth = this.chart.nativeElement.offsetWidth;
     this.chartParentHeight = this.chart.nativeElement.offsetHeight;
   }
 
-  ngAfterContentChecked() {
+  ngAfterContentChecked():void {
     this.cdref.detectChanges();
   }
 
-  ngOnInit() {
+  ngOnInit():void {
     this.user$.subscribe((user) => {
       this.user = user;
     })

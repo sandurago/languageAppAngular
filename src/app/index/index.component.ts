@@ -25,7 +25,7 @@ export class IndexComponent {
   //activatedRoute checks the route thats currently in the outlet
   constructor(public route: ActivatedRoute, private router: Router, private element: ElementRef){};
 
-  animateImages(i:number) {
+  animateImages(i:number):void {
     this.bgImage = this.images[i];
     this.animateClass = 'animate__fadeInLeft';
 
@@ -45,7 +45,7 @@ export class IndexComponent {
 
   // do responsive heres
 
-  ngOnInit() {
+  ngOnInit():void {
     this.animateImages(0);
 
     setTimeout(() => {

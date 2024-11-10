@@ -5,6 +5,7 @@ import { Observable, map } from 'rxjs';
 import { id, name, login, username } from '../Store/user/user.selector';
 import { Router } from '@angular/router';
 import { logout } from '../Store/user/user.actions';
+import { UserService } from '../User/login/create-user.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -25,7 +26,10 @@ export class NavBarComponent {
    userId$:Observable<number>;
    userId:number;
 
-   constructor(private store: Store <{ userStore: User }>, private router: Router){
+   constructor(
+    private store: Store <{ userStore: User }>,
+    private router: Router,
+    private userService: UserService){
     this.username$ = this.store.pipe(
       select('userStore'),
       map(state => username(state))
@@ -48,33 +52,16 @@ export class NavBarComponent {
    };
 
    async logout() {
-    const response = await fetch('http://localhost:5000/user/logout', {
-      method: 'POST',
-      mode: 'cors',
-      cache: 'no-cache',
-      credentials: 'same-origin',
-      headers: {
-        'Content-Type': 'Application/json',
-      },
-      redirect: 'follow',
-      referrerPolicy: 'no-referrer',
-      body: JSON.stringify({
-        'id': this.userId,
-        'name': this.name,
-        'username': this.username,
-      }),
-    });
 
-    const status = await response.status;
-    const json = await response.json();
+    const result = await this.userService.logout(this.userId, this.name, this.username);
 
-    if (status === 200 || status === 201) {
+    if (result.user !== null) {
       this.store.dispatch(logout());
       this.router.navigate(['/']);
     }
    }
 
-   ngOnInit() {
+   ngOnInit():void {
     this.name$.subscribe((name) => (
       this.name = name
     ));

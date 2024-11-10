@@ -43,7 +43,7 @@ export class ChartComponent {
   // constructor(private hostElement: ElementRef) {
   // }
 
-  onResize(event:any) {
+  onResize(event:any):void {
     this.windowWidthAfterResize = event.target.innerWidth;
     let difference;
 
@@ -77,7 +77,7 @@ export class ChartComponent {
     // this.view = [offsetWidth, offsetHeight - 100];
   }
 
-  ngOnInit() {
+  ngOnInit():void {
     this.chartParentWidth = this.chartParentWidth > 1024 ? ((this.chartParentWidth-100) / 2) : (this.chartParentWidth-100);
     this.view = [this.chartParentWidth, this.chartParentHeight+100];
     this.xAxisLabel = this.xAxis;

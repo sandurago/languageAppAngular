@@ -71,7 +71,6 @@ export class UserService {
     const jsonMessage = await response.json();
 
     if (jsonStatus == 200 || jsonStatus == 201) {
-      // Saves user data into userStore
       return {
         user: {
           id: jsonMessage.id,
@@ -92,6 +91,44 @@ export class UserService {
         user: null,
         message: jsonMessage.message,
       };
+    }
+  }
+
+  public async logout(userId:number, name:string, username:string) {
+    const response = await fetch('http://localhost:5000/user/logout', {
+      method: 'POST',
+      mode: 'cors',
+      cache: 'no-cache',
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'Application/json',
+      },
+      redirect: 'follow',
+      referrerPolicy: 'no-referrer',
+      body: JSON.stringify({
+        'id': userId,
+        'name': name,
+        'username': username,
+      }),
+    });
+
+    const status = await response.status;
+    const json = await response.json();
+
+    if (status === 200 || status === 201) {
+      return {
+        user: {
+          id: userId,
+          name: name,
+          username: username,
+        },
+        message: null,
+      }
+    } else {
+      return {
+        user: null,
+        message: json,
+      }
     }
   }
 }
