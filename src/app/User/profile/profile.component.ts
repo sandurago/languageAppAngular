@@ -4,6 +4,7 @@ import { map, Observable } from 'rxjs';
 import { MostPracticedVerbs, User } from 'src/app/Interface/user';
 import { id, createdAt, email, lastLogin, name, username } from 'src/app/Store/user/user.selector';
 import moment from 'moment';
+import { ProfileService } from './profile.service';
 
 @Component({
   selector: 'app-profile',
@@ -31,6 +32,7 @@ export class ProfileComponent {
   constructor(
     private store: Store <{userStore: User}>,
     private chart: ElementRef,
+    private profileService: ProfileService,
   ) {
     this.name$ = this.store.pipe(
       select('userStore'),
@@ -59,21 +61,10 @@ export class ProfileComponent {
   }
 
   async getMostPracticedVerbs() {
-    const response = await fetch(`http://localhost:5000/verbs/profile/${this.id}`, {
-      method: 'GET',
-      mode: 'cors',
-      cache: 'no-cache',
-      credentials: 'same-origin',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      redirect: 'follow',
-      referrerPolicy: 'no-referrer',
-    })
 
-    const jsonResponse = await response.json();
+    const result = await this.profileService.getMostPracticedVerbs(this.id);
 
-    this.data = jsonResponse.map((data: {name: string, practice_time: number}) => {
+    this.data = result.map((data: {name: string, practice_time: number}) => {
       return { name: data.name, value: data.practice_time };
     })
   }

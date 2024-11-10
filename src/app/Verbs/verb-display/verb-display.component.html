@@ -36,16 +36,6 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>
-
-
-
-
-          <!-- <div
-            *ngFor="let con of verb.conjugation | keyvalue:onCompare"
-            class="grid grid-cols-2 text-lg"
-          >
-            <span>{{ con.key }}</span> <span>{{ con.value }}</span>
-          </div> -->
         </div>
         <a [routerLink]="['/practice', verb.name]">
           <button

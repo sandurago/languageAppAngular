@@ -137,15 +137,6 @@ export class VerbPracticeTemplateComponent {
     }, 400);
   }
 
-  // countSeconds() {
-  //   if (this.seconds < 60) {
-  //     this.seconds++;
-  //   } else {
-  //     this.minutes++;
-  //     this.seconds = 0;
-  //   }
-  // }
-
   // Function to check the fields and save answers in the server
   checkAnswers() {
     this.endTime = moment();
@@ -190,6 +181,5 @@ export class VerbPracticeTemplateComponent {
 
     this.startTime = moment();
 
-    // setInterval(this.countSeconds, 1000);
   };
 }

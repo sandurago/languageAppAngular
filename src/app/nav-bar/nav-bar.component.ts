@@ -1,10 +1,9 @@
-import { Component, HostListener, SimpleChange } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { User } from '../Interface/user';
 import { Store, select } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
 import { id, name, login, username } from '../Store/user/user.selector';
-import { NavigationEnd, Router } from '@angular/router';
-import { filter } from 'rxjs/operators';
+import { Router } from '@angular/router';
 import { logout } from '../Store/user/user.actions';
 
 @Component({

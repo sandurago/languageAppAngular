@@ -23,7 +23,6 @@ export class VerbDisplayComponent {
   start:number = 0;
   end:number = 6;
   pageIndexBigger:boolean;
-  // conjugationAsArray: Array<any>;
   displayedColumns: Array<string> = ['subject', 'conjugation'];
 
   /** CONSTRUCTOR */
@@ -56,14 +55,6 @@ export class VerbDisplayComponent {
       this.allVerbsList = values;
       console.log(this.allVerbsList);
     });
-
-    // if (this.allVerbsList) {
-    //   this.conjugationAsArray = this.allVerbsList.map((conjugation) => {
-    //     return conjugation.conjugation;
-    //   })
-    // }
-
-    // console.log(this.conjugationAsArray);
   }
   /** Sorts verbs */
   onCompare(_left: KeyValue<string, string>, _right: KeyValue<string, string>): number {
